@@ -8,6 +8,7 @@ TagManager:
   - outground_red
   - outground_blue
   - outerground
+  - airwall
   layers:
   - Default
   - TransparentFX

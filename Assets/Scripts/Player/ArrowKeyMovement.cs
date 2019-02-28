@@ -12,10 +12,12 @@ public class ArrowKeyMovement : MonoBehaviour {
   public bool defenseMode = false;
   public GameObject teamMember;
   public float pickUpDistance = 5.0f;
-  public float flyingSpeed = 10.0f;
+  public float flyingSpeed = 20.0f;
+  public Vector3 flyingDir;
 
   Animator anim;
   playerStatus ps;
+  Rigidbody rb;
   bool Ready = true;
   bool defenseReady = true;
   bool pickUpReady = true;
@@ -25,6 +27,7 @@ public class ArrowKeyMovement : MonoBehaviour {
   void Start() {
     anim = GetComponent<Animator>();
     ps = GetComponent<playerStatus>();
+    rb = GetComponent<Rigidbody>();
   }
 
   // Update is called once per frame
@@ -101,7 +104,8 @@ public class ArrowKeyMovement : MonoBehaviour {
           ps.currStatus = playerStatus.status.NORMAL;
           teamMember.GetComponent<playerStatus>().currStatus = playerStatus.status.FLYING;
           teamMember.GetComponent<Animator>().SetBool("moving", false);
-          teamMember.GetComponent<Animator>().SetTrigger("IdelTrigger");
+          teamMember.GetComponent<Animator>().SetTrigger("shootTrigger");
+          anim.SetTrigger("throwTrigger");
           teamMember.GetComponent<ArrowKeyMovement>().fly();
         }
       }
@@ -111,7 +115,7 @@ public class ArrowKeyMovement : MonoBehaviour {
       transform.Find("positionIndicator").gameObject.SetActive(false);
       transform.Find("directionIndicator").gameObject.SetActive(true);
       transform.position = teamMember.transform.position + new Vector3(0, 0.8f, 0);
-      transform.Find("directionIndicator").gameObject.transform.localPosition = new Vector3(0, -0.8f, 2);
+      transform.Find("directionIndicator").gameObject.transform.localPosition = new Vector3(0, -0.7f, 2);
       float right_horizontal_val = Mathf.Abs(gp.rightStick.x.ReadValue()) < 0.1 ? 0 : gp.rightStick.x.ReadValue();
       float right_vertical_val = Mathf.Abs(gp.rightStick.y.ReadValue()) < 0.1 ? 0 : gp.rightStick.y.ReadValue();
       Vector3 NextDir = new Vector3(right_horizontal_val, 0, right_vertical_val);
@@ -132,12 +136,22 @@ public class ArrowKeyMovement : MonoBehaviour {
   }
 
   IEnumerator flying() {
-    Vector3 velocityDir = (transform.rotation * Vector3.forward).normalized;
-    for (float t=0.0f;t<=2.0f;t+=Time.deltaTime) {
-      transform.position += flyingSpeed * velocityDir * Time.deltaTime;
+    Vector3 movingDir = (teamMember.transform.rotation * Vector3.forward).normalized;
+    for (float t = 0.0f; t <= 0.2f; t += Time.deltaTime) {
+      transform.position += 5 * movingDir * Time.deltaTime;
       yield return new WaitForSeconds(Time.deltaTime);
     }
+
+    flyingDir = (transform.rotation * Vector3.forward).normalized;
+   // rb.velocity = velocityDir * flyingSpeed;
+    
+    for (float t=0.0f;t<=1.5f;t+=Time.deltaTime) {
+      transform.position += flyingSpeed * flyingDir * Time.deltaTime;
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+    
     ps.currStatus = playerStatus.status.NORMAL;
+    anim.SetTrigger("flyingEndTrigger");
   }
 
   IEnumerator defenseCoolDown(float t) {
