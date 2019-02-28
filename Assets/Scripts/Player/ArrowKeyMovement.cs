@@ -12,7 +12,7 @@ public class ArrowKeyMovement : MonoBehaviour {
   public bool defenseMode = false;
   public GameObject teamMember;
   public float pickUpDistance = 5.0f;
-  public float flyingSpeed = 2.0f;
+  public float flyingSpeed = 10.0f;
 
   Animator anim;
   playerStatus ps;
@@ -87,6 +87,7 @@ public class ArrowKeyMovement : MonoBehaviour {
           StartCoroutine(pickUPCoolDown(0.5f));
           ps.currStatus = playerStatus.status.HOLDING;
           teamMember.GetComponent<playerStatus>().currStatus = playerStatus.status.HELD;
+          teamMember.GetComponent<Animator>().SetBool("moving", false);
           teamMember.GetComponent<Animator>().SetTrigger("IdelTrigger");
           teamMember.transform.position = transform.position + new Vector3(0, 0.8f, 0);
         }
@@ -99,6 +100,7 @@ public class ArrowKeyMovement : MonoBehaviour {
           StartCoroutine(rightTriggerCoolDown(0.5f));
           ps.currStatus = playerStatus.status.NORMAL;
           teamMember.GetComponent<playerStatus>().currStatus = playerStatus.status.FLYING;
+          teamMember.GetComponent<Animator>().SetBool("moving", false);
           teamMember.GetComponent<Animator>().SetTrigger("IdelTrigger");
           teamMember.GetComponent<ArrowKeyMovement>().fly();
         }
@@ -131,7 +133,7 @@ public class ArrowKeyMovement : MonoBehaviour {
 
   IEnumerator flying() {
     Vector3 velocityDir = (transform.rotation * Vector3.forward).normalized;
-    for (float t=0.0f;t<=10.0f;t+=Time.deltaTime) {
+    for (float t=0.0f;t<=2.0f;t+=Time.deltaTime) {
       transform.position += flyingSpeed * velocityDir * Time.deltaTime;
       yield return new WaitForSeconds(Time.deltaTime);
     }
