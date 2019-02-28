@@ -26,6 +26,7 @@ ExportedObj/
 # ============ #
 .DS_Store
 .DS_Store?
+.vs
 ._*
 .Spotlight-V100
 .Trashes
