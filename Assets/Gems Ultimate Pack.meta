@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 4aeb816e2049d4d4a9257f1be8318fd2
+<<<<<<< HEAD:Assets/Prefabs.meta
+guid: 22a26f84323924eeaabcfa3c18ddec9f
+=======
+guid: a19a39562f4894824ac66a966dca854c
+>>>>>>> master:Assets/Gems Ultimate Pack.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
