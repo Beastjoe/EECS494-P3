@@ -17,6 +17,7 @@
           <e p="Player" t="Include">
             <e p="ArrowKeyMovement.cs" t="Include" />
           </e>
+          <e p="ProgressBar.cs" t="Include" />
         </e>
       </e>
       <e p="EECS494-P3.sln" t="IncludeFlat" />
@@ -28,6 +29,6 @@
       </e>
     </e>
     <e p="$USER_HOME$/Library/Caches/Rider2018.3/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.3/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_EECS494-P3.-64075737.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.3/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_EECS494-P3.1555045629.00" t="ExcludeRecursive" />
   </component>
 </project>
