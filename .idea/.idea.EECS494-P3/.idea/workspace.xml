@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd822d46-d53d-4e86-82e3-de4312bf624d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.EECS494-P3/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EECS494-P3/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EECS494-P3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EECS494-P3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/OuterBlue.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/OuterBlue.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/OuterRed.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/OuterRed.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/indicatorMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/indicatorMaterial.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/playLab.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/playLab.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/StoreResource.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/StoreResource.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/shadowScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/shadowScript.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/PostProcessing/Editor/PropertyDrawers/MinDrawer.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="572">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <marker date="1551424113658" expanded="false" signature="6:52" ph="..." />
                 <marker date="1551424113658" expanded="true" signature="90:1108" ph="{...}" />
@@ -62,12 +56,28 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/shadowScript.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+              <folding>
+                <marker date="1551458175628" expanded="false" signature="6:78" ph="..." />
+                <marker date="1551458175628" expanded="true" signature="122:428" ph="{...}" />
+                <marker date="1551458175628" expanded="true" signature="190:365" ph="{...}" />
+                <marker date="1551458175628" expanded="true" signature="420:426" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/shadowScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/StoreResource.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PostProcessing/Editor/PropertyDrawers/MinDrawer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -76,13 +86,14 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/StoreResource.cs" />
         <option value="$PROJECT_DIR$/Assets/PostProcessing/Editor/PropertyDrawers/MinDrawer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/shadowScript.cs" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="2560" />
-    <option name="height" value="1368" />
+    <option name="width" value="3840" />
+    <option name="height" value="1528" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -137,12 +148,13 @@
       <workItem from="1551423492518" duration="193000" />
       <workItem from="1551423945255" duration="11000" />
       <workItem from="1551423971489" duration="143000" />
-      <workItem from="1551424494182" duration="626000" />
+      <workItem from="1551424494182" duration="945000" />
+      <workItem from="1551458153793" duration="154000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1025000" />
+    <option name="totallyTimeSpent" value="1498000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -154,7 +166,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="2560" height="1368" extended-state="6" />
+    <frame x="0" y="23" width="3840" height="1528" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
@@ -219,8 +231,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/PostProcessing/Editor/PropertyDrawers/MinDrawer.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="572">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
           <folding>
             <marker date="1551424113658" expanded="false" signature="6:52" ph="..." />
             <marker date="1551424113658" expanded="true" signature="90:1108" ph="{...}" />
@@ -229,6 +241,19 @@
             <marker date="1551424113658" expanded="true" signature="520:698" ph="{...}" />
             <marker date="1551424113658" expanded="true" signature="774:955" ph="{...}" />
             <marker date="1551424113658" expanded="true" signature="972:1090" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/shadowScript.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <marker date="1551458175628" expanded="false" signature="6:78" ph="..." />
+            <marker date="1551458175628" expanded="true" signature="122:428" ph="{...}" />
+            <marker date="1551458175628" expanded="true" signature="190:365" ph="{...}" />
+            <marker date="1551458175628" expanded="true" signature="420:426" ph="{...}" />
           </folding>
         </state>
       </provider>
