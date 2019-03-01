@@ -9,13 +9,31 @@
             <e p="AnimationScript.cs" t="Include" />
           </e>
         </e>
+        <e p="Lowpoly_Wasteland_Props" t="Include">
+          <e p="Readme" t="Include">
+            <e p="Readme.txt" t="Include" />
+          </e>
+        </e>
         <e p="Polygonal Robot Hermit" t="Include">
           <e p="Read Me.txt" t="Include" />
           <e p="www.meshtint.com.txt" t="Include" />
         </e>
+        <e p="Resources" t="Include">
+          <e p="SpriteShadow.shader" t="Include" />
+        </e>
         <e p="Scripts" t="Include">
+          <e p="Field" t="Include">
+            <e p="GroundRotation.cs" t="Include" />
+            <e p="rubeeInstantiation.cs" t="Include" />
+          </e>
           <e p="Player" t="Include">
             <e p="ArrowKeyMovement.cs" t="Include" />
+            <e p="collisionManager.cs" t="Include" />
+            <e p="playerStatus.cs" t="Include" />
+            <e p="shadowScript.cs" t="Include" />
+          </e>
+          <e p="Temporary" t="Include">
+            <e p="BallArrowMovement.cs" t="Include" />
           </e>
         </e>
       </e>
