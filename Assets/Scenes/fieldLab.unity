@@ -1806,7 +1806,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1380537636326248, guid: d976f40eeef2f7f498bce58dfe484aaa, type: 3}
       propertyPath: m_Name
-      value: Polygonal Robot Hermit Red2
+      value: RedPlayer2
       objectReference: {fileID: 0}
     - target: {fileID: 4916635381291120, guid: d976f40eeef2f7f498bce58dfe484aaa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13913,7 +13913,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1380537636326248, guid: d976f40eeef2f7f498bce58dfe484aaa, type: 3}
       propertyPath: m_Name
-      value: Polygonal Robot Hermit Red1
+      value: RedPlayer1
       objectReference: {fileID: 0}
     - target: {fileID: 4916635381291120, guid: d976f40eeef2f7f498bce58dfe484aaa, type: 3}
       propertyPath: m_LocalPosition.x
