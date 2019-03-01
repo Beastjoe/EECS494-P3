@@ -546,7 +546,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-173736
+  m_Name: pb_Mesh61408
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -1536,6 +1536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8801485baddd4d0ab653baba9874c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  players: []
 --- !u!43 &851932616
 Mesh:
   m_ObjectHideFlags: 0
@@ -2582,6 +2583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8801485baddd4d0ab653baba9874c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  players: []
 --- !u!4 &1033480294
 Transform:
   m_ObjectHideFlags: 0
@@ -2606,7 +2608,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-173742
+  m_Name: pb_Mesh61382
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -2766,7 +2768,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-173740
+  m_Name: pb_Mesh61470
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -12570,7 +12572,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-173738
+  m_Name: pb_Mesh61446
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -12847,6 +12849,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 19.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6261505440154425923, guid: b89cad7a306b04bb89df84912a49a76c,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b89cad7a306b04bb89df84912a49a76c, type: 3}
