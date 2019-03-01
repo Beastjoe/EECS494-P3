@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class playerStatus : MonoBehaviour {
 
-  public enum status { DEFENSE, NORMAL, HOLDING, HELD, FLYING }
+  public enum status { DEFENSE, NORMAL, HOLDING, HELD, FLYING, STUNNED }
   public status currStatus;
+  public int teamIdx = 0;
 
   // Start is called before the first frame update
   void Start() {

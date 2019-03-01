@@ -27,6 +27,28 @@ public class collisionManager : MonoBehaviour {
        ReflectProjectile(collision.contacts[0].normal);
       }
     }
+    if (collision.gameObject.CompareTag("Player")) {
+      GameObject player = collision.gameObject;
+      playerStatus player_ps = player.GetComponent<playerStatus>();
+      ArrowKeyMovement player_am = player.GetComponent<ArrowKeyMovement>();
+
+      // I am a bullet
+      if (ps.currStatus == playerStatus.status.FLYING) {
+        // same team
+        if (player_ps.teamIdx == ps.teamIdx) {
+          ReflectProjectile(collision.contacts[0].normal);
+        } else {
+          // different team
+          if (player_ps.currStatus == playerStatus.status.FLYING) {
+            // hit another bullet
+            ReflectProjectile(collision.contacts[0].normal);
+          } else {
+            am.hitEnemy = true;
+            player_am.hurt(am.flyingDir);
+          }
+        }
+      }
+    }
   }
 
   private void ReflectProjectile(Vector3 reflectVector) {

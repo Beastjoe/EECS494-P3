@@ -13,7 +13,11 @@ public class ArrowKeyMovement : MonoBehaviour {
   public GameObject teamMember;
   public float pickUpDistance = 5.0f;
   public float flyingSpeed = 20.0f;
+  public float maximumFlyingSpeed = 20.0f;
+  public float knockBackSpeed = 5.0f;
+  public float stunnedTime = 1.5f;
   public Vector3 flyingDir;
+  public bool hitEnemy = false;
 
   Animator anim;
   playerStatus ps;
@@ -32,13 +36,16 @@ public class ArrowKeyMovement : MonoBehaviour {
 
   // Update is called once per frame
   void Update() {
+    if (ps.currStatus == playerStatus.status.STUNNED) {
+      return;
+    }
+
     // get GamePad
     Gamepad gp = Gamepad.all[playerIndex];
 
     if (gp.leftShoulder.isPressed && defenseReady) {
       defenseReady = false;
       StartCoroutine(defenseCoolDown(0.5f)); 
-      Debug.Log(defenseMode);
       if (ps.currStatus == playerStatus.status.NORMAL) {
         ps.currStatus = playerStatus.status.DEFENSE;
         anim.SetTrigger("defenseTrigger");
@@ -136,22 +143,48 @@ public class ArrowKeyMovement : MonoBehaviour {
   }
 
   IEnumerator flying() {
+    flyingSpeed = maximumFlyingSpeed;
     Vector3 movingDir = (teamMember.transform.rotation * Vector3.forward).normalized;
+    transform.Find("directionIndicator").gameObject.SetActive(false);
     for (float t = 0.0f; t <= 0.2f; t += Time.deltaTime) {
       transform.position += 5 * movingDir * Time.deltaTime;
       yield return new WaitForSeconds(Time.deltaTime);
     }
 
     flyingDir = (transform.rotation * Vector3.forward).normalized;
-   // rb.velocity = velocityDir * flyingSpeed;
     
     for (float t=0.0f;t<=1.5f;t+=Time.deltaTime) {
+      if (hitEnemy) {
+        break;
+      }
       transform.position += flyingSpeed * flyingDir * Time.deltaTime;
       yield return new WaitForSeconds(Time.deltaTime);
     }
-    
+
+    hitEnemy = false;
     ps.currStatus = playerStatus.status.NORMAL;
     anim.SetTrigger("flyingEndTrigger");
+    transform.Find("directionIndicator").gameObject.SetActive(false);
+    transform.Find("directionIndicator").gameObject.transform.position = new Vector3(0, 0.1f, 2);
+    transform.Find("positionIndicator").gameObject.SetActive(true);
+  }
+
+  public void hurt(Vector3 dir) {
+    anim.SetTrigger("hurtTrigger");
+    ps.currStatus = playerStatus.status.FLYING;
+    StartCoroutine(knockBack(dir));
+  }
+
+  IEnumerator knockBack(Vector3 dir) {
+    for (float t = 0.0f; t <= 0.5f; t += Time.deltaTime) {
+      transform.position += knockBackSpeed * dir * Time.deltaTime;
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+
+    StartCoroutine(getStunned(stunnedTime));
+    //transform.Find("directionIndicator").gameObject.SetActive(false);
+    //transform.Find("directionIndicator").gameObject.transform.position = new Vector3(0, 0.1f, 2);
+    //transform.Find("positionIndicator").gameObject.SetActive(true);
   }
 
   IEnumerator defenseCoolDown(float t) {
@@ -167,6 +200,14 @@ public class ArrowKeyMovement : MonoBehaviour {
   IEnumerator rightTriggerCoolDown(float t) {
     yield return new WaitForSeconds(t);
     rightTriggerReady = true;
+  }
+
+  IEnumerator getStunned(float t) {
+    ps.currStatus = playerStatus.status.STUNNED;
+    ps.GetComponent<Collider>().enabled = false;
+    yield return new WaitForSeconds(t);
+    ps.currStatus = playerStatus.status.NORMAL;
+    ps.GetComponent<Collider>().enabled = true;
   }
 
 }
