@@ -32,7 +32,9 @@ public class StoreResource : MonoBehaviour {
 
   }
 
-  private void OnTriggerStay(Collider other) {
+  private void OnTriggerStay(Collider other)
+  {
+    Debug.Log(gameObject.tag);
     int playerIndex = arr.playerIndex;
     int teamIndex = GetComponent<playerStatus>().teamIdx;
 
