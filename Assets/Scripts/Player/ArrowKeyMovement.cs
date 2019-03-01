@@ -19,6 +19,8 @@ public class ArrowKeyMovement : MonoBehaviour {
   public Vector3 flyingDir;
   public bool hitEnemy = false;
 
+  public GameObject stunnedEffect;
+
   Animator anim;
   playerStatus ps;
   Rigidbody rb;
@@ -176,15 +178,16 @@ public class ArrowKeyMovement : MonoBehaviour {
   }
 
   IEnumerator knockBack(Vector3 dir) {
+    GameObject stunningEffectObject = Instantiate(stunnedEffect);
+    stunningEffectObject.transform.position = transform.position;
+    stunningEffectObject.transform.parent = transform;
+    stunningEffectObject.transform.localPosition += new Vector3(0, 1.2f, 0);
     for (float t = 0.0f; t <= 0.5f; t += Time.deltaTime) {
       transform.position += knockBackSpeed * dir * Time.deltaTime;
       yield return new WaitForSeconds(Time.deltaTime);
     }
 
-    StartCoroutine(getStunned(stunnedTime));
-    //transform.Find("directionIndicator").gameObject.SetActive(false);
-    //transform.Find("directionIndicator").gameObject.transform.position = new Vector3(0, 0.1f, 2);
-    //transform.Find("positionIndicator").gameObject.SetActive(true);
+    StartCoroutine(getStunned(stunnedTime, stunningEffectObject));
   }
 
   IEnumerator defenseCoolDown(float t) {
@@ -202,12 +205,13 @@ public class ArrowKeyMovement : MonoBehaviour {
     rightTriggerReady = true;
   }
 
-  IEnumerator getStunned(float t) {
+  IEnumerator getStunned(float t, GameObject stunningEffectObject) {
     ps.currStatus = playerStatus.status.STUNNED;
-    ps.GetComponent<Collider>().enabled = false;
+    gameObject.layer = 11;
     yield return new WaitForSeconds(t);
     ps.currStatus = playerStatus.status.NORMAL;
-    ps.GetComponent<Collider>().enabled = true;
+    gameObject.layer = 12;
+    Destroy(stunningEffectObject);
   }
 
 }
