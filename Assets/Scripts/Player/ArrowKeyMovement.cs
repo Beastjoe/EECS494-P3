@@ -17,7 +17,11 @@ public class ArrowKeyMovement : MonoBehaviour {
   public float knockBackSpeed = 5.0f;
   public float stunnedTime = 1.5f;
   public Vector3 flyingDir;
+
+  [HideInInspector]
   public bool hitEnemy = false;
+
+  public float total_radius = 7.5f;
 
   public GameObject stunnedEffect;
 
@@ -174,7 +178,37 @@ public class ArrowKeyMovement : MonoBehaviour {
   public void hurt(Vector3 dir) {
     anim.SetTrigger("hurtTrigger");
     ps.currStatus = playerStatus.status.FLYING;
+    dropMoneyAfterhurt();
     StartCoroutine(knockBack(dir));
+  }
+
+  private void dropMoneyAfterhurt() {
+    ArrowKeyMovement arr = GetComponent<ArrowKeyMovement>();
+    int pre_num_of_res = Inventory.instance.numOfPlayerResource[arr.playerIndex];
+    Inventory.instance.numOfPlayerResource[arr.playerIndex] /= 2;
+    int num_of_money_dropped = pre_num_of_res - Inventory.instance.numOfPlayerResource[arr.playerIndex];
+    if(ps.teamIdx == 0) {
+      Inventory.instance.numOfRedTeamResource -= num_of_money_dropped;
+    }
+    else {
+      Inventory.instance.numOfBlueTeamResource -= num_of_money_dropped;
+    }
+    for(int i = 0; i < num_of_money_dropped; ++i) {
+      Vector3 delta_pos = Random.insideUnitSphere;
+      Vector3 new_pos = transform.position + delta_pos;
+      while (!judgeWhetherOutOfBound(new_pos)) {
+        delta_pos = Random.insideUnitSphere;
+        new_pos = transform.position + delta_pos;
+      }
+      // TODO: instiate a coin
+    }
+
+  }
+
+  private bool judgeWhetherOutOfBound(Vector3 pos) {
+    if (pos.x * pos.x + pos.z * pos.z <= total_radius * total_radius)
+      return true;
+    return false;
   }
 
   IEnumerator knockBack(Vector3 dir) {
