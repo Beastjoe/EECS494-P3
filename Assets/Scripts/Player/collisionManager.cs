@@ -19,9 +19,6 @@ public class collisionManager : MonoBehaviour {
   }
 
   private void OnCollisionEnter(Collision collision) {
-    if (collision.gameObject.CompareTag("cuboid")) {
-      Destroy(collision.gameObject);
-    }
     if (collision.gameObject.CompareTag("airwall")) {
       if (ps.currStatus==playerStatus.status.FLYING) {
        ReflectProjectile(collision.contacts[0].normal);
@@ -48,6 +45,13 @@ public class collisionManager : MonoBehaviour {
           }
         }
       }
+    }
+  }
+
+  private void OnTriggerEnter(Collider other) {
+    // get cuboid
+    if (other.gameObject.CompareTag("cuboid")) {
+      Destroy(other.gameObject);
     }
   }
 

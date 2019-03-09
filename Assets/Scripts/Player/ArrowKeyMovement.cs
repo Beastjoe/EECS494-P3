@@ -10,6 +10,7 @@ public class ArrowKeyMovement : MonoBehaviour {
   public float movingSpeed = 1.0f;
   public float rotatingSpeed = 3.0f;
   public bool defenseMode = false;
+  public bool onOuterGround = false;
   public GameObject teamMember;
   public float pickUpDistance = 5.0f;
   public float flyingSpeed = 20.0f;
@@ -246,6 +247,12 @@ public class ArrowKeyMovement : MonoBehaviour {
     ps.currStatus = playerStatus.status.NORMAL;
     gameObject.layer = 12;
     Destroy(stunningEffectObject);
+  }
+
+  void FixedUpdate() {
+    if (onOuterGround) {
+      transform.RotateAround(Vector3.zero, Vector3.up, -31.5f * Time.deltaTime);
+    }
   }
 
 }
