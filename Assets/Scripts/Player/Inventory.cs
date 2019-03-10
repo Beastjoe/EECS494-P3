@@ -18,16 +18,12 @@ public class Inventory : MonoBehaviour {
   }
 
   private void Update() {
-    numOfBlueTeamResource = numOfPlayerResource[2] + numOfPlayerResource[3];
-    numOfRedTeamResource = numOfPlayerResource[0] + numOfPlayerResource[1];
+    //numOfBlueTeamResource = numOfPlayerResource[2] + numOfPlayerResource[3];
+    //numOfRedTeamResource = numOfPlayerResource[0] + numOfPlayerResource[1];
   }
 
   public void addRupee(int playerIndex) {
     numOfPlayerResource[playerIndex]++;
   }
 
-  public void addTeamRupee(int teamIndex) {
-    if (teamIndex == 0) numOfRedTeamResource++;
-    
-  }
 }
