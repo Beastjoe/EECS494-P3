@@ -128,7 +128,7 @@ public class ArrowKeyMovement : MonoBehaviour {
           anim.SetTrigger("throwTrigger");
           gameObject.layer = 11;
           teamMember.GetComponent<ArrowKeyMovement>().fly();
-          setBackLayer(0.5f);
+          StartCoroutine(setBackLayer(0.5f));
         }
       }
     }
