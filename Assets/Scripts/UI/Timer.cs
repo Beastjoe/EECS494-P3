@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -37,6 +38,11 @@ public class Timer : MonoBehaviour
             }
             else {
                 winText.text = "Blue Team Wins!";
+            }
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("playLab");
             }
         }
     }
