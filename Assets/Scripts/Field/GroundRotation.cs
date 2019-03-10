@@ -14,11 +14,12 @@ public class GroundRotation : MonoBehaviour {
   // Update is called once per frame
   void Update() {
     foreach (GameObject player in players) {
-      if ((player.transform.position-transform.position).sqrMagnitude>55.0f) {
+      if ((player.transform.position-transform.position).sqrMagnitude>50.0f) {
         //Debug.Log((player.transform.position - transform.position).sqrMagnitude);
-        player.transform.parent = transform;
+        player.GetComponent<ArrowKeyMovement>().onOuterGround = true;
       } else {
-        player.transform.parent = null;
+        player.GetComponent<ArrowKeyMovement>().onOuterGround = false;
+        //player.transform.parent = null;
       }
     }
     transform.Rotate(Vector3.forward, 45 * Time.deltaTime * speed);

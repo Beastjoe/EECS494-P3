@@ -6,11 +6,13 @@ public class collisionManager : MonoBehaviour {
   // Start is called before the first frame update
   playerStatus ps;
   ArrowKeyMovement am;
+  Inventory inventory;
   Rigidbody rb;
 
   void Start() {
     ps = GetComponent<playerStatus>();
     am = GetComponent<ArrowKeyMovement>();
+    inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
   }
 
   // Update is called once per frame
@@ -21,6 +23,7 @@ public class collisionManager : MonoBehaviour {
   private void OnCollisionEnter(Collision collision) {
     if (collision.gameObject.CompareTag("cuboid")) {
       Destroy(collision.gameObject);
+      inventory.addRupee(am.playerIndex);
     }
     if (collision.gameObject.CompareTag("airwall")) {
       if (ps.currStatus==playerStatus.status.FLYING) {
@@ -48,6 +51,14 @@ public class collisionManager : MonoBehaviour {
           }
         }
       }
+    }
+  }
+
+  private void OnTriggerEnter(Collider other) {
+    // get cuboid
+    if (other.gameObject.CompareTag("cuboid")) {
+      Destroy(other.gameObject);
+      inventory.addRupee(am.playerIndex);
     }
   }
 
