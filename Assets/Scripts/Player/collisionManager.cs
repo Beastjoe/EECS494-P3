@@ -6,11 +6,13 @@ public class collisionManager : MonoBehaviour {
   // Start is called before the first frame update
   playerStatus ps;
   ArrowKeyMovement am;
+  Inventory inventory;
   Rigidbody rb;
 
   void Start() {
     ps = GetComponent<playerStatus>();
     am = GetComponent<ArrowKeyMovement>();
+    inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
   }
 
   // Update is called once per frame
@@ -52,6 +54,7 @@ public class collisionManager : MonoBehaviour {
     // get cuboid
     if (other.gameObject.CompareTag("cuboid")) {
       Destroy(other.gameObject);
+      inventory.addRupee(am.playerIndex);
     }
   }
 

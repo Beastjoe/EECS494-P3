@@ -6,7 +6,7 @@ public class shadowScript : MonoBehaviour {
   // Start is called before the first frame update
   void Start() {
     SpriteRenderer render = GetComponent<SpriteRenderer>();
-    render.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+    render.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
     render.receiveShadows = true;
   }
 
