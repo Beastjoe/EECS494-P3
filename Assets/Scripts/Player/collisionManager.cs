@@ -21,6 +21,10 @@ public class collisionManager : MonoBehaviour {
   }
 
   private void OnCollisionEnter(Collision collision) {
+    if (collision.gameObject.CompareTag("cuboid")) {
+      Destroy(collision.gameObject);
+      inventory.addRupee(am.playerIndex);
+    }
     if (collision.gameObject.CompareTag("airwall")) {
       if (ps.currStatus==playerStatus.status.FLYING) {
        ReflectProjectile(collision.contacts[0].normal);

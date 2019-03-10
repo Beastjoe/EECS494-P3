@@ -12,11 +12,12 @@ public class ArrowKeyMovement : MonoBehaviour {
   public bool defenseMode = false;
   public bool onOuterGround = false;
   public GameObject teamMember;
+  public GameObject rupee;
   public float pickUpDistance = 5.0f;
   public float flyingSpeed = 20.0f;
   public float maximumFlyingSpeed = 20.0f;
-  public float knockBackSpeed = 5.0f;
-  public float stunnedTime = 1.5f;
+  public float knockBackSpeed = 10.0f;
+  public float stunnedTime = 2.5f;
   public Vector3 flyingDir;
 
   [HideInInspector]
@@ -70,7 +71,12 @@ public class ArrowKeyMovement : MonoBehaviour {
 
       float right_horizontal_val = Mathf.Abs(gp.rightStick.x.ReadValue()) < 0.1 ? 0 : gp.rightStick.x.ReadValue();
       float right_vertical_val = Mathf.Abs(gp.rightStick.y.ReadValue()) < 0.1 ? 0 : gp.rightStick.y.ReadValue();
-      Vector3 NextDir = new Vector3(right_horizontal_val, 0, right_vertical_val);
+      Vector3 NextDir;
+      if (right_horizontal_val == 0 && right_vertical_val == 0) {
+        NextDir = new Vector3(horizontal_val, 0, vertical_val);
+      } else {
+        NextDir = new Vector3(right_horizontal_val, 0, right_vertical_val);
+      }
       if (NextDir != Vector3.zero) {
         isIdle = false;
         Vector3 currDir = transform.rotation.eulerAngles;
@@ -80,7 +86,7 @@ public class ArrowKeyMovement : MonoBehaviour {
                Mathf.LerpAngle(currDir.y, NextDir.y, rotatingSpeed * Time.deltaTime),
                Mathf.LerpAngle(currDir.z, NextDir.z, rotatingSpeed * Time.deltaTime));
         transform.eulerAngles = currentAngle;
-      }
+      } 
 
       if (horizontal_val != 0 || vertical_val != 0) {
         isIdle = false;
@@ -120,7 +126,9 @@ public class ArrowKeyMovement : MonoBehaviour {
           teamMember.GetComponent<Animator>().SetBool("moving", false);
           teamMember.GetComponent<Animator>().SetTrigger("shootTrigger");
           anim.SetTrigger("throwTrigger");
+          gameObject.layer = 11;
           teamMember.GetComponent<ArrowKeyMovement>().fly();
+          setBackLayer(0.5f);
         }
       }
     }
@@ -130,9 +138,17 @@ public class ArrowKeyMovement : MonoBehaviour {
       transform.Find("directionIndicator").gameObject.SetActive(true);
       transform.position = teamMember.transform.position + new Vector3(0, 0.8f, 0);
       transform.Find("directionIndicator").gameObject.transform.localPosition = new Vector3(0, -0.7f, 2);
+      float horizontal_val = Mathf.Abs(gp.leftStick.x.ReadValue()) < 0.1 ? 0 : gp.leftStick.x.ReadValue();
+      float vertical_val = Mathf.Abs(gp.leftStick.y.ReadValue()) < 0.1 ? 0 : gp.leftStick.y.ReadValue();
       float right_horizontal_val = Mathf.Abs(gp.rightStick.x.ReadValue()) < 0.1 ? 0 : gp.rightStick.x.ReadValue();
       float right_vertical_val = Mathf.Abs(gp.rightStick.y.ReadValue()) < 0.1 ? 0 : gp.rightStick.y.ReadValue();
-      Vector3 NextDir = new Vector3(right_horizontal_val, 0, right_vertical_val);
+      Vector3 NextDir;
+      if (right_horizontal_val == 0 && right_vertical_val == 0) {
+        NextDir = new Vector3(horizontal_val, 0, vertical_val);
+      }
+      else {
+        NextDir = new Vector3(right_horizontal_val, 0, right_vertical_val);
+      }
       if (NextDir != Vector3.zero) {
         Vector3 currDir = transform.rotation.eulerAngles;
         NextDir = Quaternion.LookRotation(NextDir).eulerAngles;
@@ -178,6 +194,7 @@ public class ArrowKeyMovement : MonoBehaviour {
 
   public void hurt(Vector3 dir) {
     anim.SetTrigger("hurtTrigger");
+    gameObject.layer = 11;
     ps.currStatus = playerStatus.status.FLYING;
     dropMoneyAfterhurt();
     StartCoroutine(knockBack(dir));
@@ -188,20 +205,9 @@ public class ArrowKeyMovement : MonoBehaviour {
     int pre_num_of_res = Inventory.instance.numOfPlayerResource[arr.playerIndex];
     Inventory.instance.numOfPlayerResource[arr.playerIndex] /= 2;
     int num_of_money_dropped = pre_num_of_res - Inventory.instance.numOfPlayerResource[arr.playerIndex];
-    if(ps.teamIdx == 0) {
-      Inventory.instance.numOfRedTeamResource -= num_of_money_dropped;
-    }
-    else {
-      Inventory.instance.numOfBlueTeamResource -= num_of_money_dropped;
-    }
     for(int i = 0; i < num_of_money_dropped; ++i) {
-      Vector3 delta_pos = Random.insideUnitSphere;
-      Vector3 new_pos = transform.position + delta_pos;
-      while (!judgeWhetherOutOfBound(new_pos)) {
-        delta_pos = Random.insideUnitSphere;
-        new_pos = transform.position + delta_pos;
-      }
-      // TODO: instiate a coin
+      GameObject coin = Instantiate(rupee, transform.position, Quaternion.identity);
+      coin.transform.GetComponentInChildren<Rigidbody>().velocity = new Vector3(Random.Range(0.0f, 3.0f), 10, Random.Range(0.0f, 3.0f)); ;
     }
 
   }
@@ -242,15 +248,19 @@ public class ArrowKeyMovement : MonoBehaviour {
 
   IEnumerator getStunned(float t, GameObject stunningEffectObject) {
     ps.currStatus = playerStatus.status.STUNNED;
-    gameObject.layer = 11;
     yield return new WaitForSeconds(t);
     ps.currStatus = playerStatus.status.NORMAL;
     gameObject.layer = 12;
     Destroy(stunningEffectObject);
   }
 
+  IEnumerator setBackLayer(float t) {
+    yield return new WaitForSeconds(t);
+    gameObject.layer = 12;
+  }
+
   void FixedUpdate() {
-    if (onOuterGround) {
+    if (onOuterGround && ps.currStatus!=playerStatus.status.FLYING) {
       transform.RotateAround(Vector3.zero, Vector3.up, -31.5f * Time.deltaTime);
     }
   }

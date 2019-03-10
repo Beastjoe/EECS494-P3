@@ -6542,6 +6542,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: team1-player4
       objectReference: {fileID: 0}
+    - target: {fileID: 5658496420395445426, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9354,7 +9359,7 @@ GameObject:
   - component: {fileID: 1827342367}
   - component: {fileID: 1827342366}
   - component: {fileID: 1827342365}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AirWall
   m_TagString: airwall
   m_Icon: {fileID: 0}
