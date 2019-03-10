@@ -5,21 +5,39 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-  float timer;
-  Text text;
-  void Start() {
-    text = GetComponent<Text>();
-    timer = float.Parse(text.text);
-  }
+    public GameObject blackPanel;
 
-  void Update()
-  {
-    timer -= Time.deltaTime;
-    if(timer >= 0.0f) {
-      text.text = timer.ToString("F2");
+    float timer;
+    Text text;
+    Text winText;
+
+    void Start() {
+        text = GetComponent<Text>();
+        winText = transform.GetChild(0).GetComponent<Text>();
+        winText.text = "";
+        timer = float.Parse(text.text);
     }
-    else{
-      //TODO: GameEnd
+
+    void Update()
+    {
+        timer -= Time.deltaTime;
+        if (timer >= 0.0f) {
+            text.text = Mathf.Ceil(timer).ToString("F0");
+        }
+        else {
+            text.text = "";
+            blackPanel.SetActive(true);
+            int redScore = Inventory.instance.numOfRedTeamResource;
+            int blueScore = Inventory.instance.numOfBlueTeamResource;
+            if (redScore > blueScore) {
+                winText.text = "Red Team Wins!";
+            }
+            else if (redScore == blueScore) {
+                winText.text = "Draw";
+            }
+            else {
+                winText.text = "Blue Team Wins!";
+            }
+        }
     }
-  }
 }
