@@ -15,7 +15,7 @@ public class StoreResource : MonoBehaviour {
 
   ArrowKeyMovement arr;
 
-  private bool isStoring = false;
+  public bool isStoring = false;
 
   private float timer = 0.0f;
 
