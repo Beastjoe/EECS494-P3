@@ -34,9 +34,9 @@ public class SurroundingRupeeController : MonoBehaviour
             for (int i = 0; i < currentNum; ++i)
             {
                 float theta = i * 2 * Mathf.PI / currentNum;
-                Vector3 position = radius * new Vector3(Mathf.Cos(theta), 0.3f, Mathf.Sin(theta));
+                Vector3 position = radius * new Vector3(Mathf.Cos(theta), 0.1f, Mathf.Sin(theta));
                 GameObject instance = Instantiate(rupee, transform.position + position, Quaternion.identity);
-                instance.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                instance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 instance.SetActive(true);
                 instance.transform.parent = transform;
             }

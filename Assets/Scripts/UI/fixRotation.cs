@@ -11,6 +11,7 @@ public class fixRotation : MonoBehaviour {
   }
 
   private void LateUpdate() {
+    transform.localPosition = new Vector3(0, 0, 0);
     transform.rotation = rotation;
   }
 }

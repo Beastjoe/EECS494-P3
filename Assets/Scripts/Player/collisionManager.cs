@@ -50,6 +50,26 @@ public class collisionManager : MonoBehaviour {
             player_am.hurt(am.flyingDir);
           }
         }
+      } else if (player_ps.teamIdx == ps.teamIdx && player_ps.currStatus == playerStatus.status.DEFENSE && ps.currStatus==playerStatus.status.NORMAL) {
+          ps.currStatus = playerStatus.status.HOLDING;
+          player_ps.currStatus = playerStatus.status.HELD;
+          player.GetComponent<Animator>().SetBool("moving", false);
+          player.GetComponent<Animator>().SetTrigger("IdelTrigger");
+          player.transform.position = transform.position + new Vector3(0, 0.8f, 0);
+      }
+    }
+  }
+
+  private void OnCollisionStay(Collision collision) {
+    if (collision.gameObject.CompareTag("Player")) {
+      GameObject player = collision.gameObject;
+      playerStatus player_ps = player.GetComponent<playerStatus>();
+      if (player_ps.teamIdx == ps.teamIdx && player_ps.currStatus == playerStatus.status.DEFENSE && ps.currStatus == playerStatus.status.NORMAL) {
+        ps.currStatus = playerStatus.status.HOLDING;
+        player_ps.currStatus = playerStatus.status.HELD;
+        player.GetComponent<Animator>().SetBool("moving", false);
+        player.GetComponent<Animator>().SetTrigger("IdelTrigger");
+        player.transform.position = transform.position + new Vector3(0, 0.8f, 0);
       }
     }
   }

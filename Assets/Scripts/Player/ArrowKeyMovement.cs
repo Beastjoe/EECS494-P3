@@ -47,6 +47,9 @@ public class ArrowKeyMovement : MonoBehaviour {
     if (ps.currStatus == playerStatus.status.STUNNED) {
       return;
     }
+    if (GetComponent<StoreResource>().isStoring) {
+      return;
+    }
 
     // get GamePad
     Gamepad gp = Gamepad.all[playerIndex];
@@ -90,8 +93,15 @@ public class ArrowKeyMovement : MonoBehaviour {
 
       if (horizontal_val != 0 || vertical_val != 0) {
         isIdle = false;
-        transform.position += movingSpeed *
-          (Vector3.forward * vertical_val + Vector3.right * horizontal_val) * Time.deltaTime;
+        if (ps.currStatus == playerStatus.status.HOLDING && transform.position.x * transform.position.x + transform.position.z * transform.position.z >= 55f) {
+          Vector3 p1 = transform.position - movingSpeed * (Vector3.forward * vertical_val + Vector3.right * horizontal_val) * Time.deltaTime;
+          Vector3 p2 = transform.position + movingSpeed * (Vector3.forward * vertical_val + Vector3.right * horizontal_val) * Time.deltaTime;
+          transform.position = p1.magnitude > p2.magnitude ? p2 : p1;
+        }
+        else {
+          transform.position += movingSpeed *
+            (Vector3.forward * vertical_val + Vector3.right * horizontal_val) * Time.deltaTime;
+        }
       }
 
       if (!isIdle) {
@@ -100,7 +110,7 @@ public class ArrowKeyMovement : MonoBehaviour {
       else {
         anim.SetBool("moving", false);
       }
-
+      /*
       if (ps.currStatus == playerStatus.status.NORMAL) {
         if (teamMember.GetComponent<playerStatus>().currStatus == playerStatus.status.DEFENSE
           && (teamMember.transform.position - transform.position).sqrMagnitude <= pickUpDistance
@@ -114,8 +124,8 @@ public class ArrowKeyMovement : MonoBehaviour {
           teamMember.GetComponent<Animator>().SetTrigger("IdelTrigger");
           teamMember.transform.position = transform.position + new Vector3(0, 0.8f, 0);
         }
-      }
-
+      }*/
+      
       if (ps.currStatus == playerStatus.status.HOLDING) {
         if (gp.rightTrigger.isPressed
           && rightTriggerReady) {
@@ -128,7 +138,7 @@ public class ArrowKeyMovement : MonoBehaviour {
           anim.SetTrigger("throwTrigger");
           gameObject.layer = 11;
           teamMember.GetComponent<ArrowKeyMovement>().fly();
-          setBackLayer(0.5f);
+          StartCoroutine(setBackLayer(0.5f));
         }
       }
     }
@@ -169,10 +179,13 @@ public class ArrowKeyMovement : MonoBehaviour {
     flyingSpeed = maximumFlyingSpeed;
     Vector3 movingDir = (teamMember.transform.rotation * Vector3.forward).normalized;
     transform.Find("directionIndicator").gameObject.SetActive(false);
-    for (float t = 0.0f; t <= 0.2f; t += Time.deltaTime) {
-      transform.position += 5 * movingDir * Time.deltaTime;
-      yield return new WaitForSeconds(Time.deltaTime);
-    }
+    transform.position -= new Vector3(0, 0.7f, 0);
+    GetComponent<BoxCollider>().size = new Vector3(1.5f, 1.0f, 1.5f);
+
+    //for (float t = 0.0f; t <= 0.2f; t += Time.deltaTime) {
+    //  transform.position += 5 * movingDir * Time.deltaTime;
+    //  yield return new WaitForSeconds(Time.deltaTime);
+    //}
 
     flyingDir = (transform.rotation * Vector3.forward).normalized;
     
@@ -190,6 +203,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     transform.Find("directionIndicator").gameObject.SetActive(false);
     transform.Find("directionIndicator").gameObject.transform.position = new Vector3(0, 0.1f, 2);
     transform.Find("positionIndicator").gameObject.SetActive(true);
+    GetComponent<BoxCollider>().size = new Vector3(1f, 1.0f, 1f);
   }
 
   public void hurt(Vector3 dir) {
