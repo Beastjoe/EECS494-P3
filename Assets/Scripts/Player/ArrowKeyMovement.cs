@@ -17,6 +17,7 @@ public class ArrowKeyMovement : MonoBehaviour {
   public GameObject rupee;
   public AnimationCurve dashSpeedCurve;
   public Image staminaBar;
+  public GameObject dashTrail;
   public float pickUpDistance = 5.0f;
   public float flyingSpeed = 20.0f;
   public float maximumFlyingSpeed = 20.0f;
@@ -254,8 +255,11 @@ public class ArrowKeyMovement : MonoBehaviour {
     Vector3 dashDir = (transform.rotation * Vector3.forward).normalized;
 
     // Dash along one direction; Speed gradually decreased
+    GameObject trail = Instantiate(dashTrail, transform.position, transform.rotation);
+    trail.transform.Rotate(0, 90, 0);
+    trail.transform.parent = transform;
     for (float t=0.0f;t<0.15f;t+=Time.deltaTime) {
-      float speed = dashSpeed - dashSpeedCurve.Evaluate(t / 0.15f) * (dashSpeed - 10);
+      float speed = dashSpeed - dashSpeedCurve.Evaluate(t / 0.15f) * (dashSpeed - 15);
       if (transform.position.x * transform.position.x + transform.position.z * transform.position.z >= 55f) {
         Vector3 p1 = transform.position - dashDir * speed * Time.deltaTime;
         Vector3 p2 = transform.position + dashDir * speed * Time.deltaTime;
@@ -265,6 +269,7 @@ public class ArrowKeyMovement : MonoBehaviour {
       }
       yield return new WaitForSeconds(Time.deltaTime);
     }
+    
 
     // cast backswing time
     yield return new WaitForSeconds(0.3f);

@@ -1097,7 +1097,7 @@ MonoBehaviour:
   playerIndex: 1
   movingSpeed: 4
   rotatingSpeed: 4
-  dashSpeed: 25
+  dashSpeed: 35
   defenseMode: 0
   onOuterGround: 0
   teamMember: {fileID: 0}
@@ -1109,6 +1109,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   staminaBar: {fileID: 7415233432684274263}
+  dashTrail: {fileID: 191114, guid: 834c99069a124aa439d5795c3579843b, type: 3}
   pickUpDistance: 5
   flyingSpeed: 20
   maximumFlyingSpeed: 20
