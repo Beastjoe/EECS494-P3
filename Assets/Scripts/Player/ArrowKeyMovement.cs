@@ -9,6 +9,7 @@ public class ArrowKeyMovement : MonoBehaviour {
   public int playerIndex;
   public float movingSpeed = 1.0f;
   public float rotatingSpeed = 3.0f;
+  public float dashSpeed = 10.0f;
   public bool defenseMode = false;
   public bool onOuterGround = false;
   public GameObject teamMember;
@@ -32,7 +33,7 @@ public class ArrowKeyMovement : MonoBehaviour {
   Rigidbody rb;
   bool Ready = true;
   bool defenseReady = true;
-  bool pickUpReady = true;
+  bool dashReday = true;
   bool rightTriggerReady = true;
 
   // Start is called before the first frame update
@@ -110,21 +111,13 @@ public class ArrowKeyMovement : MonoBehaviour {
       else {
         anim.SetBool("moving", false);
       }
-      /*
+      
       if (ps.currStatus == playerStatus.status.NORMAL) {
-        if (teamMember.GetComponent<playerStatus>().currStatus == playerStatus.status.DEFENSE
-          && (teamMember.transform.position - transform.position).sqrMagnitude <= pickUpDistance
-          && gp.rightShoulder.isPressed
-          && pickUpReady) {
-          pickUpReady = false;
-          StartCoroutine(pickUPCoolDown(0.5f));
-          ps.currStatus = playerStatus.status.HOLDING;
-          teamMember.GetComponent<playerStatus>().currStatus = playerStatus.status.HELD;
-          teamMember.GetComponent<Animator>().SetBool("moving", false);
-          teamMember.GetComponent<Animator>().SetTrigger("IdelTrigger");
-          teamMember.transform.position = transform.position + new Vector3(0, 0.8f, 0);
+        if(gp.rightShoulder.isPressed && dashReday) {
+          dashReday = false;
+          StartCoroutine(dashCoolDown(2.0f));
         }
-      }*/
+      }
       
       if (ps.currStatus == playerStatus.status.HOLDING) {
         if (gp.rightTrigger.isPressed
@@ -250,9 +243,25 @@ public class ArrowKeyMovement : MonoBehaviour {
     defenseReady = true;
   }
 
-  IEnumerator pickUPCoolDown(float t) {
-    yield return new WaitForSeconds(t);
-    pickUpReady = true;
+  IEnumerator dashCoolDown(float cd) {
+    ps.currStatus = playerStatus.status.STUNNED;
+    gameObject.layer = 11;
+    Vector3 dashDir = (transform.rotation * Vector3.forward).normalized;
+    for (float t=0.0f;t<0.075f;t+=Time.deltaTime) {
+      float speed = Mathf.Lerp(dashSpeed, movingSpeed, t / 0.075f);
+      if (transform.position.x * transform.position.x + transform.position.z * transform.position.z >= 55f) {
+        Vector3 p1 = transform.position - dashDir * dashSpeed * Time.deltaTime;
+        Vector3 p2 = transform.position + dashDir * dashSpeed * Time.deltaTime;
+        transform.position = p1.magnitude > p2.magnitude ? p2 : p1;
+      } else {
+        transform.position += dashDir * dashSpeed * Time.deltaTime;
+      }
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+    gameObject.layer = 12;
+    ps.currStatus = playerStatus.status.NORMAL;
+    yield return new WaitForSeconds(cd);
+    dashReday = true;
   }
 
   IEnumerator rightTriggerCoolDown(float t) {

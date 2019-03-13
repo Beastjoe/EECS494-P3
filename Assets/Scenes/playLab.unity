@@ -778,6 +778,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: team0-player2
       objectReference: {fileID: 0}
+    - target: {fileID: 5658496420395445426, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2726,6 +2731,11 @@ PrefabInstance:
       propertyPath: teamMember
       value: 
       objectReference: {fileID: 1194354119}
+    - target: {fileID: 5658496420395445424, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: dashSpeed
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1345527492, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2744,10 +2754,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 064a0b168ff30a847ad8becb6371a39b, type: 2}
-    - target: {fileID: 220768185, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 69617364, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.4167157
@@ -2767,6 +2773,10 @@ PrefabInstance:
     - target: {fileID: 69617364, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 49.255
+      objectReference: {fileID: 0}
+    - target: {fileID: 220768185, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
@@ -14130,7 +14140,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Blue Team Player 1: '
+  m_Text: 'Blue Team Player 2: '
 --- !u!222 &2038885982
 CanvasRenderer:
   m_ObjectHideFlags: 0
