@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Experimental.Input;
+using UnityEngine.UI;
 
 public class ArrowKeyMovement : MonoBehaviour {
 
@@ -14,6 +15,8 @@ public class ArrowKeyMovement : MonoBehaviour {
   public bool onOuterGround = false;
   public GameObject teamMember;
   public GameObject rupee;
+  public AnimationCurve dashSpeedCurve;
+  public Image staminaBar;
   public float pickUpDistance = 5.0f;
   public float flyingSpeed = 20.0f;
   public float maximumFlyingSpeed = 20.0f;
@@ -244,23 +247,49 @@ public class ArrowKeyMovement : MonoBehaviour {
   }
 
   IEnumerator dashCoolDown(float cd) {
+    anim.SetTrigger("dashTrigger");
     ps.currStatus = playerStatus.status.STUNNED;
-    gameObject.layer = 11;
+    staminaBar.gameObject.SetActive(true);
+    staminaBar.fillAmount = 0;
     Vector3 dashDir = (transform.rotation * Vector3.forward).normalized;
-    for (float t=0.0f;t<0.075f;t+=Time.deltaTime) {
-      float speed = Mathf.Lerp(dashSpeed, movingSpeed, t / 0.075f);
+
+    // Dash along one direction; Speed gradually decreased
+    for (float t=0.0f;t<0.15f;t+=Time.deltaTime) {
+      float speed = dashSpeed - dashSpeedCurve.Evaluate(t / 0.15f) * (dashSpeed - 10);
       if (transform.position.x * transform.position.x + transform.position.z * transform.position.z >= 55f) {
-        Vector3 p1 = transform.position - dashDir * dashSpeed * Time.deltaTime;
-        Vector3 p2 = transform.position + dashDir * dashSpeed * Time.deltaTime;
+        Vector3 p1 = transform.position - dashDir * speed * Time.deltaTime;
+        Vector3 p2 = transform.position + dashDir * speed * Time.deltaTime;
         transform.position = p1.magnitude > p2.magnitude ? p2 : p1;
       } else {
-        transform.position += dashDir * dashSpeed * Time.deltaTime;
+        transform.position += dashDir * speed * Time.deltaTime;
       }
       yield return new WaitForSeconds(Time.deltaTime);
     }
-    gameObject.layer = 12;
+
+    // cast backswing time
+    yield return new WaitForSeconds(0.3f);
+
+    // Refill Stamina Bar & Set dash ready
     ps.currStatus = playerStatus.status.NORMAL;
-    yield return new WaitForSeconds(cd);
+    for (float t=0.0f;t<cd;t+=Time.deltaTime) {
+      staminaBar.fillAmount = t / cd;
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+
+    // Stamina Bar Effect
+    Color c;
+    for (float t = 0.0f; t < 0.3f; t += Time.deltaTime) {
+      c = staminaBar.color;
+      c.a = 1 - t / 0.3f;
+      staminaBar.color = c;
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+    staminaBar.gameObject.SetActive(false);
+    c = staminaBar.color;
+    c.a = 1;
+    staminaBar.color = c;
+
+    // Set dash ready
     dashReday = true;
   }
 
