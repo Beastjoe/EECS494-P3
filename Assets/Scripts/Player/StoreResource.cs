@@ -20,11 +20,14 @@ public class StoreResource : MonoBehaviour {
   private float timer = 0.0f;
 
   public float storeTime = 2.0f;
+  public AudioClip storingClip;
+  private AudioSource SoundPlayer2D;
 
   float lowerboundForLeftTrigger = 0.5f;
   // Start is called before the first frame update
   void Start() {
     arr = GetComponent<ArrowKeyMovement>();
+    SoundPlayer2D = GetComponent<AudioSource>();
   }
 
   // Update is called once per frame
@@ -52,6 +55,8 @@ public class StoreResource : MonoBehaviour {
             && Inventory.instance.numOfPlayerResource[playerIndex] > 0) {
       if (!isStoring) {
         slider.SetActive(true);
+        SoundPlayer2D.clip = storingClip;
+        SoundPlayer2D.Play();
       }
 
       timer += Time.deltaTime;
@@ -65,6 +70,8 @@ public class StoreResource : MonoBehaviour {
           Inventory.instance.numOfBlueTeamResource += 1;
         }
         timer = 0.0f;
+        SoundPlayer2D.clip = storingClip;
+        SoundPlayer2D.Play();
       }
       else {
         slider.GetComponent<Slider>().value += Time.deltaTime / storeTime;
@@ -72,6 +79,7 @@ public class StoreResource : MonoBehaviour {
       isStoring = true;
     }
     else {
+      SoundPlayer2D.Stop();
       timer = 0.0f;
       slider.GetComponent<Slider>().value = 0.0f;
       slider.SetActive(false);

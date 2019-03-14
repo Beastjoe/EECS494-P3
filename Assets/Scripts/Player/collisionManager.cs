@@ -9,6 +9,8 @@ public class collisionManager : MonoBehaviour {
   Inventory inventory;
   Rigidbody rb;
 
+  public AudioClip collectClip;
+
   void Start() {
     ps = GetComponent<playerStatus>();
     am = GetComponent<ArrowKeyMovement>();
@@ -24,6 +26,7 @@ public class collisionManager : MonoBehaviour {
     if (collision.gameObject.CompareTag("cuboid")) {
       Destroy(collision.gameObject);
       inventory.addRupee(am.playerIndex);
+      Camera.main.GetComponent<AudioSource>().PlayOneShot(collectClip, 2.0f);
     }
     if (collision.gameObject.CompareTag("airwall")) {
       if (ps.currStatus==playerStatus.status.FLYING) {

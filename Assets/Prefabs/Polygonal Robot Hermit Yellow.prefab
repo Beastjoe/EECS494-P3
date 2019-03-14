@@ -1026,6 +1026,7 @@ GameObject:
   - component: {fileID: 7035379852292460809}
   - component: {fileID: 866495697}
   - component: {fileID: 4195628698027393011}
+  - component: {fileID: 4029409001654914991}
   m_Layer: 12
   m_Name: Polygonal Robot Hermit Yellow
   m_TagString: Player
@@ -1110,12 +1111,15 @@ MonoBehaviour:
     m_RotationOrder: 4
   staminaBar: {fileID: 7415233432684274263}
   dashTrail: {fileID: 191114, guid: 834c99069a124aa439d5795c3579843b, type: 3}
+  flyingFX: {fileID: 1990472012545504, guid: 7058a22133ce9874ab119efd180870c6, type: 3}
   pickUpDistance: 5
   flyingSpeed: 20
   maximumFlyingSpeed: 20
   knockBackSpeed: 5
   stunnedTime: 1.5
   flyingDir: {x: 0, y: 0, z: 0}
+  readyClip: {fileID: 8300000, guid: 5daa88b07fab62f449b5c858bcb01824, type: 3}
+  stunningClip: {fileID: 8300000, guid: c1ab79f67d0263c459c07f88c2cb6bcc, type: 3}
   hitEnemy: 0
   total_radius: 7.5
   stunnedEffect: {fileID: 6945172767159710662, guid: a372a0a5d1431e9479e04f9128d05e56,
@@ -1175,6 +1179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db2cc2bb4457f748957b0b61b94c21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectClip: {fileID: 8300000, guid: 9da722f3ed2bb5245802cdba3474fb40, type: 3}
 --- !u!114 &4195628698027393011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1191,6 +1196,103 @@ MonoBehaviour:
   effective_radius: 6
   isStoring: 0
   storeTime: 2
+  storingClip: {fileID: 8300000, guid: 4d8522beb1733aa40940bd3a23420f0b, type: 3}
+--- !u!82 &4029409001654914991
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5658496420395445426}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5658496420471404672
 GameObject:
   m_ObjectHideFlags: 0

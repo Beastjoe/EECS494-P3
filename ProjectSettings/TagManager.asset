@@ -9,6 +9,10 @@ TagManager:
   - outground_blue
   - outerground
   - airwall
+  - Red
+  - Green
+  - Blue
+  - BackgroundToDestroy
   layers:
   - Default
   - TransparentFX

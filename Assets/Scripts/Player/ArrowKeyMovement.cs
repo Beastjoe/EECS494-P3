@@ -18,12 +18,16 @@ public class ArrowKeyMovement : MonoBehaviour {
   public AnimationCurve dashSpeedCurve;
   public Image staminaBar;
   public GameObject dashTrail;
+  public GameObject flyingFX;
   public float pickUpDistance = 5.0f;
   public float flyingSpeed = 20.0f;
   public float maximumFlyingSpeed = 20.0f;
   public float knockBackSpeed = 10.0f;
   public float stunnedTime = 2.5f;
   public Vector3 flyingDir;
+
+  public AudioClip readyClip;
+  public AudioClip stunningClip;
 
   [HideInInspector]
   public bool hitEnemy = false;
@@ -63,6 +67,7 @@ public class ArrowKeyMovement : MonoBehaviour {
       defenseReady = false;
       StartCoroutine(defenseCoolDown(0.5f)); 
       if (ps.currStatus == playerStatus.status.NORMAL) {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip, 2.0f);
         ps.currStatus = playerStatus.status.DEFENSE;
         anim.SetTrigger("defenseTrigger");
       } else if (ps.currStatus == playerStatus.status.DEFENSE) {
@@ -175,6 +180,8 @@ public class ArrowKeyMovement : MonoBehaviour {
   IEnumerator flying() {
     flyingSpeed = maximumFlyingSpeed;
     Vector3 movingDir = (teamMember.transform.rotation * Vector3.forward).normalized;
+    GameObject auroa = Instantiate(flyingFX, transform.position, Quaternion.identity);
+    auroa.transform.parent = transform;
     transform.Find("directionIndicator").gameObject.SetActive(false);
     transform.position -= new Vector3(0, 0.7f, 0);
     GetComponent<BoxCollider>().size = new Vector3(1.5f, 1.0f, 1.5f);
@@ -201,10 +208,12 @@ public class ArrowKeyMovement : MonoBehaviour {
     transform.Find("directionIndicator").gameObject.transform.position = new Vector3(0, 0.1f, 2);
     transform.Find("positionIndicator").gameObject.SetActive(true);
     GetComponent<BoxCollider>().size = new Vector3(1f, 1.0f, 1f);
+    Destroy(auroa);
   }
 
   public void hurt(Vector3 dir) {
     anim.SetTrigger("hurtTrigger");
+    Camera.main.GetComponent<AudioSource>().PlayOneShot(stunningClip, 10.0f);
     gameObject.layer = 11;
     ps.currStatus = playerStatus.status.FLYING;
     dropMoneyAfterhurt();
