@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Experimental.Input;
+using UnityEngine.UI;
 
 public class ArrowKeyMovement : MonoBehaviour {
 
   public int playerIndex;
   public float movingSpeed = 1.0f;
   public float rotatingSpeed = 3.0f;
+  public float dashSpeed = 10.0f;
   public bool defenseMode = false;
   public bool onOuterGround = false;
   public GameObject teamMember;
   public GameObject rupee;
+  public AnimationCurve dashSpeedCurve;
+  public Image staminaBar;
+  public GameObject dashTrail;
   public float pickUpDistance = 5.0f;
   public float flyingSpeed = 20.0f;
   public float maximumFlyingSpeed = 20.0f;
@@ -32,7 +37,7 @@ public class ArrowKeyMovement : MonoBehaviour {
   Rigidbody rb;
   bool Ready = true;
   bool defenseReady = true;
-  bool pickUpReady = true;
+  bool dashReday = true;
   bool rightTriggerReady = true;
 
   // Start is called before the first frame update
@@ -110,21 +115,13 @@ public class ArrowKeyMovement : MonoBehaviour {
       else {
         anim.SetBool("moving", false);
       }
-      /*
+      
       if (ps.currStatus == playerStatus.status.NORMAL) {
-        if (teamMember.GetComponent<playerStatus>().currStatus == playerStatus.status.DEFENSE
-          && (teamMember.transform.position - transform.position).sqrMagnitude <= pickUpDistance
-          && gp.rightShoulder.isPressed
-          && pickUpReady) {
-          pickUpReady = false;
-          StartCoroutine(pickUPCoolDown(0.5f));
-          ps.currStatus = playerStatus.status.HOLDING;
-          teamMember.GetComponent<playerStatus>().currStatus = playerStatus.status.HELD;
-          teamMember.GetComponent<Animator>().SetBool("moving", false);
-          teamMember.GetComponent<Animator>().SetTrigger("IdelTrigger");
-          teamMember.transform.position = transform.position + new Vector3(0, 0.8f, 0);
+        if(gp.rightShoulder.isPressed && dashReday) {
+          dashReday = false;
+          StartCoroutine(dashCoolDown(2.0f));
         }
-      }*/
+      }
       
       if (ps.currStatus == playerStatus.status.HOLDING) {
         if (gp.rightTrigger.isPressed
@@ -250,9 +247,55 @@ public class ArrowKeyMovement : MonoBehaviour {
     defenseReady = true;
   }
 
-  IEnumerator pickUPCoolDown(float t) {
-    yield return new WaitForSeconds(t);
-    pickUpReady = true;
+  IEnumerator dashCoolDown(float cd) {
+    anim.SetTrigger("dashTrigger");
+    ps.currStatus = playerStatus.status.STUNNED;
+    staminaBar.gameObject.SetActive(true);
+    staminaBar.fillAmount = 0;
+    Vector3 dashDir = (transform.rotation * Vector3.forward).normalized;
+
+    // Dash along one direction; Speed gradually decreased
+    GameObject trail = Instantiate(dashTrail, transform.position, transform.rotation);
+    trail.transform.Rotate(0, 90, 0);
+    trail.transform.parent = transform;
+    for (float t=0.0f;t<0.15f;t+=Time.deltaTime) {
+      float speed = dashSpeed - dashSpeedCurve.Evaluate(t / 0.15f) * (dashSpeed - 15);
+      if (transform.position.x * transform.position.x + transform.position.z * transform.position.z >= 55f) {
+        Vector3 p1 = transform.position - dashDir * speed * Time.deltaTime;
+        Vector3 p2 = transform.position + dashDir * speed * Time.deltaTime;
+        transform.position = p1.magnitude > p2.magnitude ? p2 : p1;
+      } else {
+        transform.position += dashDir * speed * Time.deltaTime;
+      }
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+    
+
+    // cast backswing time
+    yield return new WaitForSeconds(0.3f);
+
+    // Refill Stamina Bar & Set dash ready
+    ps.currStatus = playerStatus.status.NORMAL;
+    for (float t=0.0f;t<cd;t+=Time.deltaTime) {
+      staminaBar.fillAmount = t / cd;
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+
+    // Stamina Bar Effect
+    Color c;
+    for (float t = 0.0f; t < 0.3f; t += Time.deltaTime) {
+      c = staminaBar.color;
+      c.a = 1 - t / 0.3f;
+      staminaBar.color = c;
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+    staminaBar.gameObject.SetActive(false);
+    c = staminaBar.color;
+    c.a = 1;
+    staminaBar.color = c;
+
+    // Set dash ready
+    dashReday = true;
   }
 
   IEnumerator rightTriggerCoolDown(float t) {
