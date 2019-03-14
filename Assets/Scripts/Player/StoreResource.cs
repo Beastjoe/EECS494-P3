@@ -40,10 +40,10 @@ public class StoreResource : MonoBehaviour {
 
     float x = transform.position.x;
     float z = transform.position.z;
-    if (gp.leftTrigger.ReadValue() != 0) {
-      print(gp.leftTrigger.ReadValue());
+    //if (gp.leftTrigger.ReadValue() != 0) {
+    //  print(gp.leftTrigger.ReadValue());
 
-    }
+    //}
 
     if (gp.leftTrigger.ReadValue() > lowerboundForLeftTrigger
             && ((teamIndex == 0 && other.gameObject.CompareTag("outground_red"))

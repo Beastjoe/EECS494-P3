@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -118,7 +118,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34054
+  m_Name: pb_Mesh98942
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -598,12 +598,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 186924006}
-  m_RootOrder: 4
+  m_Father: {fileID: 1180039068}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -60}
+  m_AnchoredPosition: {x: -370, y: 164.91803}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &94366192
@@ -752,12 +752,9 @@ RectTransform:
   m_Children:
   - {fileID: 17584883}
   - {fileID: 1631426785}
-  - {fileID: 1900985184}
-  - {fileID: 555286456}
-  - {fileID: 94366191}
-  - {fileID: 2038885979}
   - {fileID: 1968798536}
   - {fileID: 2108537706}
+  - {fileID: 1180039068}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -864,6 +861,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.91095746
       objectReference: {fileID: 0}
+    - target: {fileID: 5658496420395445427, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 69617365, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: m_Constraints
       value: 112
@@ -876,7 +878,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34002
+  m_Name: pb_Mesh98884
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -1965,6 +1967,7 @@ Transform:
   - {fileID: 1895430428}
   - {fileID: 1559988220}
   - {fileID: 1827342369}
+  - {fileID: 1574532443}
   m_Father: {fileID: 1727804395}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -2049,12 +2052,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 186924006}
-  m_RootOrder: 3
+  m_Father: {fileID: 1180039068}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -40}
+  m_AnchoredPosition: {x: -370, y: 184.91803}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &555286457
@@ -2201,15 +2204,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rupee: {fileID: 7416718728250022289, guid: 5de58d5ee0639403bb7de61dc3997baa, type: 3}
   parent: {fileID: 1577926977}
-  speed: 1
-  currentNum: 0
 --- !u!43 &810614462
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34124
+  m_Name: pb_Mesh99018
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -2369,7 +2370,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34146
+  m_Name: pb_Mesh99040
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -2529,7 +2530,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34110
+  m_Name: pb_Mesh99004
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -3751,7 +3752,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33932
+  m_Name: pb_Mesh98808
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -3911,7 +3912,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34072
+  m_Name: pb_Mesh98960
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -4065,6 +4066,40 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1180039067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1180039068}
+  m_Layer: 0
+  m_Name: PlayerUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1180039068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180039067}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1900985184}
+  - {fileID: 555286456}
+  - {fileID: 94366191}
+  - {fileID: 2038885979}
+  m_Father: {fileID: 186924006}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1194354119 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5658496420395445426, guid: 525afc20fa0e2b94696da870866b8a41,
@@ -4083,7 +4118,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34098
+  m_Name: pb_Mesh98986
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -5070,8 +5105,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rupee: {fileID: 7416718728250022289, guid: 5de58d5ee0639403bb7de61dc3997baa, type: 3}
   parent: {fileID: 1194354119}
-  speed: 1
-  currentNum: 0
 --- !u!1 &1535917442
 GameObject:
   m_ObjectHideFlags: 0
@@ -5874,7 +5907,7 @@ GameObject:
   - component: {fileID: 1559988222}
   - component: {fileID: 1559988221}
   m_Layer: 9
-  m_Name: Arch (3)
+  m_Name: Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6648,6 +6681,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559988219}
   m_Mesh: {fileID: 6340872}
+--- !u!1 &1574532442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1574532443}
+  - component: {fileID: 1574532444}
+  m_Layer: 0
+  m_Name: StorageController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1574532443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574532442}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: -1.4999996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 350553354}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1574532444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574532442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9cc7989eaa2149af81e61b673bb3dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlueStorage: {fileID: 1559988219}
+  RedStorage: {fileID: 1909944497}
+  tmpCount: 10
 --- !u!1001 &1577926976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9509,8 +9588,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rupee: {fileID: 7416718728250022289, guid: 5de58d5ee0639403bb7de61dc3997baa, type: 3}
   parent: {fileID: 2105269752}
-  speed: 1
-  currentNum: 0
 --- !u!1 &1827342364
 GameObject:
   m_ObjectHideFlags: 0
@@ -12043,7 +12120,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34030
+  m_Name: pb_Mesh98912
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -13015,12 +13092,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 186924006}
-  m_RootOrder: 2
+  m_Father: {fileID: 1180039068}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -20}
+  m_AnchoredPosition: {x: -370, y: 204.91803}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1900985185
@@ -13091,7 +13168,7 @@ GameObject:
   - component: {fileID: 1909944500}
   - component: {fileID: 1909944499}
   m_Layer: 9
-  m_Name: Arch (1)
+  m_Name: Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13930,7 +14007,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 186924006}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -14082,15 +14159,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rupee: {fileID: 7416718728250022289, guid: 5de58d5ee0639403bb7de61dc3997baa, type: 3}
   parent: {fileID: 958790441}
-  speed: 1
-  currentNum: 0
 --- !u!43 &2032330596
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34042
+  m_Name: pb_Mesh98930
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -14274,12 +14349,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 186924006}
-  m_RootOrder: 5
+  m_Father: {fileID: 1180039068}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -80}
+  m_AnchoredPosition: {x: -370, y: 144.91803}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2038885980
@@ -14490,7 +14565,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 186924006}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}

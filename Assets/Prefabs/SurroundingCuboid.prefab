@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7416718728250022288}
   m_Layer: 0
-  m_Name: CuboidWrapperUntagged
+  m_Name: SurroundingCuboid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 7417138188559993673}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.83, z: 0}
-  m_LocalScale: {x: 0.20000003, y: 0.2, z: 0.19999997}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 7416718728250022288}
   m_RootOrder: 0
@@ -89,7 +89,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5a9e6cf91cbfc1a4fbc9470cca37b97a, type: 2}
+  - {fileID: 2100000, guid: 100b1f3a8e9a040d89a4a1957036b174, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,13 +123,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAnimated: 1
   isRotating: 1
-  isFloating: 1
+  isFloating: 0
   isScaling: 1
   rotationAngle: {x: 0, y: 0, z: 10}
   rotationSpeed: 10
   floatSpeed: 0.005
   floatRate: 0.5
-  startScale: {x: 0.2, y: 0.2, z: 0.2}
-  endScale: {x: 0.3, y: 0.3, z: 0.3}
+  startScale: {x: 0.1, y: 0.1, z: 0.1}
+  endScale: {x: 0.1, y: 0.1, z: 0.1}
   scaleSpeed: 1
   scaleRate: 0.5
