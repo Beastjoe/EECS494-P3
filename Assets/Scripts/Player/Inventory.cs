@@ -21,7 +21,7 @@ public class Inventory : MonoBehaviour {
   }
 
   private void Update() {
-    Debug.Log(numOfBlueTeamResource);
+    //Debug.Log(numOfBlueTeamResource);
     if (numOfBlueTeamResource<10) {
       panelBlue.StringToDraw = "0" + numOfBlueTeamResource.ToString();
     } else {
