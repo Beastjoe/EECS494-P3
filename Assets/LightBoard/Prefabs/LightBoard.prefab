@@ -144,3 +144,4 @@ MonoBehaviour:
   StringToDraw: X
   TextMotionStyle: 5
   RefreshTime: 1
+  bgToDelete: {fileID: 0}

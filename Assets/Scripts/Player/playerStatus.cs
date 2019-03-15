@@ -6,7 +6,7 @@ public class playerStatus : MonoBehaviour {
 
   public enum status { DEFENSE, NORMAL, HOLDING, HELD, FLYING, STUNNED }
   public status currStatus;
-  public int teamIdx = 0;
+  public int teamIdx = 0; // 0 is red and 1 is blue
 
   // Start is called before the first frame update
   void Start() {

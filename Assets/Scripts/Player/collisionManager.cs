@@ -6,6 +6,7 @@ public class collisionManager : MonoBehaviour {
   // Start is called before the first frame update
   playerStatus ps;
   ArrowKeyMovement am;
+  ArrowKeyMovementDummy amd;
   Inventory inventory;
   Rigidbody rb;
 
@@ -50,7 +51,12 @@ public class collisionManager : MonoBehaviour {
             ReflectProjectile(collision.contacts[0].normal);
           } else {
             am.hitEnemy = true;
-            player_am.hurt(am.flyingDir);
+            if(player_am == null) {
+              player.GetComponent<ArrowKeyMovementDummy>().hurt(am.flyingDir);
+            }
+            else {
+              player_am.hurt(am.flyingDir);
+            }
           }
         }
       } else if (player_ps.teamIdx == ps.teamIdx && player_ps.currStatus == playerStatus.status.DEFENSE && ps.currStatus==playerStatus.status.NORMAL) {

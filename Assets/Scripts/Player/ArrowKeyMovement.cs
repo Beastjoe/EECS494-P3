@@ -22,6 +22,7 @@ public class ArrowKeyMovement : MonoBehaviour {
   public float pickUpDistance = 5.0f;
   public float flyingSpeed = 20.0f;
   public float maximumFlyingSpeed = 20.0f;
+  public bool inTutorialMode;
   public float knockBackSpeed = 10.0f;
   public float stunnedTime = 2.5f;
   public Vector3 flyingDir;
@@ -103,10 +104,14 @@ public class ArrowKeyMovement : MonoBehaviour {
 
       if (horizontal_val != 0 || vertical_val != 0) {
         isIdle = false;
-        if (ps.currStatus == playerStatus.status.HOLDING && transform.position.x * transform.position.x + transform.position.z * transform.position.z >= 55f) {
+        if (!inTutorialMode && ps.currStatus == playerStatus.status.HOLDING && transform.position.x * transform.position.x + transform.position.z * transform.position.z >= 55f) {
           Vector3 p1 = transform.position - movingSpeed * (Vector3.forward * vertical_val + Vector3.right * horizontal_val) * Time.deltaTime;
           Vector3 p2 = transform.position + movingSpeed * (Vector3.forward * vertical_val + Vector3.right * horizontal_val) * Time.deltaTime;
           transform.position = p1.magnitude > p2.magnitude ? p2 : p1;
+        } else if(inTutorialMode && ps.teamIdx == 0) {
+          //TODO: BOUND
+        } else if(inTutorialMode && ps.teamIdx == 1) {
+          //TODO: BOUND
         }
         else {
           transform.position += movingSpeed *
@@ -269,7 +274,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     trail.transform.parent = transform;
     for (float t=0.0f;t<0.15f;t+=Time.deltaTime) {
       float speed = dashSpeed - dashSpeedCurve.Evaluate(t / 0.15f) * (dashSpeed - 15);
-      if (transform.position.x * transform.position.x + transform.position.z * transform.position.z >= 55f) {
+      if (!inTutorialMode && transform.position.x * transform.position.x + transform.position.z * transform.position.z >= 55f) {
         Vector3 p1 = transform.position - dashDir * speed * Time.deltaTime;
         Vector3 p2 = transform.position + dashDir * speed * Time.deltaTime;
         transform.position = p1.magnitude > p2.magnitude ? p2 : p1;

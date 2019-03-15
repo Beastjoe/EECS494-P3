@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Input;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(ArrowKeyMovement))]
+//RequireComponent(typeof(ArrowKeyMovement))]
 public class StoreResource : MonoBehaviour {
 
   public GameObject slider;
