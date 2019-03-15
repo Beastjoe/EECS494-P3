@@ -165,6 +165,7 @@
             <e p="MainMenuController.cs" t="Include" />
             <e p="rubeeInstantiation.cs" t="Include" />
             <e p="SelectionController.cs" t="Include" />
+            <e p="SkipTutorialController.cs" t="Include" />
             <e p="StorageController.cs" t="Include" />
           </e>
           <e p="Lowpoly_Wasteland_Props" t="Include">
