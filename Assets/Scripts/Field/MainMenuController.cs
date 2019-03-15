@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
-    private static int playerCount = 2;
+    private static int playerCount = 4;
     bool[] hasPressed = new bool[playerCount];
     public Text PressCount;
     // Start is called before the first frame update

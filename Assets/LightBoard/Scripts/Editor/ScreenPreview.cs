@@ -44,10 +44,10 @@ public class ScreenPreview : MonoBehaviour {
 	}
 
 	static void playModeChange() {
-    PanelGenerator[] ledPanels = GameObject.FindObjectsOfType<PanelGenerator>();
-    foreach (PanelGenerator pg in ledPanels) {
-      DestroyImmediate(pg.bgToDelete);
-    }
+    //PanelGenerator[] ledPanels = GameObject.FindObjectsOfType<PanelGenerator>();
+    //foreach (PanelGenerator pg in ledPanels) {
+    //  DestroyImmediate(pg.bgToDelete);
+    //}
     /*
       GameObject[] bgs;
     bgs = GameObject.FindGameObjectsWithTag("BackgroundToDestroy");

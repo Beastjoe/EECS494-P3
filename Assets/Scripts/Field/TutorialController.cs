@@ -87,13 +87,11 @@ public class TutorialController : MonoBehaviour {
       if (!GetComponent<TutorialThrowController>().passTutorial6) {
         pass = false;
       }
-    } else if(tutorialIdx == 7) {
-      if (!(Inventory.instance.numOfRedTeamResource >= 1 && Inventory.instance.numOfBlueTeamResource >= 1))
-        pass = false;
-      else
-      {
+    }
+    else if (tutorialIdx == 7) {
+      pass = false;
+      if ((Inventory.instance.numOfRedTeamResource >= 1 && Inventory.instance.numOfBlueTeamResource >= 1))
         SceneManager.LoadScene("playLab");
-      }
     }
     if (pass) {
       passToNextTutorial();

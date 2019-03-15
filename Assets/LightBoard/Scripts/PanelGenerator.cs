@@ -49,12 +49,13 @@ public class PanelGenerator : MonoBehaviour {
 
   private void Awake() {
     bgToDelete = transform.GetChild(0).gameObject;
+    Destroy(bgToDelete);
   }
 
   // Use this for initialization
   void Start () {
-
-		if (FontToUse.Equals ("")) {
+    //bgToDelete = transform.GetChild(0).gameObject;
+    if (FontToUse.Equals ("")) {
 			FontToUse = "Fonts/7x5";
 		}
 
