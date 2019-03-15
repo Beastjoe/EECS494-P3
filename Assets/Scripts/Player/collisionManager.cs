@@ -18,11 +18,6 @@ public class collisionManager : MonoBehaviour {
     inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
   }
 
-  // Update is called once per frame
-  void Update() {
-
-  }
-
   private void OnCollisionEnter(Collision collision) {
     if (collision.gameObject.CompareTag("cuboid")) {
       Destroy(collision.gameObject);
@@ -30,9 +25,12 @@ public class collisionManager : MonoBehaviour {
       Camera.main.GetComponent<AudioSource>().PlayOneShot(collectClip, 2.0f);
     }
     if (collision.gameObject.CompareTag("airwall")) {
+      if (ps.currStatus == playerStatus.status.DASH) {
+        am.stopDash = true;
+      }
       if (ps.currStatus==playerStatus.status.FLYING) {
        ReflectProjectile(collision.contacts[0].normal);
-      }
+      } 
     }
     if (collision.gameObject.CompareTag("Player")) {
       GameObject player = collision.gameObject;
@@ -79,6 +77,11 @@ public class collisionManager : MonoBehaviour {
         player.GetComponent<Animator>().SetBool("moving", false);
         player.GetComponent<Animator>().SetTrigger("IdelTrigger");
         player.transform.position = transform.position + new Vector3(0, 0.8f, 0);
+      }
+    }
+    if (collision.gameObject.CompareTag("airwall")) {
+      if (ps.currStatus == playerStatus.status.DASH) {
+        am.stopDash = true;
       }
     }
   }

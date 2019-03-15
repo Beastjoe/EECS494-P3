@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class playerStatus : MonoBehaviour {
 
-  public enum status { DEFENSE, NORMAL, HOLDING, HELD, FLYING, STUNNED }
+  public enum status { DEFENSE, NORMAL, HOLDING, HELD, FLYING, STUNNED, DASH }
   public status currStatus;
   public int teamIdx = 0; // 0 is red and 1 is blue
 

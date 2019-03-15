@@ -32,6 +32,7 @@ public class ArrowKeyMovement : MonoBehaviour {
 
   [HideInInspector]
   public bool hitEnemy = false;
+  public bool stopDash = false;
 
   public float total_radius = 7.5f;
 
@@ -54,7 +55,7 @@ public class ArrowKeyMovement : MonoBehaviour {
 
   // Update is called once per frame
   void Update() {
-    if (ps.currStatus == playerStatus.status.STUNNED) {
+    if (ps.currStatus == playerStatus.status.STUNNED || ps.currStatus == playerStatus.status.DASH) {
       return;
     }
     if (GetComponent<StoreResource>().isStoring) {
@@ -108,11 +109,11 @@ public class ArrowKeyMovement : MonoBehaviour {
           Vector3 p1 = transform.position - movingSpeed * (Vector3.forward * vertical_val + Vector3.right * horizontal_val) * Time.deltaTime;
           Vector3 p2 = transform.position + movingSpeed * (Vector3.forward * vertical_val + Vector3.right * horizontal_val) * Time.deltaTime;
           transform.position = p1.magnitude > p2.magnitude ? p2 : p1;
-        } else if(inTutorialMode && ps.teamIdx == 0) {
+        } /*else if(inTutorialMode && ps.teamIdx == 0) {
           //TODO: BOUND
         } else if(inTutorialMode && ps.teamIdx == 1) {
           //TODO: BOUND
-        }
+        }*/
         else {
           transform.position += movingSpeed *
             (Vector3.forward * vertical_val + Vector3.right * horizontal_val) * Time.deltaTime;
@@ -203,6 +204,7 @@ public class ArrowKeyMovement : MonoBehaviour {
         break;
       }
       transform.position += flyingSpeed * flyingDir * Time.deltaTime;
+      transform.Rotate(0, 30, 0);
       yield return new WaitForSeconds(Time.deltaTime);
     }
 
@@ -263,16 +265,20 @@ public class ArrowKeyMovement : MonoBehaviour {
 
   IEnumerator dashCoolDown(float cd) {
     anim.SetTrigger("dashTrigger");
-    ps.currStatus = playerStatus.status.STUNNED;
+    ps.currStatus = playerStatus.status.DASH;
     staminaBar.gameObject.SetActive(true);
     staminaBar.fillAmount = 0;
     Vector3 dashDir = (transform.rotation * Vector3.forward).normalized;
 
     // Dash along one direction; Speed gradually decreased
+    stopDash = false;
     GameObject trail = Instantiate(dashTrail, transform.position, transform.rotation);
     trail.transform.Rotate(0, 90, 0);
     trail.transform.parent = transform;
     for (float t=0.0f;t<0.15f;t+=Time.deltaTime) {
+      if (stopDash) {
+        break;
+      }
       float speed = dashSpeed - dashSpeedCurve.Evaluate(t / 0.15f) * (dashSpeed - 15);
       if (!inTutorialMode && transform.position.x * transform.position.x + transform.position.z * transform.position.z >= 55f) {
         Vector3 p1 = transform.position - dashDir * speed * Time.deltaTime;
