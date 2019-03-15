@@ -49,8 +49,8 @@ public class StoreResource : MonoBehaviour {
     //}
 
     if (gp.leftTrigger.ReadValue() > lowerboundForLeftTrigger
-            && ((teamIndex == 0 && other.gameObject.CompareTag("outground_red"))
-                || (teamIndex == 1 && other.gameObject.CompareTag("outground_blue")))
+            && ((teamIndex == 0 && other.gameObject.CompareTag("outground_red") && StorageController.instance.GetRedStatus())
+                || (teamIndex == 1 && other.gameObject.CompareTag("outground_blue") && StorageController.instance.GetBlueStatus()))
             && (x * x + z * z >= effective_radius * effective_radius)
             && Inventory.instance.numOfPlayerResource[playerIndex] > 0) {
       if (!isStoring) {
