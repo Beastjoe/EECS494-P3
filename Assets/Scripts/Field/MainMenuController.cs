@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Experimental.Input;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class MainMenuController : MonoBehaviour
 {
@@ -46,6 +48,7 @@ public class MainMenuController : MonoBehaviour
         if (xCount == playerCount)
         {
             Debug.Log("All four x pressed");
+            SceneManager.LoadScene("Selection");
         }
     }
     
