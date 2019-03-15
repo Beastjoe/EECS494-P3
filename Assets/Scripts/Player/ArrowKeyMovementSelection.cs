@@ -66,7 +66,7 @@ public class ArrowKeyMovementSelection : MonoBehaviour {
       return;
     }
 
-    if (Gamepad.all[playerIndex].xButton.isPressed)
+    if (Gamepad.all[playerIndex].aButton.isPressed)
     {
       started = true;
       ps.currStatus = playerStatus.status.NORMAL;
