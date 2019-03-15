@@ -149,7 +149,6 @@
             <e p="Readme.txt" t="Include" />
           </e>
         </e>
-        <e p="MainMenuController.cs" t="Include" />
         <e p="Materials" t="Include">
           <e p="NewSurfaceShader.shader" t="Include" />
         </e>
@@ -163,7 +162,9 @@
         <e p="Scripts" t="Include">
           <e p="Field" t="Include">
             <e p="GroundRotation.cs" t="Include" />
+            <e p="MainMenuController.cs" t="Include" />
             <e p="rubeeInstantiation.cs" t="Include" />
+            <e p="SelectionController.cs" t="Include" />
             <e p="StorageController.cs" t="Include" />
           </e>
           <e p="Lowpoly_Wasteland_Props" t="Include">
@@ -173,6 +174,7 @@
           </e>
           <e p="Player" t="Include">
             <e p="ArrowKeyMovement.cs" t="Include" />
+            <e p="ArrowKeyMovementSelection.cs" t="Include" />
             <e p="collisionManager.cs" t="Include" />
             <e p="Inventory.cs" t="Include" />
             <e p="playerStatus.cs" t="Include" />
