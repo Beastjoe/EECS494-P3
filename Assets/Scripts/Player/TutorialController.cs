@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine.Experimental.Input;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialController : MonoBehaviour {
 
@@ -89,6 +90,10 @@ public class TutorialController : MonoBehaviour {
     } else if(tutorialIdx == 7) {
       if (!(Inventory.instance.numOfRedTeamResource >= 1 && Inventory.instance.numOfBlueTeamResource >= 1))
         pass = false;
+      else
+      {
+        SceneManager.LoadScene("playLab");
+      }
     }
     if (pass) {
       passToNextTutorial();

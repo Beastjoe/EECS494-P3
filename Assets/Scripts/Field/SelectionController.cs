@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
 
 using UnityEngine.Experimental.Input;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SelectionController : MonoBehaviour
@@ -17,6 +19,12 @@ public class SelectionController : MonoBehaviour
     public GameObject GreenStorage;
     public GameObject PurpleStorage;
     // Start is called before the first frame update
+
+    private bool Player0IsReady = false;
+    private bool Player1IsReady = false;
+    private bool Player2IsReady = false;
+    private bool Player3IsReady = false;
+
     void Start()
     {
         blueRenderer = BlueStorage.GetComponent<MeshRenderer>();
@@ -48,18 +56,21 @@ public class SelectionController : MonoBehaviour
         {
             redRenderer.material.SetColor("_Color", new Vector4(0.749f, 0f, 0.529f, 1f));
             redRenderer.material.SetColor("_EmissionColor", new Vector4(0.749f, 0f, 0.529f, 1f) * 1.5f);
+            Player0IsReady = true;
         }
         
         if (Gamepad.all[1].xButton.isPressed)
         {
             purpleRenderer.material.SetColor("_Color", new Vector4(0.749f, 0f, 0.529f, 1f));
             purpleRenderer.material.SetColor("_EmissionColor", new Vector4(0.749f, 0f, 0.529f, 1f) * 1.5f);
+            Player1IsReady = true;
         }
         
         if (Gamepad.all[2].xButton.isPressed)
         {
             greenRenderer.material.SetColor("_Color", new Vector4(0.749f, 0f, 0.529f, 1f));
             greenRenderer.material.SetColor("_EmissionColor", new Vector4(0.749f, 0f, 0.529f, 1f) * 1.5f);
+            Player2IsReady = true;
         }
         
         
@@ -67,6 +78,19 @@ public class SelectionController : MonoBehaviour
         {
             blueRenderer.material.SetColor("_Color", new Vector4(0.749f, 0f, 0.529f, 1f));
             blueRenderer.material.SetColor("_EmissionColor", new Vector4(0.749f, 0f, 0.529f, 1f) * 1.5f);
+            Player3IsReady = true;
         }
+
+        bool finished = Player0IsReady && Player1IsReady && Player2IsReady && Player3IsReady;
+
+        if (finished)
+        {
+            // TODO: Press one more button after four players are ready
+            SceneManager.LoadScene("TutorialIndividualLab");
+        }
+
     }
+    
+    
+    
 }

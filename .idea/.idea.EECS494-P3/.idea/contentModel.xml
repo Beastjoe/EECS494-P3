@@ -165,6 +165,7 @@
             <e p="MainMenuController.cs" t="Include" />
             <e p="rubeeInstantiation.cs" t="Include" />
             <e p="SelectionController.cs" t="Include" />
+            <e p="SkipTutorialController.cs" t="Include" />
             <e p="StorageController.cs" t="Include" />
           </e>
           <e p="Lowpoly_Wasteland_Props" t="Include">
@@ -174,13 +175,18 @@
           </e>
           <e p="Player" t="Include">
             <e p="ArrowKeyMovement.cs" t="Include" />
+            <e p="ArrowKeyMovementDummy.cs" t="Include" />
             <e p="ArrowKeyMovementSelection.cs" t="Include" />
+            <e p="BurrowAndPickController.cs" t="Include" />
             <e p="collisionManager.cs" t="Include" />
+            <e p="DummyRupeeController.cs" t="Include" />
             <e p="Inventory.cs" t="Include" />
             <e p="playerStatus.cs" t="Include" />
             <e p="shadowScript.cs" t="Include" />
             <e p="StoreResource.cs" t="Include" />
             <e p="SurroundingRupeeController.cs" t="Include" />
+            <e p="TutorialController.cs" t="Include" />
+            <e p="TutorialThrowController.cs" t="Include" />
           </e>
           <e p="Temporary" t="Include">
             <e p="BallArrowMovement.cs" t="Include" />
@@ -189,6 +195,7 @@
             <e p="BluePlayer1UIDisplayer.cs" t="Include" />
             <e p="BluePlayer2UIDisplayer.cs" t="Include" />
             <e p="fixRotation.cs" t="Include" />
+            <e p="lightBoardTimer.cs" t="Include" />
             <e p="RedPlayer1UIDisplayer.cs" t="Include" />
             <e p="RedPlayer2UIDisplayer.cs" t="Include" />
             <e p="TeamBlueUIDisplayer.cs" t="Include" />
@@ -212,6 +219,6 @@
       </e>
     </e>
     <e p="$USER_HOME$/Library/Caches/Rider2018.3/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.3/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_EECS494-P3.-64075737.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.3/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_EECS494-P3.-1585278525.00" t="ExcludeRecursive" />
   </component>
 </project>
