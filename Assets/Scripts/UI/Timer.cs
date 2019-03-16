@@ -20,6 +20,7 @@ public class Timer : MonoBehaviour {
     timer = float.Parse(text.text);
   }
 
+
   void Update() {
     if (GameControl.instance.isPaused) {
       return;
@@ -58,5 +59,4 @@ public class Timer : MonoBehaviour {
       }
     }
   }
-}
 }
