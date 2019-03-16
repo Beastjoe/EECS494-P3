@@ -13,6 +13,9 @@ public class GroundRotation : MonoBehaviour {
 
   // Update is called once per frame
   void Update() {
+    if (GameControl.instance.isPaused) {
+      return;
+    }
     foreach (GameObject player in players) {
       if ((player.transform.position-transform.position).sqrMagnitude>50.0f) {
         //Debug.Log((player.transform.position - transform.position).sqrMagnitude);

@@ -45,6 +45,7 @@ public class ArrowKeyMovement : MonoBehaviour {
   bool defenseReady = true;
   bool dashReday = true;
   bool rightTriggerReady = true;
+  bool startButtonReady = true;
 
   // Start is called before the first frame update
   void Start() {
@@ -61,10 +62,16 @@ public class ArrowKeyMovement : MonoBehaviour {
     if (GetComponent<StoreResource>().isStoring) {
       return;
     }
+    if (GameControl.instance.isPaused) {
+      return;
+    }
 
     // get GamePad
     Gamepad gp = Gamepad.all[playerIndex];
-
+    if (gp.startButton.isPressed && startButtonReady) {
+      startButtonReady = false;
+      GameControl.instance.isPaused = true;
+    }
     if (gp.leftShoulder.isPressed && defenseReady) {
       defenseReady = false;
       StartCoroutine(defenseCoolDown(0.5f)); 
@@ -321,6 +328,11 @@ public class ArrowKeyMovement : MonoBehaviour {
   IEnumerator rightTriggerCoolDown(float t) {
     yield return new WaitForSeconds(t);
     rightTriggerReady = true;
+  }
+
+  IEnumerator startButtonCoolDown(float t) {
+    yield return new WaitForSeconds(t);
+    startButtonReady = true;
   }
 
   IEnumerator getStunned(float t, GameObject stunningEffectObject) {

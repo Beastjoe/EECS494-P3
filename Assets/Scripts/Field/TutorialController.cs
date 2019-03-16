@@ -9,18 +9,15 @@ public class TutorialController : MonoBehaviour {
 
   public GameObject nextTutorial;
   public int tutorialIdx = 0;
+  public AnimationCurve curve;
+  public float originalPos = 0;
 
   public bool[] playerFlag = new bool[4];
   Gamepad[] playerPads = new Gamepad[4];
-
-
+  bool passToNextTutorialCalled = false;
   private void passToNextTutorial() {
-    Debug.Log("pass");
-    gameObject.SetActive(false);
-    nextTutorial.SetActive(true);
-    if (tutorialIdx == 2) {
-
-    }
+    // Disappear Effect
+    StartCoroutine(disappearEffect());
   }
 
   private void Start() {
@@ -29,6 +26,7 @@ public class TutorialController : MonoBehaviour {
       playerPads[i] = Gamepad.all[i];
     }
   }
+ 
 
   // Update is called once per frame
   void Update() {
@@ -93,9 +91,25 @@ public class TutorialController : MonoBehaviour {
       if ((Inventory.instance.numOfRedTeamResource >= 1 && Inventory.instance.numOfBlueTeamResource >= 1))
         SceneManager.LoadScene("playLab");
     }
-    if (pass) {
+    if (pass && !passToNextTutorialCalled) {
+      passToNextTutorialCalled = true;
       passToNextTutorial();
     }
 
+  }
+
+  IEnumerator disappearEffect() {
+    for (float i=0.0f;i<=0.5f;i+=Time.deltaTime) {
+      GetComponent<RectTransform>().anchoredPosition = new Vector3(0, curve.Evaluate(i) * 2 * originalPos - originalPos, 0);
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+   
+    nextTutorial.SetActive(true);
+    nextTutorial.GetComponent<TutorialController>().originalPos = nextTutorial.GetComponent<RectTransform>().anchoredPosition.y;
+    for (float i = 0.0f; i <= 0.5f; i += Time.deltaTime) {
+      nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, nextTutorial.GetComponent<TutorialController>().originalPos - curve.Evaluate(i) * 2 * nextTutorial.GetComponent<TutorialController>().originalPos, 0);
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+    gameObject.SetActive(false);
   }
 }

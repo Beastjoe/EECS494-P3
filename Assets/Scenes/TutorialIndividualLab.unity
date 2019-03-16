@@ -145,6 +145,7 @@ Transform:
   - {fileID: 712354617}
   - {fileID: 1743539506}
   - {fileID: 1520218766}
+  - {fileID: 331661847}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -680,7 +681,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &264532195
 GameObject:
@@ -785,7 +786,7 @@ PrefabInstance:
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
@@ -872,7 +873,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 331661846}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -881,8 +882,8 @@ Transform:
   - {fileID: 856814780}
   - {fileID: 1461673861}
   - {fileID: 999559786}
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 27764184}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &464786572
 GameObject:
@@ -991,11 +992,11 @@ RectTransform:
   m_Children:
   - {fileID: 1746210580}
   m_Father: {fileID: 714009700}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -62.7}
+  m_AnchoredPosition: {x: 0.000061035156, y: 62.7}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &493289068
@@ -1012,6 +1013,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextTutorial: {fileID: 644868551}
   tutorialIdx: 4
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.36722845
+      value: 1.1296389
+      inSlope: 0.37199974
+      outSlope: 0.37199974
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4503714
+      value: 0.96272373
+      inSlope: -1.3264974
+      outSlope: -1.3264974
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  originalPos: 0
   playerFlag: 00000000
 --- !u!114 &493289069
 MonoBehaviour:
@@ -1131,7 +1175,7 @@ PrefabInstance:
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
@@ -1205,7 +1249,7 @@ PrefabInstance:
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
@@ -1338,11 +1382,11 @@ RectTransform:
   - {fileID: 2041114106}
   - {fileID: 1708225747}
   m_Father: {fileID: 714009700}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -62.700043}
+  m_AnchoredPosition: {x: 0.000061035156, y: 62.7}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &644868553
@@ -1376,6 +1420,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextTutorial: {fileID: 1141070104}
   tutorialIdx: 5
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.36435354
+      value: 1.1330233
+      inSlope: 0.3644743
+      outSlope: 0.3644743
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.44148272
+      value: 0.963885
+      inSlope: -0.7289454
+      outSlope: -0.7289454
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.49275407
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  originalPos: 0
   playerFlag: 00000000
 --- !u!114 &644868555
 MonoBehaviour:
@@ -1476,7 +1563,7 @@ PrefabInstance:
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
@@ -1905,6 +1992,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 795789237}
   - {fileID: 1921067659}
   - {fileID: 1419594691}
   - {fileID: 1938058745}
@@ -1914,7 +2002,7 @@ RectTransform:
   - {fileID: 1141070105}
   - {fileID: 1093099051}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1933,6 +2021,100 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 296875454}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &795789236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 795789237}
+  - component: {fileID: 795789238}
+  m_Layer: 5
+  m_Name: Tutorial-1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &795789237
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795789236}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 714009700}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &795789238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795789236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e57522b8a39116448e43a42949771e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextTutorial: {fileID: 1921067658}
+  tutorialIdx: -1
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.32866973
+      value: 1.1104023
+      inSlope: 0.44309807
+      outSlope: 0.44309807
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4412331
+      value: 0.9303892
+      inSlope: -0.9410021
+      outSlope: -0.9410021
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  originalPos: 0
+  playerFlag: 00000000
 --- !u!1 &809916981 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7416718728250022289, guid: 98489eb001e744f1abb66dade030759e,
@@ -2114,7 +2296,7 @@ PrefabInstance:
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
@@ -2510,7 +2692,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &936320251
 GameObject:
@@ -2948,7 +3130,7 @@ PrefabInstance:
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
@@ -3000,11 +3182,11 @@ RectTransform:
   m_Children:
   - {fileID: 219022253}
   m_Father: {fileID: 714009700}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -62.700043}
+  m_AnchoredPosition: {x: 0.000061035156, y: 62.7}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1093099052
@@ -3038,6 +3220,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextTutorial: {fileID: 1921067658}
   tutorialIdx: 7
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.35414708
+      value: 1.1114683
+      inSlope: 0.35007572
+      outSlope: 0.35007572
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.431156
+      value: 0.95581
+      inSlope: -1.235026
+      outSlope: -1.235026
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.9999989
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  originalPos: 0
   playerFlag: 00000000
 --- !u!114 &1093099054
 MonoBehaviour:
@@ -3147,7 +3372,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1141070104
 GameObject:
@@ -3181,11 +3406,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 714009700}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -41.5}
+  m_AnchoredPosition: {x: 0.000061035156, y: 41.5}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1141070106
@@ -3219,6 +3444,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextTutorial: {fileID: 1093099050}
   tutorialIdx: 6
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.36062253
+      value: 1.1136311
+      inSlope: 0.3516388
+      outSlope: 0.3516388
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.43413582
+      value: 0.9627198
+      inSlope: -1.3131435
+      outSlope: -1.3131435
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  originalPos: 0
   playerFlag: 00000000
 --- !u!114 &1141070108
 MonoBehaviour:
@@ -3386,7 +3654,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1324685071
 PrefabInstance:
@@ -3692,7 +3960,7 @@ PrefabInstance:
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
@@ -3743,11 +4011,11 @@ RectTransform:
   m_Children:
   - {fileID: 464786573}
   m_Father: {fileID: 714009700}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: -49.99997}
+  m_AnchoredPosition: {x: 0.000030517578, y: 50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1419594692
@@ -3808,6 +4076,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextTutorial: {fileID: 1938058744}
   tutorialIdx: 1
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3177167
+      value: 1.113275
+      inSlope: 0.26171875
+      outSlope: 0.26171875
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.42073736
+      value: 0.95448834
+      inSlope: -1.0239054
+      outSlope: -1.0239054
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.9950752
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  originalPos: 0
   playerFlag: 00000000
 --- !u!1001 &1448577866
 PrefabInstance:
@@ -4206,7 +4517,7 @@ PrefabInstance:
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
@@ -4934,7 +5245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1921067659
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4948,11 +5259,11 @@ RectTransform:
   m_Children:
   - {fileID: 1889410623}
   m_Father: {fileID: 714009700}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1921067660
@@ -5013,6 +5324,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextTutorial: {fileID: 1419594690}
   tutorialIdx: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.32607156
+      value: 1.1049551
+      inSlope: 0.3983965
+      outSlope: 0.3983965
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.40977174
+      value: 0.96270275
+      inSlope: -0.767845
+      outSlope: -0.767845
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  originalPos: 0
   playerFlag: 00000000
 --- !u!1001 &1926668660
 PrefabInstance:
@@ -5069,7 +5423,7 @@ PrefabInstance:
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7416718728250022288, guid: 98489eb001e744f1abb66dade030759e,
         type: 3}
@@ -5280,11 +5634,11 @@ RectTransform:
   m_Children:
   - {fileID: 620568199}
   m_Father: {fileID: 714009700}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -49.99997}
+  m_AnchoredPosition: {x: 0.000061035156, y: 50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1938058746
@@ -5345,6 +5699,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextTutorial: {fileID: 1950672337}
   tutorialIdx: 2
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.33777988
+      value: 1.0992929
+      inSlope: 0.35007572
+      outSlope: 0.35007572
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4353092
+      value: 0.9564693
+      inSlope: -0.9834223
+      outSlope: -0.9834223
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  originalPos: 0
   playerFlag: 00000000
 --- !u!1 &1950672337
 GameObject:
@@ -5378,11 +5775,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 714009700}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -49.99997}
+  m_AnchoredPosition: {x: 0.000061035156, y: 50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1950672339
@@ -5443,6 +5840,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextTutorial: {fileID: 493289066}
   tutorialIdx: 3
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3442776
+      value: 1.1366037
+      inSlope: 0.3599167
+      outSlope: 0.3599167
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.42761528
+      value: 0.9674432
+      inSlope: -1.3945564
+      outSlope: -1.3945564
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  originalPos: 0
   playerFlag: 00000000
 --- !u!114 &1950672342
 MonoBehaviour:
