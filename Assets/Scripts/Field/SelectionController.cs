@@ -35,6 +35,10 @@ public class SelectionController : MonoBehaviour
     Text countText;
     int cnt;
 
+    public GameObject Timer;
+    Text timerText;
+    float timer;
+
     private bool Player0IsReady = false;
     private bool Player1IsReady = false;
     private bool Player2IsReady = false;
@@ -80,6 +84,8 @@ public class SelectionController : MonoBehaviour
         BlueIndicator.GetComponent<SpriteRenderer>().material.DisableKeyword("_EMISSION");
 
         countText = count.GetComponent<Text>();
+        timerText = Timer.GetComponent<Text>();
+        timer = float.Parse(timerText.text);
     }
 
     // Update is called once per frame
@@ -156,7 +162,18 @@ public class SelectionController : MonoBehaviour
             countText.text = cnt.ToString() + "/4";
 
             if (cnt == 4)
+                SceneManager.LoadScene("PlayLab");
+
+            timer -= Time.deltaTime;
+            if (Mathf.Ceil(timer) != float.Parse(timerText.text))
+            {
+                timerText.text = Mathf.Ceil(timer).ToString();
+            }
+
+            if (timer <= 0)
+            {
                 SceneManager.LoadScene("TutorialIndividualLab");
+            }
         }
 
     }
