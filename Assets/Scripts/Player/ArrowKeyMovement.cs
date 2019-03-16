@@ -68,9 +68,11 @@ public class ArrowKeyMovement : MonoBehaviour {
 
     // get GamePad
     Gamepad gp = Gamepad.all[playerIndex];
-    if (gp.startButton.isPressed && startButtonReady) {
+    if (gp.startButton.isPressed && startButtonReady && GameControl.instance.pauseReady) {
       startButtonReady = false;
+      StartCoroutine(startButtonCoolDown(0.5f));
       GameControl.instance.isPaused = true;
+      return;
     }
     if (gp.leftShoulder.isPressed && defenseReady) {
       defenseReady = false;

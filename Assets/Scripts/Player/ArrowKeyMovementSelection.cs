@@ -44,6 +44,7 @@ public class ArrowKeyMovementSelection : MonoBehaviour {
   bool defenseReady = true;
   bool dashReday = true;
   bool rightTriggerReady = true;
+  bool startButtonReady = true;
   private bool started = false;
 
 //  private void Awake()
@@ -63,6 +64,15 @@ public class ArrowKeyMovementSelection : MonoBehaviour {
   // Update is called once per frame
   void Update() {
     if (ps.currStatus == playerStatus.status.STUNNED) {
+      return;
+    }
+    if (GameControl.instance.isPaused) {
+      return;
+    }
+    if (Gamepad.all[playerIndex].startButton.isPressed && startButtonReady && GameControl.instance.pauseReady) {
+      startButtonReady = false;
+      StartCoroutine(startButtonCoolDown(0.5f));
+      GameControl.instance.isPaused = true;
       return;
     }
 
@@ -350,4 +360,8 @@ public class ArrowKeyMovementSelection : MonoBehaviour {
     }
   }
 
+  IEnumerator startButtonCoolDown(float t) {
+    yield return new WaitForSeconds(t);
+    startButtonReady = true;
+  }
 }
