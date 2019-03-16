@@ -161,12 +161,17 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="Field" t="Include">
+            <e p="AirwallController.cs" t="Include" />
+            <e p="AnimatorController.cs" t="Include" />
             <e p="GroundRotation.cs" t="Include" />
             <e p="MainMenuController.cs" t="Include" />
             <e p="rubeeInstantiation.cs" t="Include" />
             <e p="SelectionController.cs" t="Include" />
             <e p="SkipTutorialController.cs" t="Include" />
             <e p="StorageController.cs" t="Include" />
+            <e p="Tutorial3Controller.cs" t="Include" />
+            <e p="TutorialController.cs" t="Include" />
+            <e p="TutorialThrowController.cs" t="Include" />
           </e>
           <e p="Lowpoly_Wasteland_Props" t="Include">
             <e p="Readme" t="Include">
@@ -185,8 +190,6 @@
             <e p="shadowScript.cs" t="Include" />
             <e p="StoreResource.cs" t="Include" />
             <e p="SurroundingRupeeController.cs" t="Include" />
-            <e p="TutorialController.cs" t="Include" />
-            <e p="TutorialThrowController.cs" t="Include" />
           </e>
           <e p="Temporary" t="Include">
             <e p="BallArrowMovement.cs" t="Include" />
