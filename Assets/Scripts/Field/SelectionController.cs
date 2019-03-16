@@ -169,6 +169,7 @@ public class SelectionController : MonoBehaviour
             {
                 timerText.text = Mathf.Ceil(timer).ToString();
             }
+
             if (timer <= 0)
             {
                 SceneManager.LoadScene("TutorialIndividualLab");

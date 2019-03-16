@@ -7757,7 +7757,6 @@ GameObject:
   - component: {fileID: 788836038}
   - component: {fileID: 788836041}
   - component: {fileID: 788836040}
-  - component: {fileID: 788836039}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -7784,19 +7783,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 29.9}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &788836039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788836037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4933332e98aeea44bb8c38634b639a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blackPanel: {fileID: 0}
 --- !u!114 &788836040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16164,6 +16150,7 @@ MonoBehaviour:
   Select: {fileID: 875044594}
   Continue: {fileID: 865984348}
   count: {fileID: 927697648}
+  Timer: {fileID: 0}
 --- !u!4 &1657174243
 Transform:
   m_ObjectHideFlags: 0
