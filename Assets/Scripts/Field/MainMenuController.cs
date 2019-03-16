@@ -42,7 +42,7 @@ public class MainMenuController : MonoBehaviour
             if (hasPressed[i]) xCount++;
         }
 
-        PressCount.text = xCount.ToString() + "/" + playerCount.ToString();
+        PressCount.text = xCount.ToString();
         Debug.Log(xCount);
 
         if (xCount == playerCount)
