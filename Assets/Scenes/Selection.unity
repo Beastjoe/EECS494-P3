@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7763,7 +7763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &788836038
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7901,7 +7901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &865984349
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7937,6 +7937,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextTutorial: {fileID: 0}
   tutorialIdx: 0
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  originalPos: 0
   playerFlag: 00000000
 --- !u!114 &865984351
 MonoBehaviour:
@@ -8000,7 +8007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &875044595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8035,6 +8042,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextTutorial: {fileID: 0}
   tutorialIdx: 0
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  originalPos: 0
   playerFlag: 00000000
 --- !u!114 &875044597
 MonoBehaviour:
@@ -16150,7 +16164,7 @@ MonoBehaviour:
   Select: {fileID: 875044594}
   Continue: {fileID: 865984348}
   count: {fileID: 927697648}
-  Timer: {fileID: 0}
+  Timer: {fileID: 788836037}
 --- !u!4 &1657174243
 Transform:
   m_ObjectHideFlags: 0

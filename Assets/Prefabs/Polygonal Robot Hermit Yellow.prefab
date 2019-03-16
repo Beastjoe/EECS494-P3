@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e81af44441f4e90b04ae288fdba0c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 7740884629358191407}
   effective_radius: 6
   isStoring: 0
   storeTime: 2
