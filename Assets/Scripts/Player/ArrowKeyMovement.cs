@@ -62,7 +62,10 @@ public class ArrowKeyMovement : MonoBehaviour {
     if (GetComponent<StoreResource>().isStoring) {
       return;
     }
-    if (GameControl.instance.isPaused) {
+    if (GameControl.instance.isPaused || GameControl.instance.tutorialPaused) {
+      if (anim.GetBool("moving")) {
+        anim.SetBool("moving", false);
+      }
       return;
     }
 

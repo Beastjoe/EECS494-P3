@@ -8,6 +8,7 @@ public class GameControl : MonoBehaviour {
 
   public static GameControl instance;
   public bool isPaused = false;
+  public bool tutorialPaused = false;
   public GameObject pausePanel;
   public bool panelReady = false;
   public bool pauseReady = true;

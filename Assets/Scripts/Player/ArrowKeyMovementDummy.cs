@@ -120,4 +120,19 @@ public class ArrowKeyMovementDummy : MonoBehaviour {
     }
   }
 
+
+  public void triggerForward() {
+    StartCoroutine(forward());
+  }
+
+  IEnumerator forward() {
+    Vector3 originalPos = transform.position;
+    anim.SetBool("moving", true);
+    for (float i=0;i<=1.0f;i+=Time.deltaTime) {
+      transform.position = originalPos + new Vector3(0, 0, -Mathf.Lerp(0.0f, 3.0f, i));
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+    anim.SetBool("moving", false);
+    GameControl.instance.tutorialPaused = false;
+  }
 }

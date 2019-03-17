@@ -11,13 +11,21 @@ public class TutorialController : MonoBehaviour {
   public int tutorialIdx = 0;
   public AnimationCurve curve;
   public float originalPos = 0;
+  public GameObject platformRed;
+  public GameObject platformBlue;
 
   public bool[] playerFlag = new bool[4];
   Gamepad[] playerPads = new Gamepad[4];
   bool passToNextTutorialCalled = false;
+  bool dialogueReadyToSkip = false;
+
   private void passToNextTutorial() {
     // Disappear Effect
     StartCoroutine(disappearEffect());
+    if (tutorialIdx==3) {
+      platformRed.GetComponent<platformMove>().triggerMove();
+      platformBlue.GetComponent<platformMove>().triggerMove();
+    }
   }
 
   private void Start() {
@@ -25,12 +33,27 @@ public class TutorialController : MonoBehaviour {
       playerFlag[i] = false;
       playerPads[i] = Gamepad.all[i];
     }
+    StartCoroutine(dialogueReadyToSkipCoolDown());
   }
  
 
   // Update is called once per frame
   void Update() {
     bool pass = true;
+    // Dialogues have negative index
+    if (tutorialIdx < 0) {
+      pass = false;
+      for (int i=0; i<4; i++) {
+        if (playerPads[i].bButton.isPressed && dialogueReadyToSkip) {
+          pass = true;
+          if (tutorialIdx==-8) {
+            SceneManager.LoadScene("playLab");
+          }
+          break;
+        }
+      }
+    }
+
     if (tutorialIdx == 0) {
       for (int i = 0; i < 4; i++) {
         if (Mathf.Abs(playerPads[i].leftStick.ReadValue().x) > 0.1 || Mathf.Abs(playerPads[i].leftStick.ReadValue().y) > 0.1) {
@@ -89,7 +112,7 @@ public class TutorialController : MonoBehaviour {
     else if (tutorialIdx == 7) {
       pass = false;
       if ((Inventory.instance.numOfRedTeamResource >= 1 && Inventory.instance.numOfBlueTeamResource >= 1))
-        SceneManager.LoadScene("playLab");
+        pass = true;
     }
     if (pass && !passToNextTutorialCalled) {
       passToNextTutorialCalled = true;
@@ -100,16 +123,33 @@ public class TutorialController : MonoBehaviour {
 
   IEnumerator disappearEffect() {
     for (float i=0.0f;i<=0.5f;i+=Time.deltaTime) {
-      GetComponent<RectTransform>().anchoredPosition = new Vector3(0, curve.Evaluate(i) * 2 * originalPos - originalPos, 0);
+      if (curve.Evaluate(i) * 2 * originalPos - originalPos > GetComponent<RectTransform>().anchoredPosition.y) {
+        GetComponent<RectTransform>().anchoredPosition = new Vector3(0, curve.Evaluate(i) * 2 * originalPos - originalPos, 0);
+      }
       yield return new WaitForSeconds(Time.deltaTime);
     }
-   
+    // if Dialogue, continue to let player control
+    if (tutorialIdx<0) {
+      GameControl.instance.tutorialPaused = false;
+    }
     nextTutorial.SetActive(true);
+    if (tutorialIdx == -7) {
+      Debug.Log(nextTutorial.GetComponent<RectTransform>().anchoredPosition);
+    }
     nextTutorial.GetComponent<TutorialController>().originalPos = nextTutorial.GetComponent<RectTransform>().anchoredPosition.y;
     for (float i = 0.0f; i <= 0.5f; i += Time.deltaTime) {
       nextTutorial.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, nextTutorial.GetComponent<TutorialController>().originalPos - curve.Evaluate(i) * 2 * nextTutorial.GetComponent<TutorialController>().originalPos, 0);
       yield return new WaitForSeconds(Time.deltaTime);
     }
+    // if Dialogue, block player control
+    if (nextTutorial.GetComponent<TutorialController>().tutorialIdx < 0) {
+      GameControl.instance.tutorialPaused = true;
+    }
     gameObject.SetActive(false);
+  }
+
+  IEnumerator dialogueReadyToSkipCoolDown() {
+    yield return new WaitForSeconds(1.0f);
+    dialogueReadyToSkip = true;
   }
 }
