@@ -12,11 +12,13 @@ public class Timer : MonoBehaviour {
   float timer;
   Text text;
   Text winText;
+  bool triggered = false;
 
   void Start() {
     text = GetComponent<Text>();
     winText = transform.GetChild(0).GetComponent<Text>();
     winText.text = "";
+    winText.gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
     timer = float.Parse(text.text);
   }
 
@@ -36,13 +38,25 @@ public class Timer : MonoBehaviour {
       int blueScore = Inventory.instance.numOfBlueTeamResource;
       if (redScore > blueScore) {
         winText.text = "Red Team Wins!";
+        if (!triggered) {
+          winText.GetComponent<Animator>().SetTrigger("gameOver");
+          triggered = true;
+        }
         blackPanel.GetComponent<Image>().color = new Vector4(1, 0.6f, 0.77f, 0.36f);
       }
       else if (redScore == blueScore) {
+        if (!triggered) {
+          winText.GetComponent<Animator>().SetTrigger("gameOver");
+          triggered = true;
+        }
         winText.text = "Draw";
       }
       else {
         winText.text = "Blue Team Wins!";
+        if (!triggered) {
+          winText.GetComponent<Animator>().SetTrigger("gameOver");
+          triggered = true;
+        }
         blackPanel.GetComponent<Image>().color = new Vector4(0.6f, 1, 1, 0.36f);
 
       }

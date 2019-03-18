@@ -17,7 +17,7 @@ public class GroundRotation : MonoBehaviour {
       return;
     }
     foreach (GameObject player in players) {
-      if ((player.transform.position-transform.position).sqrMagnitude>50.0f) {
+      if ((player.transform.position-transform.position).sqrMagnitude>45.0f) {
         //Debug.Log((player.transform.position - transform.position).sqrMagnitude);
         player.GetComponent<ArrowKeyMovement>().onOuterGround = true;
       } else {

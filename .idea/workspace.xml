@@ -10,11 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0bb763b5-3213-4470-8833-76aa7c1349ae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Selection.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Selection.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TutorialIndividualLab.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TutorialIndividualLab.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/NeonShapes.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/playLab.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/playLab.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Field/GameControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Field/GameControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/ArrowKeyMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/ArrowKeyMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Timer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Timer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UIAnimations/MainPrompt (19).controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UIAnimations/MainPrompt (19).controller" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,8 +44,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -76,16 +75,18 @@
       <updated>1552685972344</updated>
       <workItem from="1552685974977" duration="99000" />
       <workItem from="1552868955693" duration="599000" />
+      <workItem from="1552876306356" duration="599000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="698000" />
+    <option name="totallyTimeSpent" value="1297000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />

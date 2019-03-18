@@ -55,6 +55,7 @@ public class StoreResource : MonoBehaviour {
             && Inventory.instance.numOfPlayerResource[playerIndex] > 0) {
       if (!isStoring) {
         slider.SetActive(true);
+        GetComponent<Animator>().SetBool("moving", false);
         SoundPlayer2D.clip = storingClip;
         SoundPlayer2D.Play();
       }
