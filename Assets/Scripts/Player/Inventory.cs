@@ -23,20 +23,19 @@ public class Inventory : MonoBehaviour {
 
   private void Update() {
     //Debug.Log(numOfBlueTeamResource);
-    if (!inTutorialMode) {
-      if (numOfBlueTeamResource < 10) {
-        panelBlue.StringToDraw = "0" + numOfBlueTeamResource.ToString();
-      }
-      else {
-        panelBlue.StringToDraw = numOfBlueTeamResource.ToString();
-      }
-      if (numOfRedTeamResource < 10) {
-        panelRed.StringToDraw = "0" + numOfRedTeamResource.ToString();
-      }
-      else {
-        panelRed.StringToDraw = numOfRedTeamResource.ToString();
-      }
+    if (numOfBlueTeamResource < 10) {
+      panelBlue.StringToDraw = "0" + numOfBlueTeamResource.ToString();
     }
+    else {
+      panelBlue.StringToDraw = numOfBlueTeamResource.ToString();
+    }
+    if (numOfRedTeamResource < 10) {
+      panelRed.StringToDraw = "0" + numOfRedTeamResource.ToString();
+    }
+    else {
+      panelRed.StringToDraw = numOfRedTeamResource.ToString();
+    }
+
   }
 
   public void addRupee(int playerIndex) {

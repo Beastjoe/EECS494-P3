@@ -7968,7 +7968,6 @@ GameObject:
   - component: {fileID: 865984349}
   - component: {fileID: 865984352}
   - component: {fileID: 865984351}
-  - component: {fileID: 865984350}
   m_Layer: 5
   m_Name: continue
   m_TagString: Untagged
@@ -7997,28 +7996,6 @@ RectTransform:
   m_AnchoredPosition: {x: -46.2, y: -120}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &865984350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865984348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e57522b8a39116448e43a42949771e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextTutorial: {fileID: 0}
-  tutorialIdx: 0
-  curve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  originalPos: 0
-  playerFlag: 00000000
 --- !u!114 &865984351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8074,7 +8051,6 @@ GameObject:
   - component: {fileID: 875044595}
   - component: {fileID: 875044598}
   - component: {fileID: 875044597}
-  - component: {fileID: 875044596}
   m_Layer: 5
   m_Name: select
   m_TagString: Untagged
@@ -8102,28 +8078,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -129.99998}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &875044596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875044594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e57522b8a39116448e43a42949771e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextTutorial: {fileID: 0}
-  tutorialIdx: 0
-  curve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  originalPos: 0
-  playerFlag: 00000000
 --- !u!114 &875044597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16777,6 +16731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
+  tutorialPaused: 0
   pausePanel: {fileID: 1265838197}
   panelReady: 0
   pauseReady: 1

@@ -234,9 +234,10 @@ public class ArrowKeyMovement : MonoBehaviour {
     anim.SetTrigger("hurtTrigger");
     Camera.main.GetComponent<AudioSource>().PlayOneShot(stunningClip, 10.0f);
     gameObject.layer = 11;
+    playerStatus.status prevStatus = ps.currStatus;
     ps.currStatus = playerStatus.status.FLYING;
     dropMoneyAfterhurt();
-    StartCoroutine(knockBack(dir));
+    StartCoroutine(knockBack(dir, prevStatus));
   }
 
   private void dropMoneyAfterhurt() {
@@ -257,7 +258,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     return false;
   }
 
-  IEnumerator knockBack(Vector3 dir) {
+  IEnumerator knockBack(Vector3 dir, playerStatus.status prevStatus) {
     GameObject stunningEffectObject = Instantiate(stunnedEffect);
     stunningEffectObject.transform.position = transform.position;
     stunningEffectObject.transform.parent = transform;
@@ -267,7 +268,7 @@ public class ArrowKeyMovement : MonoBehaviour {
       yield return new WaitForSeconds(Time.deltaTime);
     }
 
-    StartCoroutine(getStunned(stunnedTime, stunningEffectObject));
+    StartCoroutine(getStunned(stunnedTime, stunningEffectObject, prevStatus));
   }
 
   IEnumerator defenseCoolDown(float t) {
@@ -340,10 +341,14 @@ public class ArrowKeyMovement : MonoBehaviour {
     startButtonReady = true;
   }
 
-  IEnumerator getStunned(float t, GameObject stunningEffectObject) {
+  IEnumerator getStunned(float t, GameObject stunningEffectObject, playerStatus.status prevStatus) {
     ps.currStatus = playerStatus.status.STUNNED;
     yield return new WaitForSeconds(t);
-    ps.currStatus = playerStatus.status.NORMAL;
+    if (prevStatus==playerStatus.status.DEFENSE) {
+      ps.currStatus = playerStatus.status.NORMAL;
+    } else {
+      ps.currStatus = prevStatus;
+    }
     gameObject.layer = 12;
     Destroy(stunningEffectObject);
   }
