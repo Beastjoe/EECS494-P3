@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cf7f003-70d8-4bb8-8619-e4c0501de5e5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.EECS494-P3/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EECS494-P3/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.EECS494-P3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EECS494-P3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NeonShapes.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Field/MainMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Field/MainMenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UIAnimations/MainPrompt (20).controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UIAnimations/MainPrompt (20).controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UIAnimations/MainPrompt.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UIAnimations/MainPrompt.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UIAnimations/SlideUp2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UIAnimations/SlideUp2.anim" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +53,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Field/AnimatorController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
+            <state relative-caret-position="7">
               <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
               <folding>
                 <marker date="1552701403000" expanded="false" signature="6:102" ph="..." />
@@ -226,12 +225,12 @@
       <workItem from="1551420409997" duration="186000" />
       <workItem from="1552619065807" duration="991000" />
       <workItem from="1552620469511" duration="4940000" />
-      <workItem from="1552679691837" duration="2867000" />
+      <workItem from="1552679691837" duration="3075000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10871000" />
+    <option name="totallyTimeSpent" value="11079000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -244,9 +243,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1024" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13614164" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13614164" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -259,7 +257,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3299373" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.27575108" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.27575108" />
       <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
@@ -416,7 +414,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Field/AnimatorController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
+        <state relative-caret-position="7">
           <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
           <folding>
             <marker date="1552701403000" expanded="false" signature="6:102" ph="..." />
