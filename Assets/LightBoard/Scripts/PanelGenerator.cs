@@ -43,6 +43,7 @@ public class PanelGenerator : MonoBehaviour {
 	private bool				IsBlinked = false;
 	private int 				stringPixelSize = 0;
 	private FontLoader			fontLoader;
+  public Font font;
 	private string				copyString;
   [HideInInspector]
   public GameObject bgToDelete;
@@ -55,13 +56,13 @@ public class PanelGenerator : MonoBehaviour {
   // Use this for initialization
   void Start () {
     //bgToDelete = transform.GetChild(0).gameObject;
+    
     if (FontToUse.Equals ("")) {
 			FontToUse = "Fonts/7x5";
 		}
 
 		fontLoader = new FontLoader ();
-
-		fontLoader.FontName = FontToUse;
+    fontLoader.FontName = FontToUse;
 
 		ledUnits = new List<List<LedUnit>> ();
 		fontLoader.SetSize(NumberUnitHeight);
@@ -81,6 +82,7 @@ public class PanelGenerator : MonoBehaviour {
 		}
 
     background = Instantiate (PrefabBackground);
+    background.GetComponent<Collider>().enabled = false;
 		background.transform.SetParent (this.transform);
 		background.transform.localPosition = new Vector3 (0, 0, 0.5f);
 		background.transform.localScale = new Vector3 (NumberUnitWidth + Spaces * (NumberUnitWidth - 1) + 1, NumberUnitHeight + Spaces * (NumberUnitHeight - 1) + 1, 1);

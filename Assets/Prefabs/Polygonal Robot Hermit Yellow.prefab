@@ -1009,16 +1009,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 1
-  movingSpeed: 4
-  rotatingSpeed: 4
-  dashSpeed: 35
+  movingSpeed: 6
+  rotatingSpeed: 8
+  dashSpeed: 20
   defenseMode: 0
   onOuterGround: 0
   teamMember: {fileID: 0}
   rupee: {fileID: 7416718728250022289, guid: 98489eb001e744f1abb66dade030759e, type: 3}
   dashSpeedCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5876978
+      value: 0.9184138
+      inSlope: 0.804425
+      outSlope: 0.804425
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

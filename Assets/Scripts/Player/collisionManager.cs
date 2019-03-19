@@ -96,7 +96,7 @@ public class collisionManager : MonoBehaviour {
 
   private void ReflectProjectile(Vector3 reflectVector) {
     am.flyingDir = Vector3.Reflect(am.flyingDir, reflectVector);
-    am.flyingSpeed *= 0.5f;
+    am.flyingSpeed *= 0.75f;
   }
 
 }

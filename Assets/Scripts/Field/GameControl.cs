@@ -29,6 +29,8 @@ public class GameControl : MonoBehaviour {
   }
 
   private void Start() {
+    //QualitySettings.vSyncCount = 0;
+    //Application.targetFrameRate = 30;
     startTimer.SetActive(true);
     isPaused = true;
     StartCoroutine(startCountDown());
@@ -82,7 +84,6 @@ public class GameControl : MonoBehaviour {
     while (timer >= 0.0f) {
       timer -= 1.5f * Time.deltaTime;
       timerText.fontSize += (int)(500 * Time.deltaTime);
-      Debug.Log(timerText.fontSize);
       if (Mathf.Ceil(timer) != float.Parse(timerText.text)) {
         if (Mathf.Ceil(timer)==0.0) {
           break;
