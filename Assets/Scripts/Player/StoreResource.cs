@@ -22,6 +22,7 @@ public class StoreResource : MonoBehaviour {
   public float storeTime = 2.0f;
   public AudioClip storingClip;
   private AudioSource SoundPlayer2D;
+  private float blinkTime = 0.0f;
 
   float lowerboundForLeftTrigger = 0.5f;
   // Start is called before the first frame update
@@ -62,14 +63,20 @@ public class StoreResource : MonoBehaviour {
 
       timer += Time.deltaTime;
       if (timer >= storeTime) {
+        // Store Resource here
         slider.GetComponent<Slider>().value = 0;
         Inventory.instance.numOfPlayerResource[playerIndex] -= 1;
         if (teamIndex == 0) {
           Inventory.instance.numOfRedTeamResource += 1;
+          Inventory.instance.panelRed.TextMotionStyle = PanelGenerator.MotionStyle.Blink;
+          Inventory.instance.panelRed.RefreshTime = 0.3f;
         }
         else {
           Inventory.instance.numOfBlueTeamResource += 1;
+          Inventory.instance.panelBlue.TextMotionStyle = PanelGenerator.MotionStyle.Blink;
+          Inventory.instance.panelBlue.RefreshTime = 0.3f;
         }
+        Inventory.instance.stopBlinkPanel(teamIndex);
         timer = 0.0f;
         SoundPlayer2D.clip = storingClip;
         SoundPlayer2D.Play();
@@ -88,4 +95,5 @@ public class StoreResource : MonoBehaviour {
     }
 
   }
+ 
 }

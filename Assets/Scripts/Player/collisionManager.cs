@@ -49,7 +49,7 @@ public class collisionManager : MonoBehaviour {
             ReflectProjectile(collision.contacts[0].normal);
           } else {
             am.hitEnemy = true;
-            if(player_am == null) {
+            if (player_am == null) {
               player.GetComponent<ArrowKeyMovementDummy>().hurt(am.flyingDir);
             }
             else {
@@ -57,12 +57,19 @@ public class collisionManager : MonoBehaviour {
             }
           }
         }
-      } else if (player_ps.teamIdx == ps.teamIdx && player_ps.currStatus == playerStatus.status.DEFENSE && ps.currStatus==playerStatus.status.NORMAL) {
-          ps.currStatus = playerStatus.status.HOLDING;
-          player_ps.currStatus = playerStatus.status.HELD;
-          player.GetComponent<Animator>().SetBool("moving", false);
-          player.GetComponent<Animator>().SetTrigger("IdelTrigger");
-          player.transform.position = transform.position + new Vector3(0, 0.8f, 0);
+      } else if (ps.currStatus == playerStatus.status.DASH) {
+        // Dash will knock back enemy
+        if (player_ps.teamIdx !=ps.teamIdx) {
+          player.layer = 11;
+          am.stopDash = true;
+          StartCoroutine(player.GetComponent<ArrowKeyMovement>().knockBack(-collision.contacts[0].normal, player_ps.currStatus));
+        }
+      } else if (player_ps.teamIdx == ps.teamIdx && player_ps.currStatus == playerStatus.status.DEFENSE && ps.currStatus == playerStatus.status.NORMAL) {
+        ps.currStatus = playerStatus.status.HOLDING;
+        player_ps.currStatus = playerStatus.status.HELD;
+        player.GetComponent<Animator>().SetBool("moving", false);
+        player.GetComponent<Animator>().SetTrigger("IdelTrigger");
+        player.transform.position = transform.position + new Vector3(0, 0.8f, 0);
       }
     }
   }

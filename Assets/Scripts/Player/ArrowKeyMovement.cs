@@ -26,6 +26,7 @@ public class ArrowKeyMovement : MonoBehaviour {
   public float knockBackSpeed = 10.0f;
   public float stunnedTime = 2.5f;
   public Vector3 flyingDir;
+  public Vector3 NextDir;
 
   public AudioClip readyClip;
   public AudioClip stunningClip;
@@ -100,7 +101,6 @@ public class ArrowKeyMovement : MonoBehaviour {
 
       float right_horizontal_val = Mathf.Abs(gp.rightStick.x.ReadValue()) < threshold ? 0 : gp.rightStick.x.ReadValue();
       float right_vertical_val = Mathf.Abs(gp.rightStick.y.ReadValue()) < threshold ? 0 : gp.rightStick.y.ReadValue();
-      Vector3 NextDir;
       if (right_horizontal_val == 0 && right_vertical_val == 0) {
         NextDir = new Vector3(horizontal_val, 0, vertical_val);
       }
@@ -116,9 +116,6 @@ public class ArrowKeyMovement : MonoBehaviour {
                Mathf.LerpAngle(currDir.y, NextDir.y, rotatingSpeed * Time.deltaTime),
                Mathf.LerpAngle(currDir.z, NextDir.z, rotatingSpeed * Time.deltaTime));
         transform.eulerAngles = currentAngle;
-      }
-      if (playerIndex == 1) {
-        Debug.Log(horizontal_val.ToString() + " " + vertical_val.ToString());
       }
 
       if (horizontal_val != 0 || vertical_val != 0) {
@@ -170,7 +167,6 @@ public class ArrowKeyMovement : MonoBehaviour {
       float vertical_val = Mathf.Abs(gp.leftStick.y.ReadValue()) < threshold ? 0 : gp.leftStick.y.ReadValue();
       float right_horizontal_val = Mathf.Abs(gp.rightStick.x.ReadValue()) < threshold ? 0 : gp.rightStick.x.ReadValue();
       float right_vertical_val = Mathf.Abs(gp.rightStick.y.ReadValue()) < threshold ? 0 : gp.rightStick.y.ReadValue();
-      Vector3 NextDir;
       if (right_horizontal_val == 0 && right_vertical_val == 0) {
         NextDir = new Vector3(horizontal_val, 0, vertical_val);
       }
@@ -256,15 +252,16 @@ public class ArrowKeyMovement : MonoBehaviour {
     return false;
   }
 
-  IEnumerator knockBack(Vector3 dir, playerStatus.status prevStatus) {
+  public IEnumerator knockBack(Vector3 dir, playerStatus.status prevStatus) {
     GameObject stunningEffectObject = Instantiate(stunnedEffect);
     stunningEffectObject.transform.position = transform.position;
     stunningEffectObject.transform.parent = transform;
     stunningEffectObject.transform.localPosition += new Vector3(0, 1.2f, 0);
     if (!(prevStatus == playerStatus.status.HOLDING || prevStatus == playerStatus.status.HELD)) {
-      Debug.Log(playerIndex + " " + ps.currStatus.ToString() + " here");
+      Debug.Log(playerIndex + " " + ps.currStatus.ToString() + " " + dir);
       for (float t = 0.0f; t <= 0.5f; t += Time.deltaTime) {
-        rb.velocity = knockBackSpeed * dir;
+        float speed = knockBackSpeed - dashSpeedCurve.Evaluate(t / 0.5f) * (knockBackSpeed - 5);
+        rb.velocity = speed * dir;
         yield return new WaitForSeconds(Time.deltaTime);
       }
     }
@@ -289,8 +286,6 @@ public class ArrowKeyMovement : MonoBehaviour {
     trail.transform.Rotate(0, 90, 0);
     trail.transform.parent = transform;
     for (float t = 0.0f; t < 0.15f; t += Time.deltaTime) {
-
-      Debug.Log(stopDash);
       if (stopDash) {
         break;
       }
@@ -342,8 +337,9 @@ public class ArrowKeyMovement : MonoBehaviour {
     yield return new WaitForSeconds(t);
     if (prevStatus == playerStatus.status.DEFENSE) {
       ps.currStatus = playerStatus.status.NORMAL;
-    }
-    else {
+    } else if (prevStatus == playerStatus.status.DASH) {
+      ps.currStatus = playerStatus.status.NORMAL;
+    } else {
       ps.currStatus = prevStatus;
     }
     gameObject.layer = 12;
