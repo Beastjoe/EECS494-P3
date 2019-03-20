@@ -8,12 +8,14 @@ using UnityEngine.Experimental.Input;
 public class Timer : MonoBehaviour {
   public GameObject blackPanel;
   public GameObject instruction;
+  public GameObject restartTimer;
+  public GameObject AutoPlayAgainText;
 
   float timer;
   Text text;
   Text winText;
   bool triggered = false;
-
+  bool isCountingDown = false;
   void Start() {
     text = GetComponent<Text>();
     winText = transform.GetChild(0).GetComponent<Text>();
@@ -58,7 +60,13 @@ public class Timer : MonoBehaviour {
           triggered = true;
         }
         blackPanel.GetComponent<Image>().color = new Vector4(0.6f, 1, 1, 0.36f);
+        timer -= Time.deltaTime;
+      }
 
+      if (!isCountingDown)
+      {
+        isCountingDown = true;
+        StartCoroutine(startCountDown());
       }
 
       if (Gamepad.all[0].aButton.isPressed || Gamepad.all[1].aButton.isPressed ||
@@ -72,4 +80,25 @@ public class Timer : MonoBehaviour {
       }
     }
   }
+  
+  IEnumerator startCountDown() {
+    Text timerText = restartTimer.GetComponent<Text>();
+    float timer = float.Parse(timerText.text);
+    int originalFontSize = timerText.fontSize;
+    restartTimer.SetActive(true);
+    AutoPlayAgainText.SetActive(true);
+    while (timer >= 0.0f) {
+      timer -= 1.5f * Time.deltaTime;
+      timerText.fontSize += (int)(80 * Time.deltaTime);
+      if (Mathf.Ceil(timer) != float.Parse(timerText.text)) {
+        if (Mathf.Ceil(timer)==0.0) {
+          SceneManager.LoadScene("playLab");
+        }
+        timerText.text = Mathf.Ceil(timer).ToString();
+        timerText.fontSize = originalFontSize;
+      }
+      yield return new WaitForSeconds(Time.deltaTime);
+    }
+  }  
+  
 }
