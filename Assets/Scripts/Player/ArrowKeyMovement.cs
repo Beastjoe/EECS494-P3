@@ -39,12 +39,16 @@ public class ArrowKeyMovement : MonoBehaviour {
 
   public GameObject stunnedEffect;
 
+  public float defenseInitialConsumption = 0.2f;
+  public float defenseContinuousConsumption = 0.1f; // per second
+  public float staminaRechargeSpeed = 0.2f; // per second
+  public float dashConsumption = 0.3f;
+
   Animator anim;
   playerStatus ps;
   Rigidbody rb;
   bool Ready = true;
   bool defenseReady = true;
-  bool dashReday = true;
   bool rightTriggerReady = true;
   bool startButtonReady = true;
 
@@ -70,6 +74,22 @@ public class ArrowKeyMovement : MonoBehaviour {
       return;
     }
 
+    // Refill Stamina Bar if not full
+    if (staminaBar.fillAmount < 1.0f) {
+      Color c = staminaBar.color;
+      c.a = 1.0f;
+      staminaBar.color = c;
+      if (ps.currStatus != playerStatus.status.DEFENSE) {
+        staminaBar.fillAmount += staminaRechargeSpeed * Time.deltaTime;
+      }
+    } else {
+      if (staminaBar.color.a > 0) {
+        Color c = staminaBar.color;
+        c.a -= 3.33f * Time.deltaTime;
+        staminaBar.color = c;
+      }
+    }
+
     // get GamePad
     float threshold = 0.21f;
     Gamepad gp = Gamepad.all[playerIndex];
@@ -79,28 +99,46 @@ public class ArrowKeyMovement : MonoBehaviour {
       GameControl.instance.isPaused = true;
       return;
     }
-    if (gp.leftShoulder.isPressed && defenseReady) {
-      defenseReady = false;
-      StartCoroutine(defenseCoolDown(0.5f));
-      if (ps.currStatus == playerStatus.status.NORMAL) {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip, 2.0f);
-        ps.currStatus = playerStatus.status.DEFENSE;
-        anim.SetTrigger("defenseTrigger");
-      }
-      else if (ps.currStatus == playerStatus.status.DEFENSE) {
+
+    // defense status
+    if (ps.currStatus == playerStatus.status.DEFENSE) {
+      if (GetComponent<StoreResource>().onStorageArea) {
         ps.currStatus = playerStatus.status.NORMAL;
         anim.SetTrigger("IdelTrigger");
-      }
+      } else {
+        float fa = staminaBar.fillAmount - Time.deltaTime * defenseInitialConsumption;
+        if (fa <= 0.0f) {
+          ps.currStatus = playerStatus.status.NORMAL;
+          anim.SetTrigger("IdelTrigger");
+        } else {
+          staminaBar.fillAmount = fa;
+        }
+      } 
     }
 
     // normal status
     if (ps.currStatus == playerStatus.status.NORMAL || ps.currStatus == playerStatus.status.HOLDING) {
+      if (inTutorialMode && GameControl.instance.tutorialProgres>-2) {
+        return;
+      }
       bool isIdle = true;
       float horizontal_val = Mathf.Abs(gp.leftStick.x.ReadValue()) < threshold ? 0 : gp.leftStick.x.ReadValue();
       float vertical_val = Mathf.Abs(gp.leftStick.y.ReadValue()) < threshold ? 0 : gp.leftStick.y.ReadValue();
 
       float right_horizontal_val = Mathf.Abs(gp.rightStick.x.ReadValue()) < threshold ? 0 : gp.rightStick.x.ReadValue();
       float right_vertical_val = Mathf.Abs(gp.rightStick.y.ReadValue()) < threshold ? 0 : gp.rightStick.y.ReadValue();
+      
+      // move
+      if (horizontal_val != 0 || vertical_val != 0) {
+        isIdle = false;
+        rb.velocity = movingSpeed *
+          ((Vector3.forward * vertical_val + Vector3.right * horizontal_val)).normalized;
+      }
+      else {
+        rb.velocity = Vector3.zero;
+      }
+
+      // change direction
       if (right_horizontal_val == 0 && right_vertical_val == 0) {
         NextDir = new Vector3(horizontal_val, 0, vertical_val);
       }
@@ -118,15 +156,6 @@ public class ArrowKeyMovement : MonoBehaviour {
         transform.eulerAngles = currentAngle;
       }
 
-      if (horizontal_val != 0 || vertical_val != 0) {
-        isIdle = false;
-        rb.velocity = movingSpeed *
-          ((Vector3.forward * vertical_val + Vector3.right * horizontal_val)).normalized;
-      }
-      else {
-        rb.velocity = Vector3.zero;
-      }
-
       if (!isIdle) {
         anim.SetBool("moving", true);
       }
@@ -134,10 +163,20 @@ public class ArrowKeyMovement : MonoBehaviour {
         anim.SetBool("moving", false);
       }
 
+      if (inTutorialMode && GameControl.instance.tutorialProgres > -3) {
+        return;
+      }
       if (ps.currStatus == playerStatus.status.NORMAL) {
-        if (gp.rightShoulder.isPressed && dashReday) {
-          dashReday = false;
-          StartCoroutine(dashCoolDown(2.0f));
+        if (gp.rightTrigger.isPressed && rightTriggerReady) {
+          rightTriggerReady = false;
+          if (staminaBar.fillAmount < dashConsumption) {
+            //TODO:CALL WARNING OF STAMINBAR
+            StartCoroutine(staminBarWarning());
+            StartCoroutine(rightTriggerCoolDown(0.3f));
+          }
+          else {
+            StartCoroutine(dashCoolDown(2.0f));
+          }
         }
       }
 
@@ -155,6 +194,31 @@ public class ArrowKeyMovement : MonoBehaviour {
           teamMember.GetComponent<ArrowKeyMovement>().fly();
           StartCoroutine(setBackLayer(0.5f));
         }
+      }
+    }
+
+    if (inTutorialMode && GameControl.instance.tutorialProgres > -6) {
+      return;
+    }
+    if (gp.leftTrigger.isPressed && defenseReady && !GetComponent<StoreResource>().onStorageArea) {
+      defenseReady = false;
+      StartCoroutine(defenseCoolDown(0.5f));
+      if (ps.currStatus == playerStatus.status.NORMAL) {
+        if (staminaBar.fillAmount < defenseInitialConsumption) {
+          // TODO: do something
+          StartCoroutine(staminBarWarning());
+        } else {
+          Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip, 2.0f);
+          ps.currStatus = playerStatus.status.DEFENSE;
+          anim.SetTrigger("defenseTrigger");
+          // consume stamina
+          staminaBar.gameObject.SetActive(true);
+          staminaBar.fillAmount -= defenseInitialConsumption;
+        }
+      }
+      else if (ps.currStatus == playerStatus.status.DEFENSE) {
+        ps.currStatus = playerStatus.status.NORMAL;
+        anim.SetTrigger("IdelTrigger");
       }
     }
 
@@ -274,10 +338,14 @@ public class ArrowKeyMovement : MonoBehaviour {
   }
 
   IEnumerator dashCoolDown(float cd) {
+    // Consume energy for dash
+    staminaBar.fillAmount -= dashConsumption;
+    if(!staminaBar.isActiveAndEnabled)
+      staminaBar.gameObject.SetActive(true);
+
     anim.SetTrigger("dashTrigger");
     ps.currStatus = playerStatus.status.DASH;
-    staminaBar.gameObject.SetActive(true);
-    staminaBar.fillAmount = 0;
+
     Vector3 dashDir = (transform.rotation * Vector3.forward).normalized;
 
     // Dash along one direction; Speed gradually decreased
@@ -297,29 +365,10 @@ public class ArrowKeyMovement : MonoBehaviour {
 
     // cast backswing time
     yield return new WaitForSeconds(0.3f);
-
-    // Refill Stamina Bar & Set dash ready
     ps.currStatus = playerStatus.status.NORMAL;
-    for (float t = 0.0f; t < cd; t += Time.deltaTime) {
-      staminaBar.fillAmount = t / cd;
-      yield return new WaitForSeconds(Time.deltaTime);
-    }
-
-    // Stamina Bar Effect
-    Color c;
-    for (float t = 0.0f; t < 0.3f; t += Time.deltaTime) {
-      c = staminaBar.color;
-      c.a = 1 - t / 0.3f;
-      staminaBar.color = c;
-      yield return new WaitForSeconds(Time.deltaTime);
-    }
-    staminaBar.gameObject.SetActive(false);
-    c = staminaBar.color;
-    c.a = 1;
-    staminaBar.color = c;
 
     // Set dash ready
-    dashReday = true;
+    rightTriggerReady = true;
   }
 
   IEnumerator rightTriggerCoolDown(float t) {
@@ -349,6 +398,15 @@ public class ArrowKeyMovement : MonoBehaviour {
   IEnumerator setBackLayer(float t) {
     yield return new WaitForSeconds(t);
     gameObject.layer = 12;
+  }
+
+  IEnumerator staminBarWarning() {
+    for(int i= 0; i < 2; ++i) {
+      staminaBar.color = Color.red;
+      yield return new WaitForSeconds(0.1f);
+      staminaBar.color = Color.white;
+      yield return new WaitForSeconds(0.1f);
+    }
   }
 
   void FixedUpdate() {

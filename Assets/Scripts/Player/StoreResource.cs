@@ -16,7 +16,7 @@ public class StoreResource : MonoBehaviour {
   ArrowKeyMovement arr;
 
   public bool isStoring = false;
-
+  public bool onStorageArea = false;
   private float timer = 0.0f;
 
   public float storeTime = 2.0f;
@@ -33,7 +33,10 @@ public class StoreResource : MonoBehaviour {
 
   // Update is called once per frame
   void Update() {
-
+    // fix isStoring
+    if (isStoring && !onStorageArea) {
+      isStoring = false;
+    }
   }
 
   private void OnTriggerStay(Collider other) {
@@ -49,11 +52,27 @@ public class StoreResource : MonoBehaviour {
 
     //}
 
+    if (arr.inTutorialMode && GameControl.instance.tutorialProgres > -8) {
+      return;
+    }
+
+    if (((teamIndex == 0 && other.gameObject.CompareTag("outground_red") && StorageController.instance.GetRedStatus())
+                || (teamIndex == 1 && other.gameObject.CompareTag("outground_blue") && StorageController.instance.GetBlueStatus()))
+            && (x * x + z * z >= effective_radius * effective_radius)) {
+      onStorageArea = true;
+    }
+    else {
+      onStorageArea = false;
+    }
+
     if (gp.leftTrigger.ReadValue() > lowerboundForLeftTrigger
             && ((teamIndex == 0 && other.gameObject.CompareTag("outground_red") && StorageController.instance.GetRedStatus())
                 || (teamIndex == 1 && other.gameObject.CompareTag("outground_blue") && StorageController.instance.GetBlueStatus()))
             && (x * x + z * z >= effective_radius * effective_radius)
             && Inventory.instance.numOfPlayerResource[playerIndex] > 0) {
+      if (GetComponent<playerStatus>().currStatus==playerStatus.status.DEFENSE) {
+        return;
+      }
       if (!isStoring) {
         slider.SetActive(true);
         GetComponent<Animator>().SetBool("moving", false);
@@ -95,5 +114,16 @@ public class StoreResource : MonoBehaviour {
     }
 
   }
- 
+
+  private void OnTriggerExit(Collider other) {
+    int playerIndex = arr.playerIndex;
+    int teamIndex = GetComponent<playerStatus>().teamIdx;
+    float x = transform.position.x;
+    float z = transform.position.z;
+    if (((teamIndex == 0 && other.gameObject.CompareTag("outground_red") && StorageController.instance.GetRedStatus())
+               || (teamIndex == 1 && other.gameObject.CompareTag("outground_blue") && StorageController.instance.GetBlueStatus()))
+           && (x * x + z * z >= effective_radius * effective_radius)) {
+      onStorageArea = false;
+    }
+  }
 }

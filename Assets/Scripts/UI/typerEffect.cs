@@ -7,6 +7,7 @@ public class typerEffect : MonoBehaviour {
 
   Text text;
   string words;
+  bool jump = false;
 
   public float intervals = 0.1f;
 
@@ -21,7 +22,15 @@ public class typerEffect : MonoBehaviour {
   IEnumerator type() {
     for (int i=0;i<words.Length;i++) {
       text.text = words.Substring(0, i+1);
+      if (jump) {
+        text.text = words;
+        break;
+      }
       yield return new WaitForSeconds(intervals);
     }
   } 
+
+  public void jumpText() {
+    jump = true;
+  }
 }

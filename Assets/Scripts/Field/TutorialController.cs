@@ -18,6 +18,7 @@ public class TutorialController : MonoBehaviour {
   Gamepad[] playerPads = new Gamepad[4];
   bool passToNextTutorialCalled = false;
   bool dialogueReadyToSkip = false;
+  bool dialogueReadyToEnd = false;
 
   private void passToNextTutorial() {
     // Disappear Effect
@@ -25,6 +26,10 @@ public class TutorialController : MonoBehaviour {
     if (tutorialIdx==3) {
       platformRed.GetComponent<platformMove>().triggerMove();
       platformBlue.GetComponent<platformMove>().triggerMove();
+    }
+
+    if (tutorialIdx < 0) {
+      GameControl.instance.tutorialProgres = tutorialIdx;
     }
   }
 
@@ -44,9 +49,14 @@ public class TutorialController : MonoBehaviour {
     if (tutorialIdx < 0) {
       pass = false;
       for (int i=0; i<4; i++) {
-        if (playerPads[i].bButton.isPressed && dialogueReadyToSkip) {
+        if (playerPads[i].bButton.isPressed && dialogueReadyToSkip && !dialogueReadyToEnd) {
+          StartCoroutine(dialogueReadyToEndCoolDown());
+          transform.GetChild(1).GetComponent<typerEffect>().jumpText();
+          break;
+        }
+        if (playerPads[i].bButton.isPressed && dialogueReadyToEnd) {
           pass = true;
-          if (tutorialIdx==-8) {
+          if (tutorialIdx == -9) {
             SceneManager.LoadScene("playLab");
           }
           break;
@@ -76,7 +86,7 @@ public class TutorialController : MonoBehaviour {
     }
     else if (tutorialIdx == 2) {
       for (int i = 0; i < 4; i++) {
-        if (playerPads[i].rightShoulder.isPressed) {
+        if (playerPads[i].rightTrigger.isPressed) {
           playerFlag[i] = true;
         }
       }
@@ -142,14 +152,19 @@ public class TutorialController : MonoBehaviour {
       yield return new WaitForSeconds(Time.deltaTime);
     }
     // if Dialogue, block player control
-    if (nextTutorial.GetComponent<TutorialController>().tutorialIdx < 0) {
-      GameControl.instance.tutorialPaused = true;
-    }
+  //  if (nextTutorial.GetComponent<TutorialController>().tutorialIdx < 0) {
+  //    GameControl.instance.tutorialPaused = true;
+  //  }
     gameObject.SetActive(false);
   }
 
   IEnumerator dialogueReadyToSkipCoolDown() {
-    yield return new WaitForSeconds(1.0f);
+    yield return new WaitForSeconds(0.5f);
     dialogueReadyToSkip = true;
+  }
+
+  IEnumerator dialogueReadyToEndCoolDown() {
+    yield return new WaitForSeconds(0.1f);
+    dialogueReadyToEnd = true;
   }
 }
