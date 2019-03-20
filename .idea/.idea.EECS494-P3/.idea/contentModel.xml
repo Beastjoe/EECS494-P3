@@ -163,8 +163,10 @@
           <e p="Field" t="Include">
             <e p="AirwallController.cs" t="Include" />
             <e p="AnimatorController.cs" t="Include" />
+            <e p="GameControl.cs" t="Include" />
             <e p="GroundRotation.cs" t="Include" />
             <e p="MainMenuController.cs" t="Include" />
+            <e p="platformMove.cs" t="Include" />
             <e p="rubeeInstantiation.cs" t="Include" />
             <e p="SelectionController.cs" t="Include" />
             <e p="SkipTutorialController.cs" t="Include" />
@@ -198,12 +200,14 @@
             <e p="BluePlayer1UIDisplayer.cs" t="Include" />
             <e p="BluePlayer2UIDisplayer.cs" t="Include" />
             <e p="fixRotation.cs" t="Include" />
+            <e p="FPSDisplay.cs" t="Include" />
             <e p="lightBoardTimer.cs" t="Include" />
             <e p="RedPlayer1UIDisplayer.cs" t="Include" />
             <e p="RedPlayer2UIDisplayer.cs" t="Include" />
             <e p="TeamBlueUIDisplayer.cs" t="Include" />
             <e p="TeamRedUIDisplayer.cs" t="Include" />
             <e p="Timer.cs" t="Include" />
+            <e p="typerEffect.cs" t="Include" />
           </e>
         </e>
         <e p="SimpleFX" t="Include">
