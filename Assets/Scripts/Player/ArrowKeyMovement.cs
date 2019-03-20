@@ -6,7 +6,8 @@ using UnityEngine.Experimental.Input;
 using UnityEngine.UI;
 
 public class ArrowKeyMovement : MonoBehaviour {
-
+  public int initialIndex;
+  [HideInInspector]
   public int playerIndex;
   public float movingSpeed = 1.0f;
   public float rotatingSpeed = 3.0f;
@@ -53,6 +54,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     anim = GetComponent<Animator>();
     ps = GetComponent<playerStatus>();
     rb = GetComponent<Rigidbody>();
+    playerIndex = PlayerIndexAssignment.instance.indices[initialIndex];
   }
 
   // Update is called once per frame
