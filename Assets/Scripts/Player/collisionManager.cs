@@ -44,9 +44,11 @@ public class collisionManager : MonoBehaviour {
           ReflectProjectile(collision.contacts[0].normal);
         } else {
           // different team
-          if (player_ps.currStatus == playerStatus.status.FLYING) {
+          if (player_ps.currStatus == playerStatus.status.FLYING || player_ps.currStatus == playerStatus.status.DEFENSE) {
             // hit another bullet
+            player_ps.GetComponent<Rigidbody>().isKinematic = true;
             ReflectProjectile(collision.contacts[0].normal);
+            player_ps.GetComponent<Rigidbody>().isKinematic = false;
           } else {
             am.hitEnemy = true;
             if (player_am == null) {
@@ -59,7 +61,7 @@ public class collisionManager : MonoBehaviour {
         }
       } else if (ps.currStatus == playerStatus.status.DASH) {
         // Dash will knock back enemy
-        if (player_ps.teamIdx !=ps.teamIdx) {
+        if (player_ps.teamIdx !=ps.teamIdx && player.GetComponent<ArrowKeyMovement>()!=null) {
           player.layer = 11;
           am.stopDash = true;
           StartCoroutine(player.GetComponent<ArrowKeyMovement>().knockBack(-collision.contacts[0].normal, player_ps.currStatus));

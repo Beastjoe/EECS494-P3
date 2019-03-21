@@ -17,6 +17,7 @@ public class GameControl : MonoBehaviour {
   public bool isStarted = false;
   public bool playState = false;
   public bool tutorialState = false;
+  public int tutorialProgres;
 
   public GameObject startTimer;
   public GameObject go;
@@ -30,7 +31,7 @@ public class GameControl : MonoBehaviour {
 
   private void Start() {
     //QualitySettings.vSyncCount = 0;
-    //Application.targetFrameRate = 30;
+    //Application.targetFrameRate = 10;
     startTimer.SetActive(true);
     isPaused = true;
     StartCoroutine(startCountDown());

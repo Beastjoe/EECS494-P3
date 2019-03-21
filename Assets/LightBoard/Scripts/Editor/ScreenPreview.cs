@@ -15,7 +15,6 @@ public class ScreenPreview : MonoBehaviour {
 
 	static ScreenPreview () { 
 		EditorApplication.update += Update;
-		EditorApplication.playmodeStateChanged += playModeChange;
 	}
 
 	static void Update ()
@@ -43,22 +42,4 @@ public class ScreenPreview : MonoBehaviour {
 		}
 	}
 
-	static void playModeChange() {
-    //PanelGenerator[] ledPanels = GameObject.FindObjectsOfType<PanelGenerator>();
-    //foreach (PanelGenerator pg in ledPanels) {
-    //  DestroyImmediate(pg.bgToDelete);
-    //}
-    /*
-      GameObject[] bgs;
-    bgs = GameObject.FindGameObjectsWithTag("BackgroundToDestroy");
-    foreach (GameObject bg in bgs) {
-      Destroy(bg);
-    }
-
-    //foreach (GameObject go in gos) {
-		//	DestroyImmediate (go);
-		//}
-		//gos.Clear ();
-    */
-	}
 }
