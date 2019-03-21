@@ -293,6 +293,7 @@ public class ArrowKeyMovement : MonoBehaviour {
   public void hurt(Vector3 dir) {
     anim.SetTrigger("hurtTrigger");
     Camera.main.GetComponent<AudioSource>().PlayOneShot(stunningClip, 10.0f);
+    StartCoroutine(controllerVibration(1.0f));
     gameObject.layer = 11;
     playerStatus.status prevStatus = ps.currStatus;
     ps.currStatus = playerStatus.status.FLYING;
@@ -420,4 +421,26 @@ public class ArrowKeyMovement : MonoBehaviour {
     }
   }
 
+  IEnumerator controllerVibration(float t) {
+    if (playerIndex == 0) {
+      GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+      yield return new WaitForSeconds(t);
+      GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+    }
+    if (playerIndex == 1) {
+      GamePad.SetVibration(PlayerIndex.Two, 1.0f, 1.0f);
+      yield return new WaitForSeconds(t);
+      GamePad.SetVibration(PlayerIndex.Two, 0f, 0f);
+    }
+    if (playerIndex == 2) {
+      GamePad.SetVibration(PlayerIndex.Three, 1.0f, 1.0f);
+      yield return new WaitForSeconds(t);
+      GamePad.SetVibration(PlayerIndex.Three, 0f, 0f);
+    }
+    if (playerIndex == 4) {
+      GamePad.SetVibration(PlayerIndex.Four, 1.0f, 1.0f);
+      yield return new WaitForSeconds(t);
+      GamePad.SetVibration(PlayerIndex.Four, 0f, 0f);
+    }
+  }
 }
