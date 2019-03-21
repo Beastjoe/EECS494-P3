@@ -50,22 +50,21 @@ public class ArrowKeyMovementSelection : MonoBehaviour
     bool rightTriggerReady = true;
     bool startButtonReady = true;
 
-    public bool selected = false;
-
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         ps = GetComponent<playerStatus>();
         rb = GetComponent<Rigidbody>();
-        playerIndex = PlayerIndexAssignment.instance.indices[initialIndex];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!selected)
+        if (!PlayerIndexAssignment.instance.robotSelected[initialIndex])
             return;
+
+        playerIndex = PlayerIndexAssignment.instance.indices[initialIndex];
 
         if (ps.currStatus == playerStatus.status.STUNNED || ps.currStatus == playerStatus.status.DASH)
         {
@@ -93,22 +92,6 @@ public class ArrowKeyMovementSelection : MonoBehaviour
             StartCoroutine(startButtonCoolDown(0.5f));
             GameControl.instance.isPaused = true;
             return;
-        }
-        if (gp.leftShoulder.isPressed && defenseReady)
-        {
-            defenseReady = false;
-            StartCoroutine(defenseCoolDown(0.5f));
-            if (ps.currStatus == playerStatus.status.NORMAL)
-            {
-                Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip, 2.0f);
-                ps.currStatus = playerStatus.status.DEFENSE;
-                anim.SetTrigger("defenseTrigger");
-            }
-            else if (ps.currStatus == playerStatus.status.DEFENSE)
-            {
-                ps.currStatus = playerStatus.status.NORMAL;
-                anim.SetTrigger("IdelTrigger");
-            }
         }
 
         // normal status
@@ -159,225 +142,9 @@ public class ArrowKeyMovementSelection : MonoBehaviour
             {
                 anim.SetBool("moving", false);
             }
-
-            if (ps.currStatus == playerStatus.status.NORMAL)
-            {
-                if (gp.rightShoulder.isPressed && dashReday)
-                {
-                    dashReday = false;
-                    StartCoroutine(dashCoolDown(2.0f));
-                }
-            }
-
-            if (ps.currStatus == playerStatus.status.HOLDING)
-            {
-                if (gp.rightTrigger.isPressed
-                  && rightTriggerReady)
-                {
-                    rightTriggerReady = false;
-                    StartCoroutine(rightTriggerCoolDown(0.5f));
-                    ps.currStatus = playerStatus.status.NORMAL;
-                    teamMember.GetComponent<playerStatus>().currStatus = playerStatus.status.FLYING;
-                    teamMember.GetComponent<Animator>().SetBool("moving", false);
-                    teamMember.GetComponent<Animator>().SetTrigger("shootTrigger");
-                    anim.SetTrigger("throwTrigger");
-                    gameObject.layer = 11;
-                    teamMember.GetComponent<ArrowKeyMovement>().fly();
-                    StartCoroutine(setBackLayer(0.5f));
-                }
-            }
-        }
-
-        if (ps.currStatus == playerStatus.status.HELD)
-        {
-            transform.Find("positionIndicator").gameObject.SetActive(false);
-            transform.Find("directionIndicator").gameObject.SetActive(true);
-            transform.position = teamMember.transform.position + new Vector3(0, 1.0f, 0);
-            transform.Find("directionIndicator").gameObject.transform.localPosition = new Vector3(0, -0.9f, 2);
-            float horizontal_val = Mathf.Abs(gp.leftStick.x.ReadValue()) < threshold ? 0 : gp.leftStick.x.ReadValue();
-            float vertical_val = Mathf.Abs(gp.leftStick.y.ReadValue()) < threshold ? 0 : gp.leftStick.y.ReadValue();
-            float right_horizontal_val = Mathf.Abs(gp.rightStick.x.ReadValue()) < threshold ? 0 : gp.rightStick.x.ReadValue();
-            float right_vertical_val = Mathf.Abs(gp.rightStick.y.ReadValue()) < threshold ? 0 : gp.rightStick.y.ReadValue();
-            if (right_horizontal_val == 0 && right_vertical_val == 0)
-            {
-                NextDir = new Vector3(horizontal_val, 0, vertical_val);
-            }
-            else
-            {
-                NextDir = new Vector3(right_horizontal_val, 0, right_vertical_val);
-            }
-            if (NextDir != Vector3.zero)
-            {
-                Vector3 currDir = transform.rotation.eulerAngles;
-                NextDir = Quaternion.LookRotation(NextDir).eulerAngles;
-                Vector3 currentAngle = new Vector3(
-                       Mathf.LerpAngle(currDir.x, NextDir.x, rotatingSpeed * Time.deltaTime),
-                       Mathf.LerpAngle(currDir.y, NextDir.y, rotatingSpeed * Time.deltaTime),
-                       Mathf.LerpAngle(currDir.z, NextDir.z, rotatingSpeed * Time.deltaTime));
-                transform.eulerAngles = currentAngle;
-            }
         }
     }
 
-    public void fly()
-    {
-        StartCoroutine(flying());
-    }
-
-    IEnumerator flying()
-    {
-        flyingSpeed = maximumFlyingSpeed;
-        Vector3 movingDir = (teamMember.transform.rotation * Vector3.forward).normalized;
-        GameObject auroa = Instantiate(flyingFX, transform.position, Quaternion.identity);
-        auroa.transform.parent = transform;
-        transform.Find("directionIndicator").gameObject.SetActive(false);
-        transform.position -= new Vector3(0, 0.7f, 0);
-        GetComponent<BoxCollider>().size = new Vector3(1.5f, 1.5f, 1.5f);
-
-        //for (float t = 0.0f; t <= 0.2f; t += Time.deltaTime) {
-        //  transform.position += 5 * movingDir * Time.deltaTime;
-        //  yield return new WaitForSeconds(Time.deltaTime);
-        //}
-
-        flyingDir = (transform.rotation * Vector3.forward).normalized;
-
-        for (float t = 0.0f; t <= 1.5f; t += Time.deltaTime)
-        {
-            if (hitEnemy)
-            {
-                break;
-            }
-            rb.velocity = flyingSpeed * flyingDir;
-            transform.Rotate(0, 30, 0);
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-
-        hitEnemy = false;
-        ps.currStatus = playerStatus.status.NORMAL;
-        anim.SetTrigger("flyingEndTrigger");
-        transform.Find("directionIndicator").gameObject.SetActive(false);
-        transform.Find("directionIndicator").gameObject.transform.position = new Vector3(0, 0.1f, 2);
-        transform.Find("positionIndicator").gameObject.SetActive(true);
-        GetComponent<BoxCollider>().size = new Vector3(1f, 1.0f, 1f);
-        Destroy(auroa);
-    }
-
-    public void hurt(Vector3 dir)
-    {
-        anim.SetTrigger("hurtTrigger");
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(stunningClip, 10.0f);
-        gameObject.layer = 11;
-        playerStatus.status prevStatus = ps.currStatus;
-        ps.currStatus = playerStatus.status.FLYING;
-        dropMoneyAfterhurt();
-        StartCoroutine(knockBack(dir, prevStatus));
-    }
-
-    private void dropMoneyAfterhurt()
-    {
-        ArrowKeyMovement arr = GetComponent<ArrowKeyMovement>();
-        int pre_num_of_res = Inventory.instance.numOfPlayerResource[arr.playerIndex];
-        Inventory.instance.numOfPlayerResource[arr.playerIndex] /= 2;
-        int num_of_money_dropped = pre_num_of_res - Inventory.instance.numOfPlayerResource[arr.playerIndex];
-        for (int i = 0; i < num_of_money_dropped; ++i)
-        {
-            GameObject coin = Instantiate(rupee, transform.position, Quaternion.identity);
-            coin.transform.GetComponentInChildren<Rigidbody>().velocity = new Vector3(Random.Range(0.0f, 3.0f), 10, Random.Range(0.0f, 3.0f)); ;
-        }
-
-    }
-
-    private bool judgeWhetherOutOfBound(Vector3 pos)
-    {
-        if (pos.x * pos.x + pos.z * pos.z <= total_radius * total_radius)
-            return true;
-        return false;
-    }
-
-    public IEnumerator knockBack(Vector3 dir, playerStatus.status prevStatus)
-    {
-        GameObject stunningEffectObject = Instantiate(stunnedEffect);
-        stunningEffectObject.transform.position = transform.position;
-        stunningEffectObject.transform.parent = transform;
-        stunningEffectObject.transform.localPosition += new Vector3(0, 1.2f, 0);
-        if (!(prevStatus == playerStatus.status.HOLDING || prevStatus == playerStatus.status.HELD))
-        {
-            Debug.Log(playerIndex + " " + ps.currStatus.ToString() + " " + dir);
-            for (float t = 0.0f; t <= 0.5f; t += Time.deltaTime)
-            {
-                float speed = knockBackSpeed - dashSpeedCurve.Evaluate(t / 0.5f) * (knockBackSpeed - 5);
-                rb.velocity = speed * dir;
-                yield return new WaitForSeconds(Time.deltaTime);
-            }
-        }
-        StartCoroutine(getStunned(stunnedTime, stunningEffectObject, prevStatus));
-    }
-
-    IEnumerator defenseCoolDown(float t)
-    {
-        yield return new WaitForSeconds(t);
-        defenseReady = true;
-    }
-
-    IEnumerator dashCoolDown(float cd)
-    {
-        anim.SetTrigger("dashTrigger");
-        ps.currStatus = playerStatus.status.DASH;
-        staminaBar.gameObject.SetActive(true);
-        staminaBar.fillAmount = 0;
-        Vector3 dashDir = (transform.rotation * Vector3.forward).normalized;
-
-        // Dash along one direction; Speed gradually decreased
-        stopDash = false;
-        GameObject trail = Instantiate(dashTrail, transform.position, transform.rotation);
-        trail.transform.Rotate(0, 90, 0);
-        trail.transform.parent = transform;
-        for (float t = 0.0f; t < 0.15f; t += Time.deltaTime)
-        {
-            if (stopDash)
-            {
-                break;
-            }
-            float speed = dashSpeed - dashSpeedCurve.Evaluate(t / 0.15f) * (dashSpeed - 10);
-            rb.velocity = dashDir * speed;
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-
-
-        // cast backswing time
-        yield return new WaitForSeconds(0.3f);
-
-        // Refill Stamina Bar & Set dash ready
-        ps.currStatus = playerStatus.status.NORMAL;
-        for (float t = 0.0f; t < cd; t += Time.deltaTime)
-        {
-            staminaBar.fillAmount = t / cd;
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-
-        // Stamina Bar Effect
-        Color c;
-        for (float t = 0.0f; t < 0.3f; t += Time.deltaTime)
-        {
-            c = staminaBar.color;
-            c.a = 1 - t / 0.3f;
-            staminaBar.color = c;
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-        staminaBar.gameObject.SetActive(false);
-        c = staminaBar.color;
-        c.a = 1;
-        staminaBar.color = c;
-
-        // Set dash ready
-        dashReday = true;
-    }
-
-    IEnumerator rightTriggerCoolDown(float t)
-    {
-        yield return new WaitForSeconds(t);
-        rightTriggerReady = true;
-    }
 
     IEnumerator startButtonCoolDown(float t)
     {
@@ -385,42 +152,11 @@ public class ArrowKeyMovementSelection : MonoBehaviour
         startButtonReady = true;
     }
 
-    IEnumerator getStunned(float t, GameObject stunningEffectObject, playerStatus.status prevStatus)
-    {
-        ps.currStatus = playerStatus.status.STUNNED;
-        yield return new WaitForSeconds(t);
-        if (prevStatus == playerStatus.status.DEFENSE)
-        {
-            ps.currStatus = playerStatus.status.NORMAL;
-        }
-        else if (prevStatus == playerStatus.status.DASH)
-        {
-            ps.currStatus = playerStatus.status.NORMAL;
-        }
-        else
-        {
-            ps.currStatus = prevStatus;
-        }
-        gameObject.layer = 12;
-        Destroy(stunningEffectObject);
-    }
 
     IEnumerator setBackLayer(float t)
     {
         yield return new WaitForSeconds(t);
         gameObject.layer = 12;
-    }
-
-    void FixedUpdate()
-    {
-        if (GameControl.instance.isPaused)
-        {
-            return;
-        }
-        if (onOuterGround && ps.currStatus != playerStatus.status.FLYING)
-        {
-            transform.RotateAround(Vector3.zero, Vector3.up, -31.5f * Time.deltaTime);
-        }
     }
 
 }

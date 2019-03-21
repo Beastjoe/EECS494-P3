@@ -6,6 +6,7 @@ public class PlayerIndexAssignment : MonoBehaviour
 {
     public static PlayerIndexAssignment instance;
     public int[] indices;
+    public bool[] robotSelected;
 
     void Awake()
     {
@@ -21,6 +22,7 @@ public class PlayerIndexAssignment : MonoBehaviour
     void Start()
     {
         indices = new int[4];
+        robotSelected = new bool[4];
     }
 
     // Update is called once per frame
