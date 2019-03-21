@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Experimental.Input;
+using XInputDotNetPure;
 using UnityEngine.UI;
 
 public class ArrowKeyMovement : MonoBehaviour {
@@ -93,6 +94,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     // get GamePad
     float threshold = 0.21f;
     Gamepad gp = Gamepad.all[playerIndex];
+
     if (gp.startButton.isPressed && startButtonReady && GameControl.instance.pauseReady) {
       startButtonReady = false;
       StartCoroutine(startButtonCoolDown(0.5f));
