@@ -28,7 +28,7 @@ public class Timer : MonoBehaviour {
     if (GameControl.instance.isPaused) {
       return;
     }
-    timer -= Time.deltaTime;
+    timer -= 0.66f * Time.deltaTime;
     if (timer >= 0.0f) {
       text.text = Mathf.Ceil(timer).ToString("F0");
     }
