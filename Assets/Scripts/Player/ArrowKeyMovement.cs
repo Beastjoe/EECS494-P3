@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Experimental.Input;
-using XInputDotNetPure;
 using UnityEngine.UI;
 
 public class ArrowKeyMovement : MonoBehaviour {

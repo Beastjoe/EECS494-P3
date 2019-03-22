@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Experimental.Input;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TutorialController : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class TutorialController : MonoBehaviour {
   public float originalPos = 0;
   public GameObject platformRed;
   public GameObject platformBlue;
+  public GameObject BlackShader;
 
   public bool[] playerFlag = new bool[4];
   Gamepad[] playerPads = new Gamepad[4];
@@ -56,8 +58,9 @@ public class TutorialController : MonoBehaviour {
         }
         if (playerPads[i].bButton.isPressed && dialogueReadyToEnd) {
           pass = true;
-          if (tutorialIdx == -9) {
-            SceneManager.LoadScene("playLab");
+          if (tutorialIdx == -9)
+          {
+            StartCoroutine(Fading());
           }
           break;
         }
@@ -166,5 +169,18 @@ public class TutorialController : MonoBehaviour {
   IEnumerator dialogueReadyToEndCoolDown() {
     yield return new WaitForSeconds(0.1f);
     dialogueReadyToEnd = true;
+  }
+  
+  IEnumerator Fading()
+  {
+    BlackShader.SetActive(true);
+    for (int i = 0; i < 100; ++i)
+    {
+      Color c = BlackShader.GetComponent<Image>().color;
+      c.a += 0.01f;
+      BlackShader.GetComponent<Image>().color = c;
+      yield return new WaitForSeconds(0.015f);
+    }
+    SceneManager.LoadScene("playLab");
   }
 }

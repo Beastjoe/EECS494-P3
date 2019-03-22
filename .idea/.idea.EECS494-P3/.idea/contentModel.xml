@@ -216,6 +216,16 @@
           </e>
         </e>
         <e p="tmpTest.cs" t="Include" />
+        <e p="XInputDotNet-master" t="Include">
+          <e p="XInputUnity5" t="Include">
+            <e p="Assets" t="Include">
+              <e p="XInputDotNet" t="Include">
+                <e p="Docs.txt" t="Include" />
+                <e p="MITLicense.txt" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
       </e>
       <e p="EECS494-P3.sln" t="IncludeFlat" />
       <e p="Library" t="ExcludeRecursive" />

@@ -18,6 +18,7 @@ public class GameControl : MonoBehaviour {
   public bool playState = false;
   public bool tutorialState = false;
   public int tutorialProgres;
+  public GameObject BlackShader;
 
   public GameObject startTimer;
   public GameObject go;
@@ -32,7 +33,6 @@ public class GameControl : MonoBehaviour {
   private void Start() {
     //QualitySettings.vSyncCount = 0;
     //Application.targetFrameRate = 10;
-    startTimer.SetActive(true);
     isPaused = true;
     StartCoroutine(startCountDown());
   }
@@ -79,6 +79,15 @@ public class GameControl : MonoBehaviour {
   }
 
   IEnumerator startCountDown() {
+    for (int i = 0; i < 155; ++i)
+    {
+      Color c = BlackShader.GetComponent<Image>().color;
+      c.a -= 0.01f;
+      BlackShader.GetComponent<Image>().color = c;
+      yield return new WaitForSeconds(0.005f);
+    }
+    
+    startTimer.SetActive(true);
     Text timerText = startTimer.GetComponent<Text>();
     float timer = float.Parse(timerText.text);
     int originalFontSize = timerText.fontSize;
