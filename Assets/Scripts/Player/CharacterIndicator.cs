@@ -3,34 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Input;
 
-public class CharacterIndicator : MonoBehaviour
-{
+public class CharacterIndicator : MonoBehaviour {
     private bool isMoving;
     public int playerIndex;
-    
-    public float smoothTime = 0.3F;
+
+    private float smoothTime = 0.1F;
     private Vector3 velocity = Vector3.zero;
     private float yPosition;
 
     private int targetIndex;
-    private int currenIndex;
+    private int currentIndex;
 
     private bool selected;
 
     Gamepad gp;
-    
+
     // Start is called before the first frame update
-    void Start()
-    {
-        currenIndex = -1;
+    void Start() {
+        currentIndex = -1;
         yPosition = transform.position.y;
         transform.position = new Vector3(-9f, yPosition, 0f);
         gp = Gamepad.all[playerIndex];
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (selected)
             return;
 
@@ -44,69 +41,68 @@ public class CharacterIndicator : MonoBehaviour
         float h_val = Mathf.Abs(gp.leftStick.x.ReadValue()) < threshold ? 0 : gp.leftStick.x.ReadValue();
         float right_h_val = Mathf.Abs(gp.rightStick.x.ReadValue()) < threshold ? 0 : gp.rightStick.x.ReadValue();
 
-        float horizontal_val = Mathf.Max(h_val, right_h_val);
+        float horizontal_val = Mathf.Abs(h_val) > Mathf.Abs(right_h_val) ? h_val : right_h_val;
 
         if (horizontal_val > 0)
         {
+            if (currentIndex == -1)
+                targetIndex = 0;
+            else
+                targetIndex = (currentIndex + 1) % 4;
             while (PlayerIndexAssignment.instance.robotSelected[targetIndex])
             {
-                targetIndex = (currenIndex + 1) % 4;
+                targetIndex = (targetIndex + 1) % 4;
             }
             Move(targetIndex);
         }
 
         else if (horizontal_val < 0)
         {
-            if (currenIndex == -1)
+            if (currentIndex == -1 || currentIndex == 0)
             {
                 targetIndex = 3;
-                Move(targetIndex);
-                return;
             }
-
+            else
+                targetIndex = (currentIndex - 1) % 4;
             while (PlayerIndexAssignment.instance.robotSelected[targetIndex])
             {
-                targetIndex = (currenIndex - 1) % 4;
+                targetIndex = (targetIndex - 1) % 4;
             }
 
             Move(targetIndex);
         }
 
-        else if (gp.aButton.isPressed && currenIndex != -1)
+        else if (gp.aButton.isPressed && currentIndex != -1)
         {
-            if (!PlayerIndexAssignment.instance.robotSelected[currenIndex])
+            if (!PlayerIndexAssignment.instance.robotSelected[currentIndex])
             {
-                PlayerIndexAssignment.instance.indices[currenIndex] = playerIndex;
-                PlayerIndexAssignment.instance.robotSelected[currenIndex] = true;
-                GetComponent<SpriteRenderer>().color = GetColor(currenIndex);
+                PlayerIndexAssignment.instance.indices[currentIndex] = playerIndex;
+                PlayerIndexAssignment.instance.robotSelected[currentIndex] = true;
+                GetComponent<SpriteRenderer>().color = GetColor(currentIndex);
                 selected = true;
             }
         }
 
     }
 
-    void Move(int targetIndex)
-    {
+    void Move(int targetIndex) {
         isMoving = true;
         Vector3 targetPosition = Vector3.zero;
         if (targetIndex == 0) targetPosition = new Vector3(-7.5f, yPosition, 0f);
         else if (targetIndex == 1) targetPosition = new Vector3(-2.5f, yPosition, 0f);
         else if (targetIndex == 2) targetPosition = new Vector3(2.5f, yPosition, 0f);
-        else targetPosition = new Vector3(7.5f, 4f, 0f);
-        
+        else targetPosition = new Vector3(7.5f, yPosition, 0f);
+
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
-        Debug.Log(Vector3.Magnitude(transform.position - targetPosition));
         if (Vector3.Magnitude(transform.position - targetPosition) < 0.0001f)
         {
-            //Debug.Log("Inside here");
             isMoving = false;
-            currenIndex = targetIndex;
+            currentIndex = targetIndex;
             transform.position = targetPosition;
         }
     }
 
-    Vector4 GetColor(int index)
-    {
+    Vector4 GetColor(int index) {
         if (index == 0)
             return new Vector4(1, 0.286f, 0.463f, 1);
         else if (index == 1)

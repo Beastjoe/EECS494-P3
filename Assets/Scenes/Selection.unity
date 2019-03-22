@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2830,51 +2830,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150420688}
   m_CullTransparentMesh: 0
---- !u!1 &158690562
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 158690563}
-  - component: {fileID: 158690564}
-  m_Layer: 0
-  m_Name: rupees3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &158690563
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 158690562}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 688806037}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &158690564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 158690562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6836baedb309b47d2b32611bf00f24a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rupee: {fileID: 7416718728250022289, guid: 5de58d5ee0639403bb7de61dc3997baa, type: 3}
-  parent: {fileID: 5658496421302980295}
 --- !u!43 &201411509
 Mesh:
   m_ObjectHideFlags: 0
@@ -7391,19 +7346,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 463130024}
   m_Mesh: {fileID: 1235834451}
---- !u!114 &504175460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658496419679820551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db2cc2bb4457f748957b0b61b94c21f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectClip: {fileID: 8300000, guid: 9da722f3ed2bb5245802cdba3474fb40, type: 3}
 --- !u!43 &513488468
 Mesh:
   m_ObjectHideFlags: 0
@@ -8156,8 +8098,6 @@ Transform:
   m_Children:
   - {fileID: 5658496421302980291}
   - {fileID: 5658496419679820547}
-  - {fileID: 158690563}
-  - {fileID: 701196070}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8366,51 +8306,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698095650}
   m_CullTransparentMesh: 0
---- !u!1 &701196069
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 701196070}
-  - component: {fileID: 701196071}
-  m_Layer: 0
-  m_Name: rupees4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &701196070
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701196069}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 688806037}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &701196071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701196069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6836baedb309b47d2b32611bf00f24a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rupee: {fileID: 7416718728250022289, guid: 5de58d5ee0639403bb7de61dc3997baa, type: 3}
-  parent: {fileID: 5658496419679820551}
 --- !u!1 &739843841
 GameObject:
   m_ObjectHideFlags: 0
@@ -8523,19 +8418,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788836037}
   m_CullTransparentMesh: 0
---- !u!114 &805411865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658496420451802234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db2cc2bb4457f748957b0b61b94c21f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectClip: {fileID: 8300000, guid: 9da722f3ed2bb5245802cdba3474fb40, type: 3}
 --- !u!1 &818430678
 GameObject:
   m_ObjectHideFlags: 0
@@ -8581,51 +8463,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &836170589
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 836170590}
-  - component: {fileID: 836170591}
-  m_Layer: 0
-  m_Name: rupees2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &836170590
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836170589}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1674876355}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &836170591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836170589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6836baedb309b47d2b32611bf00f24a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rupee: {fileID: 7416718728250022289, guid: 5de58d5ee0639403bb7de61dc3997baa, type: 3}
-  parent: {fileID: 5658496420339518144}
 --- !u!1 &865984348
 GameObject:
   m_ObjectHideFlags: 0
@@ -8791,19 +8628,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875044594}
   m_CullTransparentMesh: 0
---- !u!114 &921750179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658496420339518144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db2cc2bb4457f748957b0b61b94c21f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectClip: {fileID: 8300000, guid: 9da722f3ed2bb5245802cdba3474fb40, type: 3}
 --- !u!4 &925107679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8243140439309193838, guid: f323d4bafdaf04aaca6a5db4d6058735,
@@ -11835,51 +11659,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1233183704}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1180409892
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1180409893}
-  - component: {fileID: 1180409894}
-  m_Layer: 0
-  m_Name: rupees1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1180409893
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180409892}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1674876355}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1180409894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180409892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6836baedb309b47d2b32611bf00f24a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rupee: {fileID: 7416718728250022289, guid: 5de58d5ee0639403bb7de61dc3997baa, type: 3}
-  parent: {fileID: 5658496420451802234}
 --- !u!1 &1197550990
 GameObject:
   m_ObjectHideFlags: 0
@@ -23699,8 +23478,6 @@ Transform:
   m_Children:
   - {fileID: 5658496420451802238}
   - {fileID: 5658496420339518148}
-  - {fileID: 1180409893}
-  - {fileID: 836170590}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23816,6 +23593,7 @@ MonoBehaviour:
   isStarted: 0
   playState: 0
   tutorialState: 0
+  tutorialProgres: 0
   startTimer: {fileID: 0}
   go: {fileID: 0}
 --- !u!4 &1756442385
@@ -28855,19 +28633,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080576237}
   m_CullTransparentMesh: 0
---- !u!114 &2102234788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658496421302980295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db2cc2bb4457f748957b0b61b94c21f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectClip: {fileID: 8300000, guid: 9da722f3ed2bb5245802cdba3474fb40, type: 3}
 --- !u!4 &2107353456
 Transform:
   m_ObjectHideFlags: 0
@@ -29607,7 +29372,6 @@ GameObject:
   - component: {fileID: 5658496419679820550}
   - component: {fileID: 1167807280}
   - component: {fileID: 7035379852739716796}
-  - component: {fileID: 504175460}
   - component: {fileID: 4029409001208789018}
   - component: {fileID: 5658496419679820552}
   m_Layer: 12
@@ -29629,9 +29393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50c589af0e204fb5abeef77289455dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialIndex: 0
+  initialIndex: 3
   playerIndex: 3
-  movingSpeed: 1
+  movingSpeed: 5
   rotatingSpeed: 3
   dashSpeed: 10
   defenseMode: 0
@@ -31054,7 +30818,6 @@ GameObject:
   - component: {fileID: 5658496420339518145}
   - component: {fileID: 1835434743}
   - component: {fileID: 7035379852337248123}
-  - component: {fileID: 921750179}
   - component: {fileID: 4029409001601133021}
   - component: {fileID: 5658496420339518146}
   m_Layer: 12
@@ -31092,9 +30855,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50c589af0e204fb5abeef77289455dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialIndex: 0
+  initialIndex: 1
   playerIndex: 1
-  movingSpeed: 1
+  movingSpeed: 5
   rotatingSpeed: 3
   dashSpeed: 10
   defenseMode: 0
@@ -31540,7 +31303,6 @@ GameObject:
   - component: {fileID: 5658496420451802235}
   - component: {fileID: 1805112397}
   - component: {fileID: 7035379852235579841}
-  - component: {fileID: 805411865}
   - component: {fileID: 4029409001644179303}
   - component: {fileID: 5658496420451802236}
   m_Layer: 12
@@ -31580,7 +31342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialIndex: 0
   playerIndex: 0
-  movingSpeed: 1
+  movingSpeed: 5
   rotatingSpeed: 3
   dashSpeed: 10
   defenseMode: 0
@@ -33543,7 +33305,6 @@ GameObject:
   - component: {fileID: 5658496421302980294}
   - component: {fileID: 651937520}
   - component: {fileID: 7035379851108103036}
-  - component: {fileID: 2102234788}
   - component: {fileID: 4029409000617356762}
   - component: {fileID: 5658496421302980296}
   m_Layer: 12
@@ -33565,9 +33326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50c589af0e204fb5abeef77289455dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialIndex: 0
+  initialIndex: 2
   playerIndex: 2
-  movingSpeed: 1
+  movingSpeed: 5
   rotatingSpeed: 3
   dashSpeed: 10
   defenseMode: 0

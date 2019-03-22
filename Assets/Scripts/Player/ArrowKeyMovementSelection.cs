@@ -66,14 +66,6 @@ public class ArrowKeyMovementSelection : MonoBehaviour
 
         playerIndex = PlayerIndexAssignment.instance.indices[initialIndex];
 
-        if (ps.currStatus == playerStatus.status.STUNNED || ps.currStatus == playerStatus.status.DASH)
-        {
-            return;
-        }
-        if (GetComponent<StoreResource>().isStoring)
-        {
-            return;
-        }
         if (GameControl.instance.isPaused || GameControl.instance.tutorialPaused)
         {
             if (anim.GetBool("moving"))
@@ -81,6 +73,12 @@ public class ArrowKeyMovementSelection : MonoBehaviour
                 anim.SetBool("moving", false);
             }
             return;
+        }
+
+        if (Gamepad.all[playerIndex].aButton.isPressed)
+        {
+            ps.currStatus = playerStatus.status.NORMAL;
+            anim.SetTrigger("IdelTrigger");
         }
 
         // get GamePad
