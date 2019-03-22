@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Experimental.Input;
-using XInputDotNetPure;
+//using XInputDotNetPure;
 using UnityEngine.UI;
 
 public class ArrowKeyMovement : MonoBehaviour {
@@ -118,6 +118,7 @@ public class ArrowKeyMovement : MonoBehaviour {
         // defense status
         if (ps.currStatus == playerStatus.status.DEFENSE)
         {
+            rb.isKinematic = true;
             if (GetComponent<StoreResource>().onStorageArea)
             {
                 ps.currStatus = playerStatus.status.NORMAL;
@@ -136,6 +137,9 @@ public class ArrowKeyMovement : MonoBehaviour {
                     staminaBar.fillAmount = fa;
                 }
             }
+        } else
+        {
+            rb.isKinematic = false;
         }
 
         // normal status
@@ -338,11 +342,12 @@ public class ArrowKeyMovement : MonoBehaviour {
         GetComponent<BoxCollider>().size = new Vector3(1f, 1.0f, 1f);
         Destroy(auroa);
     }
-
+   
+    
     public void hurt(Vector3 dir) {
         anim.SetTrigger("hurtTrigger");
         Camera.main.GetComponent<AudioSource>().PlayOneShot(stunningClip, 10.0f);
-        StartCoroutine(controllerVibration(1.0f));
+        //StartCoroutine(controllerVibration(1.0f));
         gameObject.layer = 11;
         playerStatus.status prevStatus = ps.currStatus;
         ps.currStatus = playerStatus.status.FLYING;
@@ -482,7 +487,7 @@ public class ArrowKeyMovement : MonoBehaviour {
             transform.RotateAround(Vector3.zero, Vector3.up, -31.5f * Time.deltaTime);
         }
     }
-
+    /*
     IEnumerator controllerVibration(float t) {
         if (playerIndex == 0)
         {
@@ -508,5 +513,5 @@ public class ArrowKeyMovement : MonoBehaviour {
             yield return new WaitForSeconds(t);
             GamePad.SetVibration(PlayerIndex.Four, 0f, 0f);
         }
-    }
+    }*/
 }

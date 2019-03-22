@@ -31,6 +31,8 @@ public class SelectionController : MonoBehaviour
     public GameObject Select;
     public GameObject Continue;
     public GameObject count;
+    public GameObject BlackShader;
+
     Text countText;
     int cnt;
 
@@ -156,7 +158,10 @@ public class SelectionController : MonoBehaviour
             countText.text = cnt.ToString() + "/4";
 
             if (cnt == 4)
-                SceneManager.LoadScene("PlayLab");
+            {
+                StartCoroutine(Fading());
+            }
+               
 
             timer -= Time.deltaTime;
             if (Mathf.Ceil(timer) != float.Parse(timerText.text))
@@ -170,5 +175,16 @@ public class SelectionController : MonoBehaviour
             }
         }
 
+    }
+
+    IEnumerator Fading() {
+        for (int i = 0; i < 100; ++i)
+        {
+            Color c = BlackShader.GetComponent<Image>().color;
+            c.a += 0.01f;
+            BlackShader.GetComponent<Image>().color = c;
+            yield return new WaitForSeconds(0.005f);
+        }
+        SceneManager.LoadScene("playLab");
     }
 }
