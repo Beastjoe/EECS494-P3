@@ -10,7 +10,6 @@ public class playerStatus : MonoBehaviour {
 
   // Start is called before the first frame update
   void Start() {
-    currStatus = status.NORMAL;
   }
 
   // Update is called once per frame
