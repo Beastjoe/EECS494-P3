@@ -28,6 +28,11 @@ public class SelectionController : MonoBehaviour
     public GameObject GreenIndicator;
     public GameObject BlueIndicator;
 
+    public GameObject RedSprite;
+    public GameObject PurpleSprite;
+    public GameObject GreenSprite;
+    public GameObject BlueSprite;
+
     public GameObject Select;
     public GameObject Continue;
     public GameObject count;
@@ -44,6 +49,9 @@ public class SelectionController : MonoBehaviour
     private bool Player1Confirmed;
     private bool Player2Confirmed;
     private bool Player3Confirmed;
+
+    private Vector3[] velocity;
+    private float smoothTime = 0.1f;
 
     void Start()
     {
@@ -82,6 +90,12 @@ public class SelectionController : MonoBehaviour
         countText = count.GetComponent<Text>();
         timerText = Timer.GetComponent<Text>();
         timer = float.Parse(timerText.text);
+
+        velocity = new Vector3[4];
+        RedSprite.transform.localPosition += new Vector3(0, 30, 0);
+        PurpleSprite.transform.localPosition += new Vector3(0, 30, 0);
+        GreenSprite.transform.localPosition += new Vector3(0, 30, 0);
+        BlueSprite.transform.localPosition += new Vector3(0, 30, 0);
     }
 
     // Update is called once per frame
@@ -93,6 +107,7 @@ public class SelectionController : MonoBehaviour
             redRenderer.material.SetColor("_EmissionColor", new Vector4(0.749f, 0f, 0.529f, 1f) * 1.5f);
             RedRobot.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", Color.white);
             RedIndicator.GetComponent<SpriteRenderer>().material.EnableKeyword("_EMISSION");
+            Move(RedSprite, 0);
         }
 
         if (PlayerIndexAssignment.instance.robotSelected[1])
@@ -101,6 +116,7 @@ public class SelectionController : MonoBehaviour
             purpleRenderer.material.SetColor("_EmissionColor", new Vector4(0.749f, 0f, 0.529f, 1f) * 1.5f);
             PurpleRobot.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", Color.white);
             PurpleIndicator.GetComponent<SpriteRenderer>().material.EnableKeyword("_EMISSION");
+            Move(PurpleSprite, 1);
         }
 
         if (PlayerIndexAssignment.instance.robotSelected[2])
@@ -109,6 +125,7 @@ public class SelectionController : MonoBehaviour
             greenRenderer.material.SetColor("_EmissionColor", new Vector4(0f, 0.749f, 0.749f, 1f) * 1.5f);
             GreenRobot.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", Color.white);
             GreenIndicator.GetComponent<SpriteRenderer>().material.EnableKeyword("_EMISSION");
+            Move(GreenSprite, 2);
         }
 
 
@@ -118,6 +135,7 @@ public class SelectionController : MonoBehaviour
             blueRenderer.material.SetColor("_EmissionColor", new Vector4(0f, 0.749f, 0.749f, 1f) * 1.5f);
             BlueRobot.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", Color.white);
             BlueIndicator.GetComponent<SpriteRenderer>().material.EnableKeyword("_EMISSION");
+            Move(BlueSprite, 3);
         }
 
         bool selectionFinished = PlayerIndexAssignment.instance.robotSelected[0] &&
@@ -186,5 +204,16 @@ public class SelectionController : MonoBehaviour
             yield return new WaitForSeconds(0.005f);
         }
         SceneManager.LoadScene("playLab");
+    }
+
+    void Move(GameObject obj, int index)
+    {
+        Vector3 targetPosition = new Vector3(obj.transform.localPosition.x, 0f, 0f);
+
+        obj.transform.localPosition = Vector3.SmoothDamp(obj.transform.localPosition, targetPosition, ref velocity[index], smoothTime);
+        if (Vector3.Magnitude(obj.transform.localPosition - targetPosition) < 0.0001f)
+        {
+            obj.transform.localPosition = targetPosition;
+        }
     }
 }

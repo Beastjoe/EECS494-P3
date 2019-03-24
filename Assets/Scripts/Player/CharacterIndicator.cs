@@ -15,6 +15,8 @@ public class CharacterIndicator : MonoBehaviour {
     private int currentIndex;
 
     private bool selected;
+    private bool floating;
+    private float amplitude = 0.01f;
 
     Gamepad gp;
 
@@ -29,7 +31,17 @@ public class CharacterIndicator : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (selected)
+        {
+            if (!floating)
+                Move(-1);
+            else
+            {
+                Vector3 tempPos = transform.position;
+                tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * 1) * amplitude;
+                transform.position = tempPos;
+            }
             return;
+        }
 
         if (isMoving)
         {
@@ -78,8 +90,9 @@ public class CharacterIndicator : MonoBehaviour {
             {
                 PlayerIndexAssignment.instance.indices[currentIndex] = playerIndex;
                 PlayerIndexAssignment.instance.robotSelected[currentIndex] = true;
-                GetComponent<SpriteRenderer>().color = GetColor(currentIndex);
+                //GetComponent<SpriteRenderer>().color = GetColor(currentIndex);
                 selected = true;
+                Move(-1);
             }
         }
 
@@ -91,7 +104,8 @@ public class CharacterIndicator : MonoBehaviour {
         if (targetIndex == 0) targetPosition = new Vector3(-7.5f, yPosition, 0f);
         else if (targetIndex == 1) targetPosition = new Vector3(-2.5f, yPosition, 0f);
         else if (targetIndex == 2) targetPosition = new Vector3(2.5f, yPosition, 0f);
-        else targetPosition = new Vector3(7.5f, yPosition, 0f);
+        else if (targetIndex == 3) targetPosition = new Vector3(7.5f, yPosition, 0f);
+        else targetPosition = new Vector3(transform.position.x, 2.75f, 0);
 
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
         if (Vector3.Magnitude(transform.position - targetPosition) < 0.0001f)
@@ -99,6 +113,8 @@ public class CharacterIndicator : MonoBehaviour {
             isMoving = false;
             currentIndex = targetIndex;
             transform.position = targetPosition;
+            if (targetIndex == -1)
+                floating = true;
         }
     }
 
