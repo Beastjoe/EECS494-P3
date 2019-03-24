@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7455841171867798587}
   - component: {fileID: 703224951723509596}
   - component: {fileID: 6856463646109665183}
+  - component: {fileID: 1547073621993506133}
   m_Layer: 14
   m_Name: Cuboid
   m_TagString: cuboid
@@ -165,3 +166,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1547073621993506133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7417138188559993673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805ed71a1d01b7a4a9ed59f2eac7d814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -40,6 +40,7 @@ public class ArrowKeyMovementSelection : MonoBehaviour
     public float total_radius = 7.5f;
 
     public GameObject stunnedEffect;
+    public AudioClip confirmationClip;
 
     Animator anim;
     playerStatus ps;
@@ -75,8 +76,9 @@ public class ArrowKeyMovementSelection : MonoBehaviour
             return;
         }
 
-        if (Gamepad.all[playerIndex].aButton.isPressed)
+        if (Gamepad.all[playerIndex].aButton.isPressed && ps.currStatus == playerStatus.status.DEFENSE)
         {
+            GetComponent<AudioSource>().PlayOneShot(confirmationClip);
             ps.currStatus = playerStatus.status.NORMAL;
             anim.SetTrigger("IdelTrigger");
         }
