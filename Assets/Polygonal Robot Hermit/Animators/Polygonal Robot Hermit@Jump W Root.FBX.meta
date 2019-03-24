@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 759140f9ecde47744a4eaadc7d800937
+guid: 94f76b99e9573ec4087cd3c81678de29
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -69,16 +69,17 @@ ModelImporter:
     400060: RigRGunGizmo
     400062: RigWheel
     400064: RigWheelGizmo
+    2100000: 02 - Default
     4300000: Polygonal Robot Hermit
-    7400000: Run Forward W Root
+    7400000: Jump W Root
     9500000: //RootNode
     13700000: Polygonal Robot Hermit
   externalObjects: {}
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -102,17 +103,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Run Forward W Root
+      name: Jump W Root
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -147,7 +148,7 @@ ModelImporter:
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
-    indexFormat: 1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -160,7 +161,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   importAnimation: 1

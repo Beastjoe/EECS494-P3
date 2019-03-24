@@ -8615,6 +8615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indices: 
   robotSelected: 
+  robotSelectedCount: 0
 --- !u!4 &818430680
 Transform:
   m_ObjectHideFlags: 0
@@ -23690,6 +23691,7 @@ MonoBehaviour:
   Select: {fileID: 875044594}
   Continue: {fileID: 865984348}
   count: {fileID: 927697648}
+  BlackShader: {fileID: 0}
   Timer: {fileID: 788836037}
 --- !u!4 &1657174243
 Transform:
@@ -29685,6 +29687,10 @@ MonoBehaviour:
   stopDash: 0
   total_radius: 7.5
   stunnedEffect: {fileID: 109542, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
+  confirmationClip1: {fileID: 8300000, guid: bbae1508163ca1648821f4b6813214e3, type: 3}
+  confirmationClip2: {fileID: 8300000, guid: 46aec6a2cd4c1444c8b0391952936e3a, type: 3}
+  confirmationClip3: {fileID: 8300000, guid: 477cdea2e11082b49af33ce0b31a9c3a, type: 3}
+  confirmationClip4: {fileID: 8300000, guid: aa53d8f752f604e48a49c53adaf83826, type: 3}
 --- !u!4 &5658496419683783586
 Transform:
   m_ObjectHideFlags: 0
@@ -31147,6 +31153,10 @@ MonoBehaviour:
   stopDash: 0
   total_radius: 7.5
   stunnedEffect: {fileID: 109542, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
+  confirmationClip1: {fileID: 8300000, guid: bbae1508163ca1648821f4b6813214e3, type: 3}
+  confirmationClip2: {fileID: 8300000, guid: 46aec6a2cd4c1444c8b0391952936e3a, type: 3}
+  confirmationClip3: {fileID: 8300000, guid: 477cdea2e11082b49af33ce0b31a9c3a, type: 3}
+  confirmationClip4: {fileID: 8300000, guid: aa53d8f752f604e48a49c53adaf83826, type: 3}
 --- !u!95 &5658496420339518147
 Animator:
   serializedVersion: 3
@@ -31632,6 +31642,10 @@ MonoBehaviour:
   stopDash: 0
   total_radius: 7.5
   stunnedEffect: {fileID: 109542, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
+  confirmationClip1: {fileID: 8300000, guid: bbae1508163ca1648821f4b6813214e3, type: 3}
+  confirmationClip2: {fileID: 8300000, guid: 46aec6a2cd4c1444c8b0391952936e3a, type: 3}
+  confirmationClip3: {fileID: 8300000, guid: 477cdea2e11082b49af33ce0b31a9c3a, type: 3}
+  confirmationClip4: {fileID: 8300000, guid: aa53d8f752f604e48a49c53adaf83826, type: 3}
 --- !u!4 &5658496420451802238
 Transform:
   m_ObjectHideFlags: 0
@@ -33618,6 +33632,10 @@ MonoBehaviour:
   stopDash: 0
   total_radius: 7.5
   stunnedEffect: {fileID: 109542, guid: 2ed06ab528b7c474eb9246421cd7c791, type: 3}
+  confirmationClip1: {fileID: 8300000, guid: bbae1508163ca1648821f4b6813214e3, type: 3}
+  confirmationClip2: {fileID: 8300000, guid: 46aec6a2cd4c1444c8b0391952936e3a, type: 3}
+  confirmationClip3: {fileID: 8300000, guid: 477cdea2e11082b49af33ce0b31a9c3a, type: 3}
+  confirmationClip4: {fileID: 8300000, guid: aa53d8f752f604e48a49c53adaf83826, type: 3}
 --- !u!1 &5658496421319781792
 GameObject:
   m_ObjectHideFlags: 0

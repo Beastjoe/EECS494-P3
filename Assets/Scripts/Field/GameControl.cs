@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Input;
@@ -18,10 +19,13 @@ public class GameControl : MonoBehaviour {
     public bool isStarted = false;
     public bool playState = false;
     public bool tutorialState = false;
+    int redTimeHasChanged = 100, blueTimeHasChanged = 100;
     public int tutorialProgres;
 
     public GameObject startTimer;
     public GameObject go;
+
+    GameObject timer;
 
     void Awake() {
         if (!instance)
@@ -35,10 +39,49 @@ public class GameControl : MonoBehaviour {
         //Application.targetFrameRate = 10;
         isPaused = true;
         StartCoroutine(startCountDown());
+        if (playState)
+        {
+            timer = GameObject.Find("Canvas/Timer");
+        }
     }
 
     // Update is called once per frame
     void Update() {
+
+        if (playState)
+        {
+            int time =  Convert.ToInt32(timer.GetComponent<Text>().text);
+            if (59==time || time==19)
+            {
+                if (!StorageController.instance.isRedLit && time < redTimeHasChanged)
+                {
+                    redTimeHasChanged = time;
+                    StorageController.instance.LightRed();
+                }
+            }
+            if (79 == time || time == 39)
+            {
+                if (StorageController.instance.isRedLit && time < redTimeHasChanged)
+                {
+                    redTimeHasChanged = time;
+                    StorageController.instance.UnlightRed();
+                }
+                if (!StorageController.instance.isBlueLit && time < blueTimeHasChanged)
+                {
+                    blueTimeHasChanged = time;
+                    StorageController.instance.LightBlue();
+                }
+            }
+            if (59 == time || 99 == time)
+            {
+                if (StorageController.instance.isBlueLit && time < blueTimeHasChanged)
+                {
+                    blueTimeHasChanged = time;
+                    StorageController.instance.UnlightBlue();
+                }
+            }
+        }
+
         if (isPaused && isStarted)
         {
             pausePanel.SetActive(true);

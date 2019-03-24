@@ -36,6 +36,11 @@ public class TutorialController : MonoBehaviour {
         {
             GameControl.instance.tutorialProgres = tutorialIdx;
         }
+        if (tutorialIdx == 6)
+        {
+            StorageController.instance.LightBlue();
+            StorageController.instance.LightRed();
+        }
     }
 
     private void Start() {

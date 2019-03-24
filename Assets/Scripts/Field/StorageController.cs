@@ -15,8 +15,8 @@ public class StorageController : MonoBehaviour
     private float flashCountdown;
     
    
-    private bool isBlueLit;
-    private bool isRedLit;
+    public bool isBlueLit = true;
+    public bool isRedLit = true;
 
     private void Awake()
     {
@@ -33,9 +33,6 @@ public class StorageController : MonoBehaviour
         redRenderer = RedStorage.GetComponent<MeshRenderer>();
         blueRenderer.material.EnableKeyword("_EmissionColor");
         redRenderer.material.EnableKeyword("_EmissionColor");
-
-        isRedLit = true;
-        isBlueLit = true;
 
         flashCountdown = FlashCount;
     }
@@ -68,10 +65,10 @@ public class StorageController : MonoBehaviour
 
     IEnumerator RedFlashOn()
     {
-        int sparklingCount = 10;
+        int sparklingCount = 6;
         for (int i = 0; i < sparklingCount; i++)
         {
-            float WaitTime = 0.05f + Random.Range(0f, 0.05f);
+            float WaitTime = 0.15f;
             yield return new WaitForSeconds(WaitTime);
             isRedLit = !isRedLit;
         }
@@ -80,10 +77,10 @@ public class StorageController : MonoBehaviour
     
     IEnumerator BlueFlashOn()
     {
-        int sparklingCount = 10;
+        int sparklingCount = 6;
         for (int i = 0; i < sparklingCount; i++)
         {
-            float WaitTime = 0.05f + Random.Range(0f, 0.05f);
+            float WaitTime = 0.15f;
             yield return new WaitForSeconds(WaitTime);
             isBlueLit = !isBlueLit;
         }
@@ -92,10 +89,10 @@ public class StorageController : MonoBehaviour
     
     IEnumerator BlueFlashOff()
     {
-        int sparklingCount = 10;
+        int sparklingCount = 6;
         for (int i = 0; i < sparklingCount; i++)
         {
-            float WaitTime = 0.05f + Random.Range(0f, 0.05f);
+            float WaitTime = 0.15f;
             yield return new WaitForSeconds(WaitTime);
             isBlueLit = !isBlueLit;
         }
@@ -104,10 +101,10 @@ public class StorageController : MonoBehaviour
     
     IEnumerator RedFlashOff()
     {
-        int sparklingCount = 10;
+        int sparklingCount = 6;
         for (int i = 0; i < sparklingCount; i++)
         {
-            float WaitTime = 0.05f + Random.Range(0f, 0.05f);
+            float WaitTime = 0.15f;
             yield return new WaitForSeconds(WaitTime);
             isRedLit = !isRedLit;
         }

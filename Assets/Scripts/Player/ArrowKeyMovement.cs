@@ -363,6 +363,7 @@ public class ArrowKeyMovement : MonoBehaviour {
         for (int i = 0; i < num_of_money_dropped; ++i)
         {
             GameObject coin = Instantiate(rupee, transform.position, Quaternion.identity);
+            coin.transform.GetChild(0).GetComponent<RupeeInitialization>().enabled = false;
             coin.transform.GetComponentInChildren<Rigidbody>().velocity = new Vector3(Random.Range(0.0f, 3.0f), 10, Random.Range(0.0f, 3.0f)); ;
         }
 

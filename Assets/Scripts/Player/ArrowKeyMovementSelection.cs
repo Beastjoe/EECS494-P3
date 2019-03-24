@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Input;
 using UnityEngine.UI;
 
-public class ArrowKeyMovementSelection : MonoBehaviour
-{
+public class ArrowKeyMovementSelection : MonoBehaviour {
     public int initialIndex;
     [HideInInspector]
     public int playerIndex;
@@ -40,7 +39,10 @@ public class ArrowKeyMovementSelection : MonoBehaviour
     public float total_radius = 7.5f;
 
     public GameObject stunnedEffect;
-    public AudioClip confirmationClip;
+    public AudioClip confirmationClip1;
+    public AudioClip confirmationClip2;
+    public AudioClip confirmationClip3;
+    public AudioClip confirmationClip4;
 
     Animator anim;
     playerStatus ps;
@@ -52,16 +54,14 @@ public class ArrowKeyMovementSelection : MonoBehaviour
     bool startButtonReady = true;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         anim = GetComponent<Animator>();
         ps = GetComponent<playerStatus>();
         rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (!PlayerIndexAssignment.instance.robotSelected[initialIndex])
             return;
 
@@ -78,7 +78,26 @@ public class ArrowKeyMovementSelection : MonoBehaviour
 
         if (Gamepad.all[playerIndex].aButton.isPressed && ps.currStatus == playerStatus.status.DEFENSE)
         {
-            GetComponent<AudioSource>().PlayOneShot(confirmationClip);
+            if (PlayerIndexAssignment.instance.robotSelectedCount == 0)
+            {
+                PlayerIndexAssignment.instance.robotSelectedCount++;
+                GetComponent<AudioSource>().PlayOneShot(confirmationClip1);
+            }
+            else if (PlayerIndexAssignment.instance.robotSelectedCount == 1)
+            {
+                PlayerIndexAssignment.instance.robotSelectedCount++;
+                GetComponent<AudioSource>().PlayOneShot(confirmationClip2);
+            }
+            else if (PlayerIndexAssignment.instance.robotSelectedCount == 2)
+            {
+                PlayerIndexAssignment.instance.robotSelectedCount++;
+                GetComponent<AudioSource>().PlayOneShot(confirmationClip3);
+            }
+            else if (PlayerIndexAssignment.instance.robotSelectedCount == 3)
+            {
+                PlayerIndexAssignment.instance.robotSelectedCount++;
+                GetComponent<AudioSource>().PlayOneShot(confirmationClip4);
+            }
             ps.currStatus = playerStatus.status.NORMAL;
             anim.SetTrigger("IdelTrigger");
         }
@@ -146,15 +165,13 @@ public class ArrowKeyMovementSelection : MonoBehaviour
     }
 
 
-    IEnumerator startButtonCoolDown(float t)
-    {
+    IEnumerator startButtonCoolDown(float t) {
         yield return new WaitForSeconds(t);
         startButtonReady = true;
     }
 
 
-    IEnumerator setBackLayer(float t)
-    {
+    IEnumerator setBackLayer(float t) {
         yield return new WaitForSeconds(t);
         gameObject.layer = 12;
     }

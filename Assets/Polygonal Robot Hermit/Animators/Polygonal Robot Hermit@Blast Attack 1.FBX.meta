@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 759140f9ecde47744a4eaadc7d800937
+guid: 70491c4be45ef73428628ecf6e9195e7
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -70,7 +70,7 @@ ModelImporter:
     400062: RigWheel
     400064: RigWheelGizmo
     4300000: Polygonal Robot Hermit
-    7400000: Run Forward W Root
+    7400000: Blast Attack 1
     9500000: //RootNode
     13700000: Polygonal Robot Hermit
   externalObjects: {}
@@ -102,17 +102,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Run Forward W Root
+      name: Blast Attack 1
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

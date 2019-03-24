@@ -6,99 +6,177 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Experimental.Input;
 
 public class Timer : MonoBehaviour {
-  public GameObject blackPanel;
-  public GameObject instruction;
-  public GameObject restartTimer;
-  public GameObject AutoPlayAgainText;
+    public GameObject blackPanel;
+    public GameObject instruction;
+    public GameObject restartTimer;
+    public GameObject AutoPlayAgainText;
+    public Camera redTeamCamera1, redTeamCamera2;
+    public Camera blueTeamCamera1, blueTeamCamera2;
+    bool gameEndAnimation = false;
+    public AnimationCurve cutsceneCameraCurve;
 
-  float timer;
-  Text text;
-  Text winText;
-  bool triggered = false;
-  bool isCountingDown = false;
-  void Start() {
-    text = GetComponent<Text>();
-    winText = transform.GetChild(0).GetComponent<Text>();
-    winText.text = "";
-    winText.gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
-    timer = float.Parse(text.text);
-  }
-
-  void Update() {
-    if (GameControl.instance.isPaused) {
-      return;
+    float timer;
+    Text text;
+    Text winText;
+    bool triggered = false;
+    bool isCountingDown = false;
+    void Start() {
+        text = GetComponent<Text>();
+        winText = transform.GetChild(0).GetComponent<Text>();
+        winText.text = "";
+        winText.gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
+        timer = float.Parse(text.text);
     }
-    timer -= 0.66f * Time.deltaTime;
-    if (timer >= 0.0f) {
-      text.text = Mathf.Ceil(timer).ToString("F0");
-    }
-    else {
-      text.text = "00";
-      blackPanel.SetActive(true);
-      instruction.SetActive(true);
-      int redScore = Inventory.instance.numOfRedTeamResource;
-      int blueScore = Inventory.instance.numOfBlueTeamResource;
-      if (redScore > blueScore) {
-        winText.text = "Red Team Wins!";
-        if (!triggered) {
-          winText.GetComponent<Animator>().SetTrigger("gameOver");
-          triggered = true;
-        }
-        blackPanel.GetComponent<Image>().color = new Vector4(1, 0.6f, 0.77f, 0.36f);
-      }
-      else if (redScore == blueScore) {
-        if (!triggered) {
-          winText.GetComponent<Animator>().SetTrigger("gameOver");
-          triggered = true;
-        }
-        winText.text = "Draw";
-      }
-      else {
-        winText.text = "Blue Team Wins!";
-        if (!triggered) {
-          winText.GetComponent<Animator>().SetTrigger("gameOver");
-          triggered = true;
-        }
-        blackPanel.GetComponent<Image>().color = new Vector4(0.6f, 1, 1, 0.36f);
-        timer -= Time.deltaTime;
-      }
 
-      if (!isCountingDown)
-      {
-        isCountingDown = true;
-        StartCoroutine(startCountDown());
-      }
-
-      if (Gamepad.all[0].aButton.isPressed || Gamepad.all[1].aButton.isPressed ||
-      Gamepad.all[2].aButton.isPressed || Gamepad.all[3].aButton.isPressed) {
-        SceneManager.LoadScene("playLab");
-      }
-
-      if (Gamepad.all[0].bButton.isPressed || Gamepad.all[1].bButton.isPressed ||
-      Gamepad.all[2].bButton.isPressed || Gamepad.all[3].bButton.isPressed) {
-        SceneManager.LoadScene("MainMenu");
-      }
-    }
-  }
-  
-  IEnumerator startCountDown() {
-    Text timerText = restartTimer.GetComponent<Text>();
-    float timer = float.Parse(timerText.text);
-    int originalFontSize = timerText.fontSize;
-    restartTimer.SetActive(true);
-    AutoPlayAgainText.SetActive(true);
-    while (timer >= 0.0f) {
-      timer -= 1.5f * Time.deltaTime;
-      timerText.fontSize += (int)(80 * Time.deltaTime);
-      if (Mathf.Ceil(timer) != float.Parse(timerText.text)) {
-        if (Mathf.Ceil(timer)==0.0) {
-          SceneManager.LoadScene("playLab");
+    void Update() {
+        if (GameControl.instance.isPaused)
+        {
+            return;
         }
-        timerText.text = Mathf.Ceil(timer).ToString();
-        timerText.fontSize = originalFontSize;
-      }
-      yield return new WaitForSeconds(Time.deltaTime);
+        timer -= 3.0f * Time.deltaTime;
+        if (timer >= 0.0f)
+        {
+            text.text = Mathf.Ceil(timer).ToString("F0");
+        }
+        else
+        {
+            text.text = "00";
+            GameControl.instance.isStarted = false;
+
+            StartCoroutine(gameEnd());
+
+            if (gameEndAnimation)
+            {
+                blackPanel.SetActive(true);
+                instruction.SetActive(true);
+                int redScore = Inventory.instance.numOfRedTeamResource;
+                int blueScore = Inventory.instance.numOfBlueTeamResource;
+                if (redScore > blueScore)
+                {
+                    winText.text = "Red Team Wins!";
+                    if (!triggered)
+                    {
+                        winText.GetComponent<Animator>().SetTrigger("gameOver");
+                        triggered = true;
+                    }
+                    blackPanel.GetComponent<Image>().color = new Vector4(1, 0.6f, 0.77f, 0.36f);
+                }
+                else if (redScore == blueScore)
+                {
+                    if (!triggered)
+                    {
+                        winText.GetComponent<Animator>().SetTrigger("gameOver");
+                        triggered = true;
+                    }
+                    winText.text = "Draw";
+                }
+                else
+                {
+                    winText.text = "Blue Team Wins!";
+                    if (!triggered)
+                    {
+                        winText.GetComponent<Animator>().SetTrigger("gameOver");
+                        triggered = true;
+                    }
+                    blackPanel.GetComponent<Image>().color = new Vector4(0.6f, 1, 1, 0.36f);
+                    timer -= Time.deltaTime;
+                }
+
+                if (!isCountingDown)
+                {
+                    isCountingDown = true;
+                    StartCoroutine(startCountDown());
+                }
+
+                if (Gamepad.all[0].aButton.isPressed || Gamepad.all[1].aButton.isPressed ||
+                Gamepad.all[2].aButton.isPressed || Gamepad.all[3].aButton.isPressed)
+                {
+                    SceneManager.LoadScene("playLab");
+                }
+
+                if (Gamepad.all[0].bButton.isPressed || Gamepad.all[1].bButton.isPressed ||
+                Gamepad.all[2].bButton.isPressed || Gamepad.all[3].bButton.isPressed)
+                {
+                    SceneManager.LoadScene("MainMenu");
+                }
+            }
+        }
     }
-  }  
-  
+
+    IEnumerator startCountDown() {
+        Text timerText = restartTimer.GetComponent<Text>();
+        float timer = float.Parse(timerText.text);
+        int originalFontSize = timerText.fontSize;
+        restartTimer.SetActive(true);
+        AutoPlayAgainText.SetActive(true);
+        while (timer >= 0.0f)
+        {
+            timer -= 1.5f * Time.deltaTime;
+            timerText.fontSize += (int)(80 * Time.deltaTime);
+            if (Mathf.Ceil(timer) != float.Parse(timerText.text))
+            {
+                if (Mathf.Ceil(timer) == 0.0)
+                {
+                    SceneManager.LoadScene("playLab");
+                }
+                timerText.text = Mathf.Ceil(timer).ToString();
+                timerText.fontSize = originalFontSize;
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+
+    IEnumerator gameEnd() {
+        Vector3 originalPos = Camera.main.transform.position;
+        Camera.main.gameObject.SetActive(false);
+        int redScore = Inventory.instance.numOfRedTeamResource;
+        int blueScore = Inventory.instance.numOfBlueTeamResource;
+        if (redScore == blueScore)
+        {
+            gameEndAnimation = true;
+            yield return null;
+        }
+        bool redTeamWin = redScore > blueScore;
+        if (redTeamWin)
+        {
+            Vector3 targetPos1 = redTeamCamera1.transform.position;
+            Vector3 targetPos2 = redTeamCamera2.transform.position;
+            redTeamCamera1.transform.position = originalPos;
+            redTeamCamera2.transform.position = originalPos;
+            redTeamCamera1.gameObject.SetActive(true);
+            redTeamCamera2.gameObject.SetActive(true);
+            for (float t = 0.0f; t<=2f; t+=Time.deltaTime)
+            {
+                cutsceneCameraCurve.Evaluate(t / 2f);
+                redTeamCamera1.transform.position = Vector3.Lerp(originalPos, targetPos1, cutsceneCameraCurve.Evaluate(t / 2f));
+                redTeamCamera2.transform.position = Vector3.Lerp(originalPos, targetPos2, cutsceneCameraCurve.Evaluate(t / 2f));
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+            redTeamCamera1.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger1");
+            redTeamCamera2.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger2");
+            yield return new WaitForSeconds(4.0f);
+        }
+        else
+        {
+            Vector3 targetPos1 = blueTeamCamera1.transform.position;
+            Vector3 targetPos2 = blueTeamCamera2.transform.position;
+
+            blueTeamCamera1.transform.position = originalPos;
+            blueTeamCamera2.transform.position = originalPos;
+            blueTeamCamera1.gameObject.SetActive(true);
+            blueTeamCamera2.gameObject.SetActive(true);
+            for (float t = 0.0f; t <= 2f; t += Time.deltaTime)
+            {
+                cutsceneCameraCurve.Evaluate(t / 2f);
+                blueTeamCamera1.transform.position = Vector3.Lerp(originalPos, targetPos1, cutsceneCameraCurve.Evaluate(t / 2f));
+                blueTeamCamera2.transform.position = Vector3.Lerp(originalPos, targetPos2, cutsceneCameraCurve.Evaluate(t / 2f));
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+            blueTeamCamera1.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger1");
+            blueTeamCamera2.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger2");
+            yield return new WaitForSeconds(4.0f);
+        }
+
+        gameEndAnimation = true;
+    }
 }

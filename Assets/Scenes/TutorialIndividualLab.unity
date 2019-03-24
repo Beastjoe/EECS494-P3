@@ -1505,6 +1505,8 @@ MonoBehaviour:
   BlueStorage: {fileID: 712354616}
   RedStorage: {fileID: 976086581}
   FlashCount: 0.1
+  isBlueLit: 0
+  isRedLit: 0
 --- !u!4 &222392881
 Transform:
   m_ObjectHideFlags: 0
@@ -3950,6 +3952,10 @@ PrefabInstance:
     - target: {fileID: 1748231301, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: teamIdx
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1748231301, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
+      propertyPath: currStatus
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5658496419715011905, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
@@ -8039,6 +8045,10 @@ PrefabInstance:
     - target: {fileID: 1748231301, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: teamIdx
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1748231301, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
+      propertyPath: currStatus
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5658496420395445424, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
