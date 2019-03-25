@@ -54,6 +54,10 @@ public class ArrowKeyMovement : MonoBehaviour {
     bool rightTriggerReady = true;
     bool startButtonReady = true;
 
+    float threshold = 0.21f;
+    Gamepad gp;
+
+
     // Start is called before the first frame update
     void Start() {
         anim = GetComponent<Animator>();
@@ -62,7 +66,10 @@ public class ArrowKeyMovement : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update () {
+
+
+
         if (ps.currStatus == playerStatus.status.STUNNED || ps.currStatus == playerStatus.status.DASH)
         {
             return;
@@ -71,12 +78,47 @@ public class ArrowKeyMovement : MonoBehaviour {
         {
             return;
         }
-        if (GameControl.instance.isPaused || GameControl.instance.tutorialPaused)
+        if (GameControl.instance.isPaused || GameControl.instance.tutorialPaused || !GameControl.instance.isStarted)
         {
             if (anim.GetBool("moving"))
             {
                 anim.SetBool("moving", false);
             }
+
+            bool isCountingDown = GameControl.instance.isCountingDown;
+            if (isCountingDown)
+            {
+                gp = Gamepad.all[playerIndex];
+
+                bool isIdle = true;
+                float horizontal_val = Mathf.Abs(gp.leftStick.x.ReadValue()) < threshold ? 0 : gp.leftStick.x.ReadValue();
+                float vertical_val = Mathf.Abs(gp.leftStick.y.ReadValue()) < threshold ? 0 : gp.leftStick.y.ReadValue();
+
+                float right_horizontal_val = Mathf.Abs(gp.rightStick.x.ReadValue()) < threshold ? 0 : gp.rightStick.x.ReadValue();
+                float right_vertical_val = Mathf.Abs(gp.rightStick.y.ReadValue()) < threshold ? 0 : gp.rightStick.y.ReadValue();
+
+                // change direction
+                if (right_horizontal_val == 0 && right_vertical_val == 0)
+                {
+                    NextDir = new Vector3(horizontal_val, 0, vertical_val);
+                }
+                else
+                {
+                    NextDir = new Vector3(right_horizontal_val, 0, right_vertical_val);
+                }
+                if (NextDir != Vector3.zero)
+                {
+                    isIdle = false;
+                    Vector3 currDir = transform.rotation.eulerAngles;
+                    NextDir = Quaternion.LookRotation(NextDir).eulerAngles;
+                    Vector3 currentAngle = new Vector3(
+                           Mathf.LerpAngle(currDir.x, NextDir.x, rotatingSpeed * Time.deltaTime),
+                           Mathf.LerpAngle(currDir.y, NextDir.y, rotatingSpeed * Time.deltaTime),
+                           Mathf.LerpAngle(currDir.z, NextDir.z, rotatingSpeed * Time.deltaTime));
+                    transform.eulerAngles = currentAngle;
+                }
+            }
+
             return;
         }
 
@@ -104,8 +146,7 @@ public class ArrowKeyMovement : MonoBehaviour {
         }
 
         // get GamePad
-        float threshold = 0.21f;
-        Gamepad gp = Gamepad.all[playerIndex];
+        gp = Gamepad.all[playerIndex];
 
         if (gp.startButton.isPressed && startButtonReady && GameControl.instance.pauseReady)
         {
@@ -149,24 +190,26 @@ public class ArrowKeyMovement : MonoBehaviour {
             {
                 return;
             }
+
             bool isIdle = true;
             float horizontal_val = Mathf.Abs(gp.leftStick.x.ReadValue()) < threshold ? 0 : gp.leftStick.x.ReadValue();
             float vertical_val = Mathf.Abs(gp.leftStick.y.ReadValue()) < threshold ? 0 : gp.leftStick.y.ReadValue();
 
             float right_horizontal_val = Mathf.Abs(gp.rightStick.x.ReadValue()) < threshold ? 0 : gp.rightStick.x.ReadValue();
             float right_vertical_val = Mathf.Abs(gp.rightStick.y.ReadValue()) < threshold ? 0 : gp.rightStick.y.ReadValue();
-
             // move
+
             if (horizontal_val != 0 || vertical_val != 0)
             {
                 isIdle = false;
                 rb.velocity = movingSpeed *
-                  ((Vector3.forward * vertical_val + Vector3.right * horizontal_val)).normalized;
+                    ((Vector3.forward * vertical_val + Vector3.right * horizontal_val)).normalized;
             }
             else
             {
                 rb.velocity = Vector3.zero;
             }
+            
 
             // change direction
             if (right_horizontal_val == 0 && right_vertical_val == 0)
@@ -300,9 +343,11 @@ public class ArrowKeyMovement : MonoBehaviour {
                 transform.eulerAngles = currentAngle;
             }
         }
+
     }
 
     public void fly() {
+        GetComponent<Rigidbody>().useGravity = true;
         StartCoroutine(flying());
     }
 
@@ -324,6 +369,11 @@ public class ArrowKeyMovement : MonoBehaviour {
 
         for (float t = 0.0f; t <= 1.5f; t += Time.deltaTime)
         {
+            if (!GameControl.instance.isStarted)
+            {
+                rb.velocity = Vector3.zero;
+                break;
+            }
             if (hitEnemy)
             {
                 break;
@@ -382,9 +432,13 @@ public class ArrowKeyMovement : MonoBehaviour {
         stunningEffectObject.transform.localPosition += new Vector3(0, 1.2f, 0);
         if (!(prevStatus == playerStatus.status.HOLDING || prevStatus == playerStatus.status.HELD))
         {
-            Debug.Log(playerIndex + " " + ps.currStatus.ToString() + " " + dir);
             for (float t = 0.0f; t <= 0.5f; t += Time.deltaTime)
             {
+                if (!GameControl.instance.isStarted)
+                {
+                    rb.velocity = Vector3.zero;
+                    yield break;
+                }
                 float speed = knockBackSpeed - dashSpeedCurve.Evaluate(t / 0.5f) * (knockBackSpeed - 5);
                 rb.velocity = speed * dir;
                 yield return new WaitForSeconds(Time.deltaTime);
@@ -483,7 +537,7 @@ public class ArrowKeyMovement : MonoBehaviour {
         {
             return;
         }
-        if (onOuterGround && ps.currStatus != playerStatus.status.FLYING)
+        if (onOuterGround && ps.currStatus != playerStatus.status.FLYING && GameControl.instance.isStarted)
         {
             transform.RotateAround(Vector3.zero, Vector3.up, -31.5f * Time.deltaTime);
         }

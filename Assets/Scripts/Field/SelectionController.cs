@@ -50,6 +50,8 @@ public class SelectionController : MonoBehaviour
     private bool Player2Confirmed;
     private bool Player3Confirmed;
 
+    private bool isFading = false;
+
     private Vector3[] velocity;
     private float smoothTime = 0.1f;
 
@@ -149,25 +151,25 @@ public class SelectionController : MonoBehaviour
             Continue.SetActive(true);
             Timer.SetActive(true);
 
-            if (Gamepad.all[0].xButton.isPressed && !Player0Confirmed)
+            if (Gamepad.all[0].aButton.isPressed && !Player0Confirmed)
             {
                 cnt++;
                 Player0Confirmed = true;
             }
 
-            if (Gamepad.all[1].xButton.isPressed && !Player1Confirmed)
+            if (Gamepad.all[1].aButton.isPressed && !Player1Confirmed)
             {
                 cnt++;
                 Player1Confirmed = true;
             }
 
-            if (Gamepad.all[2].xButton.isPressed && !Player2Confirmed)
+            if (Gamepad.all[2].aButton.isPressed && !Player2Confirmed)
             {
                 cnt++;
                 Player2Confirmed = true;
             }
 
-            if (Gamepad.all[3].xButton.isPressed && !Player3Confirmed)
+            if (Gamepad.all[3].aButton.isPressed && !Player3Confirmed)
             {
                 cnt++;
                 Player3Confirmed = true;
@@ -175,13 +177,13 @@ public class SelectionController : MonoBehaviour
 
             countText.text = cnt.ToString() + "/4";
 
-            if (cnt == 4)
+            if (cnt == 4 && !isFading)
             {
                 StartCoroutine(Fading());
             }
                
-
-            timer -= Time.deltaTime;
+            if(!isFading)
+                timer -= Time.deltaTime;
             if (Mathf.Ceil(timer) != float.Parse(timerText.text))
             {
                 timerText.text = Mathf.Ceil(timer).ToString();
@@ -196,6 +198,8 @@ public class SelectionController : MonoBehaviour
     }
 
     IEnumerator Fading() {
+        Debug.Log("Nice!");
+        isFading = true;
         for (int i = 0; i < 100; ++i)
         {
             Color c = BlackShader.GetComponent<Image>().color;

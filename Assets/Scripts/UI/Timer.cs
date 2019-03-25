@@ -33,7 +33,7 @@ public class Timer : MonoBehaviour {
         {
             return;
         }
-        timer -= 3.0f * Time.deltaTime;
+        timer -= 0.66f * Time.deltaTime;
         if (timer >= 0.0f)
         {
             text.text = Mathf.Ceil(timer).ToString("F0");
@@ -79,7 +79,6 @@ public class Timer : MonoBehaviour {
                         triggered = true;
                     }
                     blackPanel.GetComponent<Image>().color = new Vector4(0.6f, 1, 1, 0.36f);
-                    timer -= Time.deltaTime;
                 }
 
                 if (!isCountingDown)
@@ -104,6 +103,7 @@ public class Timer : MonoBehaviour {
     }
 
     IEnumerator startCountDown() {
+        yield return new WaitForSeconds(0.5f);
         Text timerText = restartTimer.GetComponent<Text>();
         float timer = float.Parse(timerText.text);
         int originalFontSize = timerText.fontSize;
@@ -128,9 +128,13 @@ public class Timer : MonoBehaviour {
 
     IEnumerator gameEnd() {
         Vector3 originalPos = Camera.main.transform.position;
-        Camera.main.gameObject.SetActive(false);
         int redScore = Inventory.instance.numOfRedTeamResource;
         int blueScore = Inventory.instance.numOfBlueTeamResource;
+        redTeamCamera1.transform.parent.Find("Canvas").gameObject.SetActive(false);
+        redTeamCamera2.transform.parent.Find("Canvas").gameObject.SetActive(false);
+        blueTeamCamera1.transform.parent.Find("Canvas").gameObject.SetActive(false);
+        blueTeamCamera2.transform.parent.Find("Canvas").gameObject.SetActive(false);
+
         if (redScore == blueScore)
         {
             gameEndAnimation = true;
@@ -139,14 +143,18 @@ public class Timer : MonoBehaviour {
         bool redTeamWin = redScore > blueScore;
         if (redTeamWin)
         {
-            Vector3 targetPos1 = redTeamCamera1.transform.position;
-            Vector3 targetPos2 = redTeamCamera2.transform.position;
+            Camera.main.gameObject.GetComponent<Camera>().enabled = false;
+            
             redTeamCamera1.transform.position = originalPos;
             redTeamCamera2.transform.position = originalPos;
             redTeamCamera1.gameObject.SetActive(true);
             redTeamCamera2.gameObject.SetActive(true);
             for (float t = 0.0f; t<=2f; t+=Time.deltaTime)
             {
+
+                Vector3 targetPos1 = redTeamCamera1.transform.parent.transform.position + getOffset(redTeamCamera1);
+                Vector3 targetPos2 = redTeamCamera2.transform.parent.transform.position + getOffset(redTeamCamera2);
+
                 cutsceneCameraCurve.Evaluate(t / 2f);
                 redTeamCamera1.transform.position = Vector3.Lerp(originalPos, targetPos1, cutsceneCameraCurve.Evaluate(t / 2f));
                 redTeamCamera2.transform.position = Vector3.Lerp(originalPos, targetPos2, cutsceneCameraCurve.Evaluate(t / 2f));
@@ -154,19 +162,21 @@ public class Timer : MonoBehaviour {
             }
             redTeamCamera1.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger1");
             redTeamCamera2.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger2");
-            yield return new WaitForSeconds(4.0f);
+            yield return new WaitForSeconds(3.0f);
         }
         else
         {
-            Vector3 targetPos1 = blueTeamCamera1.transform.position;
-            Vector3 targetPos2 = blueTeamCamera2.transform.position;
-
+            Camera.main.gameObject.SetActive(false);
             blueTeamCamera1.transform.position = originalPos;
             blueTeamCamera2.transform.position = originalPos;
             blueTeamCamera1.gameObject.SetActive(true);
             blueTeamCamera2.gameObject.SetActive(true);
             for (float t = 0.0f; t <= 2f; t += Time.deltaTime)
             {
+
+                Vector3 targetPos1 = blueTeamCamera1.transform.parent.transform.position + getOffset(blueTeamCamera1);
+                Vector3 targetPos2 = blueTeamCamera2.transform.parent.transform.position + getOffset(blueTeamCamera2);
+
                 cutsceneCameraCurve.Evaluate(t / 2f);
                 blueTeamCamera1.transform.position = Vector3.Lerp(originalPos, targetPos1, cutsceneCameraCurve.Evaluate(t / 2f));
                 blueTeamCamera2.transform.position = Vector3.Lerp(originalPos, targetPos2, cutsceneCameraCurve.Evaluate(t / 2f));
@@ -174,9 +184,14 @@ public class Timer : MonoBehaviour {
             }
             blueTeamCamera1.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger1");
             blueTeamCamera2.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger2");
-            yield return new WaitForSeconds(4.0f);
+            yield return new WaitForSeconds(3.0f);
         }
 
         gameEndAnimation = true;
+    }
+
+
+    private Vector3 getOffset(Camera obj) {
+        return 1.3f * obj.gameObject.transform.parent.transform.up + 2.8f * obj.gameObject.transform.parent.transform.forward;
     }
 }

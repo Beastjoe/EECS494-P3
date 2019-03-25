@@ -62,13 +62,13 @@ public class TutorialController : MonoBehaviour {
             pass = false;
             for (int i = 0; i < 4; i++)
             {
-                if (playerPads[i].bButton.isPressed && dialogueReadyToSkip && !dialogueReadyToEnd)
+                if (playerPads[i].aButton.isPressed && dialogueReadyToSkip && !dialogueReadyToEnd)
                 {
                     StartCoroutine(dialogueReadyToEndCoolDown());
                     transform.GetChild(1).GetComponent<typerEffect>().jumpText();
                     break;
                 }
-                if (playerPads[i].bButton.isPressed && dialogueReadyToEnd)
+                if (playerPads[i].aButton.isPressed && dialogueReadyToEnd)
                 {
                     pass = true;
                     if (tutorialIdx == -9 && !startFading)

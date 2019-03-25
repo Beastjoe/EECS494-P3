@@ -19,6 +19,7 @@ public class GameControl : MonoBehaviour {
     public bool isStarted = false;
     public bool playState = false;
     public bool tutorialState = false;
+    public bool isCountingDown = false;
     int redTimeHasChanged = 100, blueTimeHasChanged = 100;
     public int tutorialProgres;
 
@@ -47,7 +48,16 @@ public class GameControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        if(timer && go)
+        {
+            if(timer.activeSelf || go.activeSelf)
+            {
+                isCountingDown = true;
+            }
+            else{
+                isCountingDown = false;
+            }
+        }
         if (playState)
         {
             int time =  Convert.ToInt32(timer.GetComponent<Text>().text);

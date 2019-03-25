@@ -96,6 +96,7 @@ public class collisionManager : MonoBehaviour {
             {
                 ps.currStatus = playerStatus.status.HOLDING;
                 player_ps.currStatus = playerStatus.status.HELD;
+                player_ps.gameObject.GetComponent<Rigidbody>().useGravity = false; 
                 player.GetComponent<Animator>().SetBool("moving", false);
                 player.GetComponent<Animator>().SetTrigger("IdelTrigger");
                 player.transform.position = transform.position + new Vector3(0, 0.8f, 0);

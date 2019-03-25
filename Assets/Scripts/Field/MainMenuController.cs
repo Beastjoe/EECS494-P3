@@ -29,7 +29,7 @@ public class MainMenuController : MonoBehaviour
         for (int i = 0; i < playerCount; i++)
         {
             Gamepad gp = Gamepad.all[i];
-            if (gp.xButton.isPressed)
+            if (gp.aButton.isPressed)
             {
                 hasPressed[i] = true;
             }
