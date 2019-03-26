@@ -52,10 +52,6 @@ public class StoreResource : MonoBehaviour {
 
     //}
 
-    if (arr.inTutorialMode && GameControl.instance.tutorialProgres > -8) {
-      return;
-    }
-
     if (((teamIndex == 0 && other.gameObject.CompareTag("outground_red") && StorageController.instance.GetRedStatus())
                 || (teamIndex == 1 && other.gameObject.CompareTag("outground_blue") && StorageController.instance.GetBlueStatus()))
             && (x * x + z * z >= effective_radius * effective_radius)) {

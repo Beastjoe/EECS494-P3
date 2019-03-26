@@ -32,6 +32,7 @@ public class ArrowKeyMovement : MonoBehaviour {
 
     public AudioClip readyClip;
     public AudioClip stunningClip;
+    public AudioClip errorResource;
 
     [HideInInspector]
     public bool hitEnemy = false;
@@ -41,10 +42,10 @@ public class ArrowKeyMovement : MonoBehaviour {
 
     public GameObject stunnedEffect;
 
-    public float defenseInitialConsumption = 0.2f;
-    public float defenseContinuousConsumption = 0.1f; // per second
-    public float staminaRechargeSpeed = 0.2f; // per second
-    public float dashConsumption = 0.3f;
+    private float defenseInitialConsumption = 0.2f;
+    private float defenseContinuousConsumption = 0.1f; // per second
+    private float staminaRechargeSpeed = 0.2f; // per second
+    private float dashConsumption = 0.6f;
 
     Animator anim;
     playerStatus ps;
@@ -299,7 +300,7 @@ public class ArrowKeyMovement : MonoBehaviour {
                 }
                 else
                 {
-                    Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip, 2.0f);
+                    Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip, 0.35f);
                     ps.currStatus = playerStatus.status.DEFENSE;
                     anim.SetTrigger("defenseTrigger");
                     // consume stamina
@@ -396,7 +397,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     
     public void hurt(Vector3 dir) {
         anim.SetTrigger("hurtTrigger");
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(stunningClip, 10.0f);
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(stunningClip, 2.0f);
         //StartCoroutine(controllerVibration(1.0f));
         gameObject.layer = 11;
         playerStatus.status prevStatus = ps.currStatus;
@@ -523,6 +524,8 @@ public class ArrowKeyMovement : MonoBehaviour {
     }
 
     IEnumerator staminBarWarning() {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(errorResource, 1.5f);
+
         for (int i = 0; i < 2; ++i)
         {
             staminaBar.color = Color.red;

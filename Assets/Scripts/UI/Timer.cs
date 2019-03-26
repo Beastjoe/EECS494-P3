@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour {
     public Camera blueTeamCamera1, blueTeamCamera2;
     bool gameEndAnimation = false;
     public AnimationCurve cutsceneCameraCurve;
+    public AudioClip winningClip;
 
     float timer;
     Text text;
@@ -143,12 +144,13 @@ public class Timer : MonoBehaviour {
         bool redTeamWin = redScore > blueScore;
         if (redTeamWin)
         {
-            Camera.main.gameObject.GetComponent<Camera>().enabled = false;
+            Camera.main.gameObject.SetActive(false);
             
             redTeamCamera1.transform.position = originalPos;
             redTeamCamera2.transform.position = originalPos;
             redTeamCamera1.gameObject.SetActive(true);
             redTeamCamera2.gameObject.SetActive(true);
+            redTeamCamera1.gameObject.GetComponent<AudioSource>().PlayOneShot(winningClip, 1.0f);
             for (float t = 0.0f; t<=2f; t+=Time.deltaTime)
             {
 
@@ -171,6 +173,7 @@ public class Timer : MonoBehaviour {
             blueTeamCamera2.transform.position = originalPos;
             blueTeamCamera1.gameObject.SetActive(true);
             blueTeamCamera2.gameObject.SetActive(true);
+            blueTeamCamera1.gameObject.GetComponent<AudioSource>().PlayOneShot(winningClip, 1.0f);
             for (float t = 0.0f; t <= 2f; t += Time.deltaTime)
             {
 

@@ -831,7 +831,7 @@ PrefabInstance:
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.3
+      value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
@@ -988,6 +988,16 @@ PrefabInstance:
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 1977035826}
+    - target: {fileID: 5658496420395445424, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: readyClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d79515dea59dde41be0a52c43d4cb09, type: 3}
+    - target: {fileID: 5658496420395445424, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: errorResource
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ea9c4dc7e58376408a666eaecaa662d, type: 3}
     - target: {fileID: 1345527492, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1044,6 +1054,11 @@ PrefabInstance:
       propertyPath: effective_radius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4195628698027393011, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: storingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d1f82cb9ab790654481177079bea62a7, type: 3}
     - target: {fileID: 1748231301, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: currStatus
       value: 1
@@ -1072,6 +1087,10 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 866495697, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
+      propertyPath: collectClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3f5e63ffcdf4da749984db8438a530b6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
 --- !u!1 &142060750 stripped
@@ -5415,7 +5434,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: aad8c721caaeb964fa971ba5958eb7f5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 04187e8b0b2598f4484ed6eb52601d0b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -8674,7 +8693,7 @@ PrefabInstance:
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.21
+      value: 4.7
       objectReference: {fileID: 0}
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
@@ -8751,6 +8770,16 @@ PrefabInstance:
       propertyPath: initialIndex
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5658496420395445424, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: readyClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d79515dea59dde41be0a52c43d4cb09, type: 3}
+    - target: {fileID: 5658496420395445424, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: errorResource
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ea9c4dc7e58376408a666eaecaa662d, type: 3}
     - target: {fileID: 1345527492, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -8788,6 +8817,11 @@ PrefabInstance:
       propertyPath: effective_radius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4195628698027393011, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: storingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d1f82cb9ab790654481177079bea62a7, type: 3}
     - target: {fileID: 1748231301, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: teamIdx
       value: 1
@@ -8806,6 +8840,10 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 866495697, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
+      propertyPath: collectClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3f5e63ffcdf4da749984db8438a530b6, type: 3}
     - target: {fileID: 4029409001654914991, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
       propertyPath: MaxDistance
@@ -9817,7 +9855,7 @@ PrefabInstance:
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.79
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
@@ -9894,6 +9932,16 @@ PrefabInstance:
       propertyPath: initialIndex
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5658496420395445424, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: readyClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d79515dea59dde41be0a52c43d4cb09, type: 3}
+    - target: {fileID: 5658496420395445424, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: errorResource
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ea9c4dc7e58376408a666eaecaa662d, type: 3}
     - target: {fileID: 1345527492, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -9931,6 +9979,11 @@ PrefabInstance:
       propertyPath: effective_radius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4195628698027393011, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: storingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d1f82cb9ab790654481177079bea62a7, type: 3}
     - target: {fileID: 1748231301, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: teamIdx
       value: 1
@@ -9953,6 +10006,10 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 866495697, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
+      propertyPath: collectClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3f5e63ffcdf4da749984db8438a530b6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
 --- !u!1 &1838868536 stripped
@@ -10795,7 +10852,7 @@ PrefabInstance:
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.7
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 5658496420395445430, guid: 525afc20fa0e2b94696da870866b8a41,
         type: 3}
@@ -10867,6 +10924,16 @@ PrefabInstance:
       propertyPath: initialIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5658496420395445424, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: readyClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d79515dea59dde41be0a52c43d4cb09, type: 3}
+    - target: {fileID: 5658496420395445424, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: errorResource
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ea9c4dc7e58376408a666eaecaa662d, type: 3}
     - target: {fileID: 1345527492, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -10912,6 +10979,11 @@ PrefabInstance:
       propertyPath: effective_radius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4195628698027393011, guid: 525afc20fa0e2b94696da870866b8a41,
+        type: 3}
+      propertyPath: storingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d1f82cb9ab790654481177079bea62a7, type: 3}
     - target: {fileID: 1748231301, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
       propertyPath: currStatus
       value: 1
@@ -10934,6 +11006,10 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 866495697, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
+      propertyPath: collectClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3f5e63ffcdf4da749984db8438a530b6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 525afc20fa0e2b94696da870866b8a41, type: 3}
 --- !u!1 &1936915648 stripped

@@ -23,7 +23,7 @@ public class collisionManager : MonoBehaviour {
         {
             Destroy(collision.gameObject);
             inventory.addRupee(am.playerIndex);
-            Camera.main.GetComponent<AudioSource>().PlayOneShot(collectClip, 2.0f);
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(collectClip, 0.5f);
         }
         if (collision.gameObject.CompareTag("airwall"))
         {
