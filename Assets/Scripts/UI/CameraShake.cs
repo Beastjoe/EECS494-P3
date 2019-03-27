@@ -1,0 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Experimental.Input.Haptics;
+
+public class CameraShake : MonoBehaviour
+{
+
+    public void ShakeCamera(float duration, float magnitude)
+    {
+        StartCoroutine(Shake(duration, magnitude));
+    }
+    
+    IEnumerator Shake(float duration, float magnitude)
+    {
+        Vector3 originalPos = transform.localPosition;
+
+        float elasped = 0.0f;
+
+        while (elasped < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+            
+            transform.localPosition = new Vector3(x, y, originalPos.z);
+
+            elasped += Time.deltaTime;
+
+            yield return null;
+        }
+
+        transform.localPosition = originalPos;
+    }
+}
