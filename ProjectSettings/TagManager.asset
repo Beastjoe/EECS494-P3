@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - cuboid
+  - outground_red
+  - outground_blue
+  - outerground
+  - airwall
+  - Red
+  - Green
+  - Blue
+  - BackgroundToDestroy
+  - FX
+  - ScoreBoard
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - PostProcessing
+  - OuterPlayground
+  - InnerPlayground
+  - Invinicible
+  - Player
+  - airwall
+  - cuboid
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: player
+    uniqueID: 3111923039
+    locked: 0

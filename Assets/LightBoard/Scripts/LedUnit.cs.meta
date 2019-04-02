@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c59e790ded8224ea2a73fdcc68c898a2
+timeCreated: 1456322200
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - LightOn: {fileID: 2100000, guid: f6fb0b3a6515245af86331ca08929011, type: 2}
+  - LightOff: {fileID: 2100000, guid: baab5219088134c96ae82bc1fb02592d, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

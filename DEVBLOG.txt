@@ -1,0 +1,37 @@
+﻿**Overview
+After one gold spike and two milestones, CodeX has finally come to its public test α-Version. Today we are more than excited to share with you what's new in the α-Version and what the future steps will be.
+Again, the final version of our game will be released on April 23, 2019, at EECS494 Game Design Showcase at UM. You are always welcome to share your idea on the game with us!
+
+
+What's New? What's the Motivation?
+Milestone indicates a functionally complete version of our game. Based on all the feedback from the playtesting and our advisors, we have made several changes this week.
+
+
+**Mechanism
++What's New: Now when you throw your partner at your opponent, ALL the energons of the hit opponent will be dropped. Motivation: We want to make the game more balanced and we know that throwing is hard and we believe high risk should mean high reward. So, try your best to throw your partner at the opponent!
++What's New: Now dashing becomes more powerful. When your opponent is hit by the dash, not only will it be stunned but also it will be knocked back for a longer distance. Motivation: We are always thinking hard to design the dash mechanism. In order to mimic the physics world and in order to encourage players to use the dash mechanism, we make dashing more powerful.
+What's New: Hold the LT button to remain in the defense mode. Motivation: A simple change but an intuitive one. Human's intuition towards the trigger button is to hold them to remain in a certain status for a period of time.
++What's New: Modify the energy consumption for the dash and being in the defense mode. Motivation: In order to prevent the player's passive strategy, we have optimized the energy consumption system.
++What's New: Modify the tutorial. Motivation: One key strategy that we want to remind the players of is that being in the duck mode (wait for your partner to pick you up and throw you) means also being defensive.
+
+
+**Juiciness
++What's New: Build the gameplay arena. It's no longer abyss. Motivation: The first step towards the game world building. We are still building the universe of our game and we are thinking a combination of science fiction, energy exhaustion, and wasted city.
++What's New: Add camera shaking for hitting the opponent. More juiciness has been introduced when hitting the opponent. Motivation: We want to reward the players for complicated operations, with juiciness.
+
+
++What's New: Add feedback when you successfully deposit a coin. Motivation: According to the feedback and observation, we add more haptic feedback when the player successfully deposits a coin. Hola!
++What's New: Make better transition scene. Motivation: To make the transition between the scenes smoother and juicier.
++What's New: Add a logo scene for our Studio. Motivation: Juicy! Juicy! Juicy!
+
+
+**Next Steps
+The next iteration of our game will be CodeX-β, in which we will mainly focus on: 
++Strengthen the background universe of our game. We need a good story for our game.
++Optimize the storage area activation mechanism. We need to ensure fairness and also really think   hard on how the activation mechanism may change the player's strategies.
++Introduce the force accumulation mechanism for throwing your partner.
+
+
+
+
+Our IndieDB article is still awaiting authorisation. https://www.indiedb.com/games/codex1/news/codex-alpha-release

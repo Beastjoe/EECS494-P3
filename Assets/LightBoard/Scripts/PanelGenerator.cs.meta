@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f61786b1450f141cfaa4eb8ccc3a9afc
+timeCreated: 1456322184
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - PrefabUnit: {fileID: 130552, guid: 98d0363256e0646fc9c0018bd7d87652, type: 2}
+  - PrefabBackground: {fileID: 150946, guid: 142b32e93cbde4d2b88e094b52b0d4ea, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
