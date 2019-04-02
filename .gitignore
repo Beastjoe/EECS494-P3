@@ -7,6 +7,7 @@ UnityGenerated/
 Library/
 Assets/AssetStoreTools*
 
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
@@ -27,6 +28,7 @@ ExportedObj/
 .DS_Store
 .DS_Store?
 .vs
+.idea
 ._*
 .Spotlight-V100
 .Trashes
@@ -38,3 +40,4 @@ Thumbs.db
 WindowsBuild
 OSXBuild
 OSXBuild.app
+*.txt
