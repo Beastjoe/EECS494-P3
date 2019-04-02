@@ -40,6 +40,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     public bool stopDash = false;
 
     public float total_radius = 7.5f;
+    public float maximumChargingTime = 2f;
 
     public GameObject stunnedEffect;
 
@@ -47,6 +48,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     private float defenseContinuousConsumption = 0.1f; // per second
     private float staminaRechargeSpeed = 0.2f; // per second
     private float dashConsumption = 0.6f;
+    public float flyingTime = 1.5f;
     private playerStatus.status prevStatus;
 
     Animator anim;
@@ -57,7 +59,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     bool rightTriggerReady = true;
     bool startButtonReady = true;
     // chargingAmount is from 0 
-    float chargingAmount = 0.0f;
+    public float chargingAmount = 0.0f;
 
     float threshold = 0.21f;
     public Gamepad gp;
@@ -282,11 +284,29 @@ public class ArrowKeyMovement : MonoBehaviour {
 
             if (ps.currStatus == playerStatus.status.HOLDING)
             {
-                if (gp.rightTrigger.isPressed
-                  && rightTriggerReady)
+                if (gp.rightTrigger.isPressed && chargingAmount < 1.0f)
                 {
+                    chargingAmount += Time.deltaTime / maximumChargingTime;
+                    teamMember.GetComponent<ArrowKeyMovement>().anim.SetBool("charging", true);
+                    if (chargingAmount > 0.5f)
+                    {
+                        gp.SetMotorSpeeds(1.0f, 1.0f);
+                    }
+                    else if (chargingAmount > 0.25f)
+                    {
+                        gp.SetMotorSpeeds(chargingAmount, chargingAmount);
+                    }
+                } else if (chargingAmount != 0)
+                {
+                    // finish charging, throw
+                    GetComponent<ArrowKeyMovement>().gp.SetMotorSpeeds(0, 0);
+                    teamMember.GetComponent<ArrowKeyMovement>().anim.SetBool("charging", false);
+                    teamMember.GetComponent<ArrowKeyMovement>().flyingTime = 1.5f * chargingAmount + 0.5f;
+                    teamMember.GetComponent<ArrowKeyMovement>().maximumFlyingSpeed = 15f + 10f * chargingAmount;
+                    chargingAmount = 0.0f;
+
                     rightTriggerReady = false;
-                    StartCoroutine(rightTriggerCoolDown(0.5f));
+                    StartCoroutine(rightTriggerCoolDown(1.0f));
                     ps.currStatus = playerStatus.status.NORMAL;
                     teamMember.GetComponent<playerStatus>().currStatus = playerStatus.status.FLYING;
                     teamMember.GetComponent<Animator>().SetBool("moving", false);
@@ -392,7 +412,7 @@ public class ArrowKeyMovement : MonoBehaviour {
 
         flyingDir = (transform.rotation * Vector3.forward).normalized;
 
-        for (float t = 0.0f; t <= 1.5f; t += Time.deltaTime)
+        for (float t = 0.0f; t <= flyingTime; t += Time.deltaTime)
         {
             if (!GameControl.instance.isStarted)
             {
@@ -403,7 +423,7 @@ public class ArrowKeyMovement : MonoBehaviour {
             {
                 break;
             }
-            flyingSpeed = Mathf.Lerp(maximumFlyingSpeed, 12.0f, t/1.5f);
+            flyingSpeed = Mathf.Lerp(maximumFlyingSpeed, 7.0f, t/flyingTime);
             rb.velocity = flyingSpeed * flyingDir;
             transform.Rotate(0, 30, 0);
             yield return new WaitForSeconds(Time.deltaTime);
@@ -475,7 +495,6 @@ public class ArrowKeyMovement : MonoBehaviour {
                 yield return new WaitForSeconds(Time.deltaTime);
             }
         }
-        Debug.Log("GetStunned");
         StartCoroutine(getStunned(stunnedTime, stunningEffectObject, prevStatus));
     }
 
