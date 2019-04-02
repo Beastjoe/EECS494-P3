@@ -6122,7 +6122,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Notice you cannot be attacked while you are burrowed.
+  m_Text: "Notice you cannot be attacked while you are \nburrowed."
 --- !u!222 &899608638
 CanvasRenderer:
   m_ObjectHideFlags: 0

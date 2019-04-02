@@ -69,6 +69,12 @@ public class collisionManager : MonoBehaviour {
                         }
                         else
                         {
+                            if (Inventory.instance.numOfPlayerResource[player_am.playerIndex]>=3) {
+                                Camera.main.GetComponent<TimeManager>().DoSlowMotion(collision.contacts[0].point);
+                                Camera.main.GetComponent<CameraShake>().ShakeCameraOnHurt(0.5f, 0.15f);
+                            } else {
+                                Camera.main.GetComponent<CameraShake>().ShakeCamera(0.5f, 0.5f);
+                            }
                             player_am.hurt(collision);
                             player_am.Vibration(0.5f);
                             am.Vibration(0.5f);

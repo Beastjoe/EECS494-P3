@@ -441,7 +441,6 @@ public class ArrowKeyMovement : MonoBehaviour {
 
 
     public void hurt(Collision collision) {
-        Camera.main.GetComponent<CameraShake>().ShakeCamera(0.5f, 0.5f);
         anim.SetTrigger("hurtTrigger");
         Camera.main.GetComponent<AudioSource>().PlayOneShot(stunningClip, 2.0f);
         //StartCoroutine(controllerVibration(1.0f));
@@ -461,7 +460,7 @@ public class ArrowKeyMovement : MonoBehaviour {
         {
             GameObject coin = Instantiate(rupee, transform.position, Quaternion.identity);
             coin.transform.GetChild(0).GetComponent<RupeeInitialization>().enabled = false;
-            coin.transform.GetComponentInChildren<Rigidbody>().velocity = new Vector3(Random.Range(-5.0f, 5.0f), 12, Random.Range(-5.0f, 5.0f)); ;
+            coin.transform.GetComponentInChildren<Rigidbody>().velocity = new Vector3(Random.Range(-5.0f, 5.0f), 15, Random.Range(-5.0f, 5.0f)); ;
         }
 
     }
