@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1345527493}
   - component: {fileID: 1345527494}
+  - component: {fileID: 1360866617939405486}
   m_Layer: 12
   m_Name: directionIndicator
   m_TagString: Untagged
@@ -68,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a002ac2b3f6cd1443a215d795e0434a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 361524f87b3bdab48a4a233548d3d29a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -79,6 +80,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1360866617939405486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345527492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0497f22b571094fa888680a735f125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whiteMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  pingpongTime: 0.2
+  chargingSprites:
+  - {fileID: 21300000, guid: 6b6b451af6ec05b4e93a45869eb0d389, type: 3}
+  - {fileID: 21300000, guid: a4fb443deac84dc49b580b848d8dd4c0, type: 3}
+  - {fileID: 21300000, guid: 361524f87b3bdab48a4a233548d3d29a, type: 3}
 --- !u!1 &388496191796947818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,8 +1087,12 @@ MonoBehaviour:
   hitEnemy: 0
   stopDash: 0
   total_radius: 7.5
+  maximumChargingTime: 2
   stunnedEffect: {fileID: 6945172767159710662, guid: a372a0a5d1431e9479e04f9128d05e56,
     type: 3}
+  flyingTime: 1.5
+  defenseReady: 1
+  chargingAmount: 0
 --- !u!54 &5658496420395445427
 Rigidbody:
   m_ObjectHideFlags: 0

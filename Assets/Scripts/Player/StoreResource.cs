@@ -103,11 +103,11 @@ public class StoreResource : MonoBehaviour {
                 slider.GetComponent<Slider>().value += Time.deltaTime / storeTime;
                 if (timer / storeTime > 0.75f)
                 {
-                    GetComponent<ArrowKeyMovement>().gp.SetMotorSpeeds(1.0f, 1.0f);
+                    GetComponent<ArrowKeyMovement>().Vibration(Time.deltaTime, 1.0f);
                 }
                 else if (timer / storeTime > 0.5f)
                 {
-                    GetComponent<ArrowKeyMovement>().gp.SetMotorSpeeds(timer/storeTime, timer/storeTime);
+                    GetComponent<ArrowKeyMovement>().Vibration(Time.deltaTime, timer / storeTime);
                 }
             }
             isStoring = true;
@@ -119,7 +119,6 @@ public class StoreResource : MonoBehaviour {
             slider.GetComponent<Slider>().value = 0.0f;
             slider.SetActive(false);
             isStoring = false;
-            GetComponent<ArrowKeyMovement>().gp.SetMotorSpeeds(0, 0);
         }
 
     }
