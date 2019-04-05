@@ -37,6 +37,8 @@ public class ArrowKeyMovementDummy : MonoBehaviour {
 
     public GameObject stunnedEffect;
 
+    GameObject barrier;
+    GameObject positionIndicator;
     Animator anim;
     playerStatus ps;
     Rigidbody rb;
@@ -54,10 +56,26 @@ public class ArrowKeyMovementDummy : MonoBehaviour {
         anim = GetComponent<Animator>();
         ps = GetComponent<playerStatus>();
         rb = GetComponent<Rigidbody>();
+        barrier = transform.Find("Barrier").gameObject;
+        positionIndicator = transform.Find("positionIndicator").gameObject;
     }
 
     // Update is called once per frame
-
+    public void Update() {
+        if (ps.currStatus == playerStatus.status.DEFENSE)
+        {
+            barrier.transform.localScale += new Vector3(4 * Time.deltaTime, 4 * Time.deltaTime, 4 * Time.deltaTime);
+            positionIndicator.transform.localScale -= new Vector3(0.2f * Time.deltaTime, 0.2f * Time.deltaTime, 0);
+            if (barrier.transform.localScale.x > 2)
+            {
+                barrier.transform.localScale = new Vector3(2, 2, 2);
+            }
+            if (positionIndicator.transform.localScale.y < 0)
+            {
+                positionIndicator.transform.localScale = new Vector3(0, 0, 1);
+            }
+        }
+    }
 
     public void hurt(Vector3 dir) {
         anim.SetTrigger("hurtTrigger");
@@ -106,7 +124,10 @@ public class ArrowKeyMovementDummy : MonoBehaviour {
     IEnumerator getStunned(float t, GameObject stunningEffectObject) {
         ps.currStatus = playerStatus.status.STUNNED;
         yield return new WaitForSeconds(t);
-        ps.currStatus = playerStatus.status.NORMAL;
+        if (ps.currStatus != playerStatus.status.DEFENSE)
+        {
+            ps.currStatus = playerStatus.status.NORMAL;
+        }
         gameObject.layer = 12;
         Destroy(stunningEffectObject);
     }

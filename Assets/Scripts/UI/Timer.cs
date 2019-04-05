@@ -14,14 +14,21 @@ public class Timer : MonoBehaviour {
     public Camera blueTeamCamera1, blueTeamCamera2;
     bool gameEndAnimation = false;
     public AnimationCurve cutsceneCameraCurve;
+    public AnimationCurve bonusCurve;
     public AudioClip winningClip;
     public GameObject winningRainbow;
+    public GameObject deathSmoke;
+    public AudioClip countDownClip;
 
     float timer;
     Text text;
     Text winText;
+    public Text bonusText;
     bool triggered = false;
     bool isCountingDown = false;
+    bool hasTriggeredBouns = false;
+    bool hasCountDown = false;
+
     void Start() {
         text = GetComponent<Text>();
         winText = transform.GetChild(0).GetComponent<Text>();
@@ -35,6 +42,19 @@ public class Timer : MonoBehaviour {
         {
             return;
         }
+
+        if (timer<19f && !hasTriggeredBouns)
+        {
+            hasTriggeredBouns = true;
+            StartCoroutine(showupText());
+            GameControl.instance.bonusTime();
+        }
+        if (timer < 10f && !hasCountDown)
+        {
+            hasCountDown = true;
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(countDownClip);
+        }
+
         timer -= 0.66f * Time.deltaTime;
         if (timer >= 0.0f)
         {
@@ -184,6 +204,13 @@ public class Timer : MonoBehaviour {
             redTeamCamera1.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger1");
             redTeamCamera2.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger2");
 
+            blueTeamCamera1.gameObject.transform.parent.gameObject.GetComponent<Animator>().SetTrigger("die");
+            blueTeamCamera2.gameObject.transform.parent.gameObject.GetComponent<Animator>().SetTrigger("die");
+
+            yield return new WaitForSeconds(1.0f);
+
+            Instantiate(deathSmoke, blueTeamCamera1.gameObject.transform.parent.transform.position, Quaternion.identity);
+            Instantiate(deathSmoke, blueTeamCamera2.gameObject.transform.parent.transform.position, Quaternion.identity);
             blueTeamCamera1.gameObject.transform.parent.parent.gameObject.SetActive(false);
             yield return new WaitForSeconds(3.0f);
         }
@@ -220,6 +247,16 @@ public class Timer : MonoBehaviour {
             blueTeamCamera1.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger1");
             blueTeamCamera2.gameObject.transform.parent.GetComponent<Animator>().SetTrigger("winTrigger2");
 
+
+            redTeamCamera1.gameObject.transform.parent.gameObject.GetComponent<Animator>().SetTrigger("die");
+            redTeamCamera2.gameObject.transform.parent.gameObject.GetComponent<Animator>().SetTrigger("die");
+
+            yield return new WaitForSeconds(1.0f);
+
+            Instantiate(deathSmoke, redTeamCamera1.gameObject.transform.parent.transform.position, Quaternion.identity);
+            Instantiate(deathSmoke, redTeamCamera2.gameObject.transform.parent.transform.position, Quaternion.identity);
+
+
             redTeamCamera2.gameObject.transform.parent.parent.gameObject.SetActive(false);
             yield return new WaitForSeconds(3.0f);
         }
@@ -240,5 +277,22 @@ public class Timer : MonoBehaviour {
                 tr.gameObject.SetActive(false);
             }
         }
+    }
+
+    IEnumerator showupText() {
+        bonusText.gameObject.SetActive(true);
+
+        for (float i = 0.0f; i < 0.6f; i += Time.deltaTime)
+        {
+            bonusText.gameObject.GetComponent<RectTransform>().localScale = new Vector3(bonusCurve.Evaluate(i / 0.6f), bonusCurve.Evaluate(i / 0.6f), 1);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        yield return new WaitForSeconds(1.5f);
+        for (float i = 0.0f; i < 0.5f; i += Time.deltaTime)
+        {
+            bonusText.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, Mathf.Lerp(-20.0f, 50.0f, bonusCurve.Evaluate(i / 0.5f)), 0);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        bonusText.gameObject.SetActive(false);
     }
 }

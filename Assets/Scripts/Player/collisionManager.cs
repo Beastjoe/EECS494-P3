@@ -72,8 +72,10 @@ public class collisionManager : MonoBehaviour {
                             if (Inventory.instance.numOfPlayerResource[player_am.playerIndex]>=3) {
                                 Camera.main.GetComponent<TimeManager>().DoSlowMotion(collision.contacts[0].point);
                                 Camera.main.GetComponent<CameraShake>().ShakeCameraOnHurt(0.5f, 0.15f);
+                                //ScreenShakeManager.Bump(0.15f);
                             } else {
                                 Camera.main.GetComponent<CameraShake>().ShakeCamera(0.5f, 0.5f);
+                                //ScreenShakeManager.Bump(0.5f);
                             }
                             player_am.hurt(collision);
                             player_am.Vibration(0.5f);
@@ -100,18 +102,14 @@ public class collisionManager : MonoBehaviour {
                         am.stopDash = true;
                         player_am.Vibration(0.2f);
                         am.Vibration(0.2f);
-                        StartCoroutine(player.GetComponent<ArrowKeyMovement>().knockBack(collision, player_ps.currStatus));
+                        StartCoroutine(player.GetComponent<ArrowKeyMovement>().knockBack(collision, player_ps.currStatus, 1.5f));
                     }
                 }
             }
             else if (player_ps.teamIdx == ps.teamIdx && player_ps.currStatus == playerStatus.status.DEFENSE && ps.currStatus == playerStatus.status.NORMAL)
             {
                 ps.currStatus = playerStatus.status.HOLDING;
-                player_ps.currStatus = playerStatus.status.HELD;
-                player_ps.gameObject.GetComponent<Rigidbody>().useGravity = false;
-                player.GetComponent<Animator>().SetBool("moving", false);
-                player.GetComponent<Animator>().SetTrigger("IdelTrigger");
-                player.transform.position = transform.position + new Vector3(0, 0.8f, 0);
+                player_am.defenseToHeld();
             }
         }
     }
@@ -121,13 +119,11 @@ public class collisionManager : MonoBehaviour {
         {
             GameObject player = collision.gameObject;
             playerStatus player_ps = player.GetComponent<playerStatus>();
+            ArrowKeyMovement player_am = player.GetComponent<ArrowKeyMovement>();
             if (player_ps.teamIdx == ps.teamIdx && player_ps.currStatus == playerStatus.status.DEFENSE && ps.currStatus == playerStatus.status.NORMAL)
             {
                 ps.currStatus = playerStatus.status.HOLDING;
-                player_ps.currStatus = playerStatus.status.HELD;
-                player.GetComponent<Animator>().SetBool("moving", false);
-                player.GetComponent<Animator>().SetTrigger("IdelTrigger");
-                player.transform.position = transform.position + new Vector3(0, 0.8f, 0);
+                player_am.defenseToHeld();
             }
         }
         if (collision.gameObject.CompareTag("airwall"))

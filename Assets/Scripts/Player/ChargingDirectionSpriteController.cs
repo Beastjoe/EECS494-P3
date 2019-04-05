@@ -21,7 +21,7 @@ public class ChargingDirectionSpriteController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 1.9f + Mathf.PingPong(Time.time*0.5f + +am.chargingAmount, 0.2f));
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 1.4f + Mathf.PingPong(Time.time*0.5f + +am.chargingAmount, 0.2f));
         if (am.chargingAmount<0.2f)
         {
             deltaTime = 0;
@@ -37,7 +37,7 @@ public class ChargingDirectionSpriteController : MonoBehaviour {
         } else
         {
             deltaTime += Time.deltaTime;
-            transform.localScale = new Vector3(0.05f + Mathf.PingPong(Time.time * 0.5f + am.chargingAmount, 0.03f), 0.1f + Mathf.PingPong(Time.time * 0.5f + am.chargingAmount, 0.06f), 1);
+            transform.localScale = new Vector3(0.05f + Mathf.PingPong(Time.time * 0.5f + am.chargingAmount, 0.03f), 0.05f + Mathf.PingPong(Time.time * 0.5f + am.chargingAmount, 0.06f), 1);
             if (deltaTime<0.1f)
             {
                 rend.material = whiteMaterial;

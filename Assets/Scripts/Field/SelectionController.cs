@@ -180,7 +180,7 @@ public class SelectionController : MonoBehaviour
 
             if (cnt == 4 && !isFading)
             {
-                StartCoroutine(Fading());
+                StartCoroutine(Fading("playLab"));
             }
 
             if (GameControl.instance.isPaused)
@@ -195,13 +195,13 @@ public class SelectionController : MonoBehaviour
 
             if (timer <= 0)
             {
-                SceneManager.LoadScene("TutorialIndividualLab");
+                StartCoroutine(Fading("TutorialIndividualLab"));
             }
         }
 
     }
 
-    IEnumerator Fading() {
+    IEnumerator Fading(string sceneName) {
         TransitionShader.SetActive(true);
         BlackShader.SetActive(true);
         isFading = true;
@@ -217,7 +217,7 @@ public class SelectionController : MonoBehaviour
             TransitionShader.gameObject.transform.localScale = new Vector3(i, i, i);
             yield return new WaitForSeconds(0.001f);
         }
-        SceneManager.LoadScene("playLab");
+        SceneManager.LoadScene(sceneName);
 
     }
 

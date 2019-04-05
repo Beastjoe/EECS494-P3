@@ -18,6 +18,7 @@ public class TutorialController : MonoBehaviour {
     public GameObject TransitionShader;
 
     public bool[] playerFlag = new bool[4];
+    public AudioClip dialogueClip;
     Gamepad[] playerPads = new Gamepad[4];
     bool passToNextTutorialCalled = false;
     bool dialogueReadyToSkip = false;
@@ -51,6 +52,8 @@ public class TutorialController : MonoBehaviour {
             playerPads[i] = Gamepad.all[i];
         }
         StartCoroutine(dialogueReadyToSkipCoolDown());
+        GameObject.Find("Announcer").GetComponent<AudioSource>().Stop();
+        GameObject.Find("Announcer").GetComponent<AudioSource>().PlayOneShot(dialogueClip);
     }
 
 

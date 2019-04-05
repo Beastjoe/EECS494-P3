@@ -34,6 +34,7 @@ public class GameControl : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+        Cursor.visible = false;
     }
 
     private void Start() {
@@ -147,7 +148,8 @@ public class GameControl : MonoBehaviour {
 
     IEnumerator startCountDown() {
 
-        if (SceneManager.GetActiveScene().name == "playLab")
+        if (SceneManager.GetActiveScene().name == "playLab"
+            || SceneManager.GetActiveScene().name == "TutorialIndividualLab")
         {
 
             TransitionShader.SetActive(true);
@@ -186,6 +188,7 @@ public class GameControl : MonoBehaviour {
                 {
                     hasShaked = true;
                     Camera.main.GetComponent<CameraShake>().ShakeCamera(0.35f, 0.5f - 0.1f * Mathf.Ceil(timer));
+                    //ScreenShakeManager.Bump(0.5f - 0.1f * Mathf.Ceil(timer));
                 }
                 if (Mathf.Ceil(timer) != float.Parse(timerText.text))
                 {
@@ -210,6 +213,7 @@ public class GameControl : MonoBehaviour {
                 {
                     hasShaked = true;
                     Camera.main.GetComponent<CameraShake>().ShakeCamera(0.6f, 0.5f);
+                    //ScreenShakeManager.Bump(0.5f);
                 }
                 yield return new WaitForSeconds(Time.deltaTime);
             }
@@ -230,5 +234,18 @@ public class GameControl : MonoBehaviour {
         SceneManager.LoadScene("playLab");
     }
 
-    
+    public void bonusTime() {
+        GameObject rupeeController = GameObject.Find("RubeeController");
+        rupeeController.GetComponent<rubeeInstantiation>().instantiationDuration = 2.0f;
+
+        GameObject player0 = GameObject.Find("team0/team0-player1");
+        GameObject player1 = GameObject.Find("team0/team0-player2");
+        GameObject player2 = GameObject.Find("team1/team1-player3");
+        GameObject player3 = GameObject.Find("team1/team1-player4");
+        Debug.Log(player0 == null);
+        player0.GetComponent<StoreResource>().storeTime = 1.0f;
+        player1.GetComponent<StoreResource>().storeTime = 1.0f;
+        player2.GetComponent<StoreResource>().storeTime = 1.0f;
+        player3.GetComponent<StoreResource>().storeTime = 1.0f;
+    }
 }

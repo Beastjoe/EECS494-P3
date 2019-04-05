@@ -43,6 +43,8 @@ public class ArrowKeyMovement : MonoBehaviour {
     public float maximumChargingTime = 2f;
 
     public GameObject stunnedEffect;
+    GameObject barrier;
+    GameObject positionIndicator;
 
     private float defenseInitialConsumption = 0.35f;
     private float defenseContinuousConsumption = 0.1f; // per second
@@ -70,6 +72,8 @@ public class ArrowKeyMovement : MonoBehaviour {
         anim = GetComponent<Animator>();
         ps = GetComponent<playerStatus>();
         rb = GetComponent<Rigidbody>();
+        barrier = transform.Find("Barrier").gameObject;
+        positionIndicator = transform.Find("positionIndicator").gameObject;
     }
 
     // Update is called once per frame
@@ -172,19 +176,28 @@ public class ArrowKeyMovement : MonoBehaviour {
         // defense status
         if (ps.currStatus == playerStatus.status.DEFENSE)
         {
+            barrier.transform.localScale += new Vector3(4 * Time.deltaTime, 4 * Time.deltaTime, 4 * Time.deltaTime);
+            positionIndicator.transform.localScale -= new Vector3(0.2f * Time.deltaTime, 0.2f * Time.deltaTime, 0);
+            if (barrier.transform.localScale.x>2)
+            {
+                barrier.transform.localScale = new Vector3(2, 2, 2);
+            }
+            if (positionIndicator.transform.localScale.y < 0)
+            {
+                positionIndicator.transform.localScale = new Vector3(0, 0, 1);
+            }
             rb.isKinematic = true;
             if (GetComponent<StoreResource>().onStorageArea)
             {
-                ps.currStatus = playerStatus.status.NORMAL;
-                anim.SetTrigger("IdelTrigger");
+                defenseToNormal();
+                
             }
             else
             {
                 float fa = staminaBar.fillAmount - Time.deltaTime * defenseInitialConsumption;
                 if (fa <= 0.0f)
                 {
-                    ps.currStatus = playerStatus.status.NORMAL;
-                    anim.SetTrigger("IdelTrigger");
+                    defenseToNormal();
                 }
                 else
                 {
@@ -195,6 +208,16 @@ public class ArrowKeyMovement : MonoBehaviour {
         else
         {
             rb.isKinematic = false;
+            barrier.transform.localScale -= new Vector3(8 * Time.deltaTime, 8 * Time.deltaTime, 8 * Time.deltaTime);
+            positionIndicator.transform.localScale += new Vector3(0.2f * Time.deltaTime, 0.2f * Time.deltaTime, 0);
+            if (barrier.transform.localScale.x < 0)
+            {
+                barrier.transform.localScale = new Vector3(0, 0, 0);
+            }
+            if (positionIndicator.transform.localScale.y > 0.1)
+            {
+                positionIndicator.transform.localScale = new Vector3(0.1f, 0.1f, 1);
+            }
         }
 
         // normal status
@@ -302,7 +325,7 @@ public class ArrowKeyMovement : MonoBehaviour {
                     GetComponent<ArrowKeyMovement>().gp.SetMotorSpeeds(0, 0);
                     teamMember.GetComponent<ArrowKeyMovement>().anim.SetBool("charging", false);
                     teamMember.GetComponent<ArrowKeyMovement>().flyingTime = 1.5f * chargingAmount + 0.5f;
-                    teamMember.GetComponent<ArrowKeyMovement>().maximumFlyingSpeed = 15f + 10f * chargingAmount;
+                    teamMember.GetComponent<ArrowKeyMovement>().maximumFlyingSpeed = 15f + 20f * chargingAmount;
                     chargingAmount = 0.0f;
 
                     rightTriggerReady = false;
@@ -339,12 +362,7 @@ public class ArrowKeyMovement : MonoBehaviour {
                 }
                 else
                 {
-                    Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip, 0.35f);
-                    ps.currStatus = playerStatus.status.DEFENSE;
-                    anim.SetTrigger("defenseTrigger");
-                    // consume stamina
-                    staminaBar.gameObject.SetActive(true);
-                    staminaBar.fillAmount -= defenseInitialConsumption;
+                    normalToDefense();
                 }
             }
             else if (ps.currStatus == playerStatus.status.DEFENSE)
@@ -356,8 +374,7 @@ public class ArrowKeyMovement : MonoBehaviour {
             }
         } else if (ps.currStatus == playerStatus.status.DEFENSE && !GetComponent<StoreResource>().onStorageArea && !gp.leftTrigger.isPressed)
         {
-            ps.currStatus = playerStatus.status.NORMAL;
-            anim.SetTrigger("IdelTrigger");
+            defenseToNormal();
         }
 
         if (ps.currStatus == playerStatus.status.HELD)
@@ -442,6 +459,7 @@ public class ArrowKeyMovement : MonoBehaviour {
 
     public void hurt(Collision collision) {
         anim.SetTrigger("hurtTrigger");
+        anim.SetBool("moving", false);
         Camera.main.GetComponent<AudioSource>().PlayOneShot(stunningClip, 2.0f);
         //StartCoroutine(controllerVibration(1.0f));
         gameObject.layer = 11;
@@ -470,10 +488,10 @@ public class ArrowKeyMovement : MonoBehaviour {
             return true;
         return false;
     }
-
-    public IEnumerator knockBack(Collision collision, playerStatus.status prevStatus) {
+    
+    public IEnumerator knockBack(Collision collision, playerStatus.status prevStatus, float stunTime = 3.5f) {
         Instantiate(hitYellow, collision.contacts[0].point, Quaternion.identity);
-
+        this.prevStatus = prevStatus; 
         Vector3 dir = -collision.contacts[0].normal;
         ps.currStatus = playerStatus.status.STUNNED;
         GameObject stunningEffectObject = Instantiate(stunnedEffect);
@@ -494,7 +512,7 @@ public class ArrowKeyMovement : MonoBehaviour {
                 yield return new WaitForSeconds(Time.deltaTime);
             }
         }
-        StartCoroutine(getStunned(stunnedTime, stunningEffectObject, prevStatus));
+        StartCoroutine(getStunned(stunTime, stunningEffectObject, prevStatus));
     }
 
     IEnumerator defenseCoolDown(float t) {
@@ -609,5 +627,35 @@ public class ArrowKeyMovement : MonoBehaviour {
         gp.SetMotorSpeeds(amount, amount);
         yield return new WaitForSeconds(t);
         gp.SetMotorSpeeds(0.0f, 0.0f);
+    }
+
+    private void defenseToNormal() {
+        //barrier.SetActive(false);
+        //positionIndicator.SetActive(true);
+        ps.currStatus = playerStatus.status.NORMAL;
+        anim.SetTrigger("IdelTrigger");
+    }
+
+    private void normalToDefense() {
+        //barrier.SetActive(true);
+        barrier.transform.localScale = Vector3.zero;
+        //positionIndicator.SetActive(false);
+
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip, 0.35f);
+        ps.currStatus = playerStatus.status.DEFENSE;
+        anim.SetTrigger("defenseTrigger");
+        // consume stamina
+        staminaBar.gameObject.SetActive(true);
+        staminaBar.fillAmount -= defenseInitialConsumption;
+    }
+
+    public void defenseToHeld() {
+        //barrier.SetActive(false);
+
+        ps.currStatus = playerStatus.status.HELD;
+        rb.useGravity = false;
+        anim.SetBool("moving", false);
+        anim.SetTrigger("IdelTrigger");
+        transform.position = teamMember.transform.position + new Vector3(0, 0.8f, 0);
     }
 }
