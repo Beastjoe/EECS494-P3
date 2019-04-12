@@ -38,6 +38,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     [HideInInspector]
     public bool hitEnemy = false;
     public bool stopDash = false;
+    //public bool inHurtPhase = false;
 
     public float total_radius = 7.5f;
     public float maximumChargingTime = 2f;
@@ -82,6 +83,10 @@ public class ArrowKeyMovement : MonoBehaviour {
         if (ps.currStatus != playerStatus.status.HELD && ps.currStatus != playerStatus.status.STUNNED)
         {
             rb.useGravity = true;
+        } else if (ps.currStatus == playerStatus.status.HELD)
+        {
+            transform.position = teamMember.transform.position + new Vector3(0, 0.75f, 0);
+ 
         }
 
         playerIndex = PlayerIndexAssignment.instance.indices[initialIndex];
@@ -90,7 +95,7 @@ public class ArrowKeyMovement : MonoBehaviour {
         {
             if (ps.currStatus == playerStatus.status.STUNNED && prevStatus == playerStatus.status.HELD)
             {
-                transform.position = teamMember.transform.position + new Vector3(0, 1.0f, 0);
+                transform.position = teamMember.transform.position + new Vector3(0, 0.75f, 0);
             }
             return;
         }
@@ -100,6 +105,7 @@ public class ArrowKeyMovement : MonoBehaviour {
         }
         if (GameControl.instance.isPaused || GameControl.instance.tutorialPaused || !GameControl.instance.isStarted)
         {
+            chargingAmount = 0.0f;
             if (anim.GetBool("moving"))
             {
                 anim.SetBool("moving", false);
@@ -140,6 +146,11 @@ public class ArrowKeyMovement : MonoBehaviour {
             }
 
             return;
+        }
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Defend 0") && ps.currStatus == playerStatus.status.NORMAL)
+        {
+            anim.SetTrigger("IdelTrigger");
         }
 
         // Refill Stamina Bar if not full
@@ -335,6 +346,8 @@ public class ArrowKeyMovement : MonoBehaviour {
                     teamMember.GetComponent<Animator>().SetBool("moving", false);
                     teamMember.GetComponent<Animator>().SetTrigger("shootTrigger");
                     anim.SetTrigger("throwTrigger");
+
+                    //StartCoroutine(tmp());
                     gameObject.layer = 11;
                     teamMember.GetComponent<ArrowKeyMovement>().fly();
                     StartCoroutine(setBackLayer(0.5f));
@@ -379,10 +392,11 @@ public class ArrowKeyMovement : MonoBehaviour {
 
         if (ps.currStatus == playerStatus.status.HELD)
         {
+            GetComponent<BoxCollider>().enabled = false;
+            teamMember.GetComponent<playerStatus>().currStatus = playerStatus.status.HOLDING; 
             transform.Find("positionIndicator").gameObject.SetActive(false);
             transform.Find("directionIndicator").gameObject.SetActive(true);
-            transform.position = teamMember.transform.position + new Vector3(0, 1.0f, 0);
-            transform.Find("directionIndicator").gameObject.transform.localPosition = new Vector3(0, -0.9f, 2);
+            transform.Find("directionIndicator").gameObject.transform.localPosition = new Vector3(0, -0.7f, 2);
             float horizontal_val = Mathf.Abs(gp.leftStick.x.ReadValue()) < threshold ? 0 : gp.leftStick.x.ReadValue();
             float vertical_val = Mathf.Abs(gp.leftStick.y.ReadValue()) < threshold ? 0 : gp.leftStick.y.ReadValue();
             float right_horizontal_val = Mathf.Abs(gp.rightStick.x.ReadValue()) < threshold ? 0 : gp.rightStick.x.ReadValue();
@@ -414,6 +428,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     }
 
     IEnumerator flying() {
+        GetComponent<BoxCollider>().enabled = true;
         flyingSpeed = maximumFlyingSpeed;
         Vector3 movingDir = (teamMember.transform.rotation * Vector3.forward).normalized;
         GameObject auroa = Instantiate(flyingFX, transform.position, Quaternion.identity);
@@ -428,7 +443,7 @@ public class ArrowKeyMovement : MonoBehaviour {
         //}
 
         flyingDir = (transform.rotation * Vector3.forward).normalized;
-
+        rb.velocity = Vector3.zero;
         for (float t = 0.0f; t <= flyingTime; t += Time.deltaTime)
         {
             if (!GameControl.instance.isStarted)
@@ -441,7 +456,7 @@ public class ArrowKeyMovement : MonoBehaviour {
                 break;
             }
             flyingSpeed = Mathf.Lerp(maximumFlyingSpeed, 7.0f, t/flyingTime);
-            rb.velocity = flyingSpeed * flyingDir;
+            rb.velocity = flyingSpeed * flyingDir + rb.velocity.y * Vector3.up;
             transform.Rotate(0, 30, 0);
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -458,11 +473,20 @@ public class ArrowKeyMovement : MonoBehaviour {
 
 
     public void hurt(Collision collision) {
+        chargingAmount = 0;
         anim.SetTrigger("hurtTrigger");
         anim.SetBool("moving", false);
         Camera.main.GetComponent<AudioSource>().PlayOneShot(stunningClip, 2.0f);
         //StartCoroutine(controllerVibration(1.0f));
-        gameObject.layer = 11;
+
+        if (ps.currStatus == playerStatus.status.HOLDING || ps.currStatus == playerStatus.status.HELD)
+        {
+            if (teamMember.layer!=11)
+            {
+                teamMember.layer = 11;
+                teamMember.GetComponent<ArrowKeyMovement>().hurt(collision);
+            }
+        }
         prevStatus = ps.currStatus;
         ps.currStatus = playerStatus.status.FLYING;
         dropMoneyAfterhurt();
@@ -478,7 +502,7 @@ public class ArrowKeyMovement : MonoBehaviour {
         {
             GameObject coin = Instantiate(rupee, transform.position, Quaternion.identity);
             coin.transform.GetChild(0).GetComponent<RupeeInitialization>().enabled = false;
-            coin.transform.GetComponentInChildren<Rigidbody>().velocity = new Vector3(Random.Range(-5.0f, 5.0f), 15, Random.Range(-5.0f, 5.0f)); ;
+            coin.transform.GetComponentInChildren<Rigidbody>().velocity = new Vector3(Random.Range(-5.0f, 5.0f), 30, Random.Range(-5.0f, 5.0f)); ;
         }
 
     }
@@ -489,7 +513,17 @@ public class ArrowKeyMovement : MonoBehaviour {
         return false;
     }
     
-    public IEnumerator knockBack(Collision collision, playerStatus.status prevStatus, float stunTime = 3.5f) {
+    public IEnumerator knockBack(Collision collision, playerStatus.status prevStatus, float stunTime = 2.5f) {
+
+        if (ps.currStatus == playerStatus.status.HOLDING || ps.currStatus == playerStatus.status.HELD)
+        {
+            if (teamMember.layer != 11)
+            {
+                teamMember.layer = 11;
+                StartCoroutine(teamMember.GetComponent<ArrowKeyMovement>().knockBack(collision, teamMember.GetComponent<playerStatus>().currStatus, 1.5f));
+            }
+        }
+
         Instantiate(hitYellow, collision.contacts[0].point, Quaternion.identity);
         this.prevStatus = prevStatus; 
         Vector3 dir = -collision.contacts[0].normal;
@@ -617,6 +651,10 @@ public class ArrowKeyMovement : MonoBehaviour {
                 transform.RotateAround(Vector3.zero, Vector3.up, -31.5f * Time.deltaTime);
             }
         }
+        if (!GameControl.instance.tutorialState)
+        {
+            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y , - 1.0f, 0.3f), transform.position.z);
+        }
     }
 
     public void Vibration(float t, float amount = 1.0f) {
@@ -656,6 +694,14 @@ public class ArrowKeyMovement : MonoBehaviour {
         rb.useGravity = false;
         anim.SetBool("moving", false);
         anim.SetTrigger("IdelTrigger");
-        transform.position = teamMember.transform.position + new Vector3(0, 0.8f, 0);
+        transform.position = teamMember.transform.position + new Vector3(0, 0.75f, 0);
     }
+
+    IEnumerator tmp() {
+        yield return new WaitForSeconds(0.25f);
+        gameObject.layer = 11;
+        teamMember.GetComponent<ArrowKeyMovement>().fly();
+        StartCoroutine(setBackLayer(0.5f));
+    }
+
 }

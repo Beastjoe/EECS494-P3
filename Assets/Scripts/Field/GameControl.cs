@@ -20,6 +20,7 @@ public class GameControl : MonoBehaviour {
     public bool playState = false;
     public bool tutorialState = false;
     public bool isCountingDown = false;
+    public Animator cameraAnim;
     int redTimeHasChanged = 100, blueTimeHasChanged = 100;
     public int tutorialProgres;
     public GameObject TransitionShader;
@@ -28,6 +29,7 @@ public class GameControl : MonoBehaviour {
     public GameObject go;
 
     GameObject timer;
+    bool triggerStartDown = false;
 
     void Awake() {
         if (!instance)
@@ -41,7 +43,7 @@ public class GameControl : MonoBehaviour {
         //QualitySettings.vSyncCount = 0;
         //Application.targetFrameRate = 10;
         isPaused = true;
-        StartCoroutine(startCountDown());
+        StartCoroutine(transition());
         if (playState)
         {
             timer = GameObject.Find("Canvas/Timer");
@@ -50,6 +52,14 @@ public class GameControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        
+        if (cameraAnim!=null && cameraAnim.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !triggerStartDown)
+        {
+            triggerStartDown = true;
+            cameraAnim.enabled = false;
+            StartCoroutine(startCountDown());
+        }
+
         if(timer && go)
         {
             if(timer.activeSelf || go.activeSelf)
@@ -146,10 +156,9 @@ public class GameControl : MonoBehaviour {
         pauseReady = true;
     }
 
-    IEnumerator startCountDown() {
-
+    IEnumerator transition() {
         if (SceneManager.GetActiveScene().name == "playLab"
-            || SceneManager.GetActiveScene().name == "TutorialIndividualLab")
+           || SceneManager.GetActiveScene().name == "TutorialIndividualLab")
         {
 
             TransitionShader.SetActive(true);
@@ -171,8 +180,14 @@ public class GameControl : MonoBehaviour {
             TransitionShader.SetActive(false);
             BlackShader.SetActive(false);
         }
+        if (startTimer == null)
+        {
+            isPaused = false;
+            isStarted = true;
+        }
+    }
 
-
+    IEnumerator startCountDown() {
         if (startTimer != null)
         {
             startTimer.SetActive(true);
@@ -247,5 +262,9 @@ public class GameControl : MonoBehaviour {
         player1.GetComponent<StoreResource>().storeTime = 1.0f;
         player2.GetComponent<StoreResource>().storeTime = 1.0f;
         player3.GetComponent<StoreResource>().storeTime = 1.0f;
+    }
+
+    public void changeColor() {
+
     }
 }

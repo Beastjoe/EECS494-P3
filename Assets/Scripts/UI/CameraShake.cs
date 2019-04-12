@@ -6,8 +6,9 @@ using UnityEngine.Experimental.Input.Haptics;
 public class CameraShake : MonoBehaviour
 {
     Vector3 originalPos;
-    private void Start() {
+    private void Awake() {
         originalPos = transform.localPosition;
+        Debug.Log(originalPos);
     }
 
     public void ShakeCamera(float duration, float magnitude)

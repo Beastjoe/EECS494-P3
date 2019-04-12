@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundRotation : MonoBehaviour {
-  float speed = 0.7f;
+  public float speed = 0.7f;
   public GameObject[] players;
 
   // Start is called before the first frame update

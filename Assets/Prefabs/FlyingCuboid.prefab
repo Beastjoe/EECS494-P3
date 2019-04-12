@@ -9544,6 +9544,6 @@ MonoBehaviour:
   blueFireWork: {fileID: 107778, guid: e6b0c8eedb7b4b148b2d830fdcf06603, type: 3}
   redFireWork: {fileID: 164546, guid: e6e6f5beacfc73b41883f0becc4e2a67, type: 3}
   punch: {fileID: 179906, guid: 65a239151d8922044b185e60c7439323, type: 3}
-  scoreClip: {fileID: 8300000, guid: c72e79e2b69fc2f469e406f6c77c251d, type: 3}
+  scoreClip: {fileID: 8300000, guid: 8d9e24b62f9ceab4e8368fe686717980, type: 3}
   redTeamScore: 0
   flyingSpeed: 20

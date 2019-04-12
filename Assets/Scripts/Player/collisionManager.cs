@@ -69,7 +69,9 @@ public class collisionManager : MonoBehaviour {
                         }
                         else
                         {
-                            if (Inventory.instance.numOfPlayerResource[player_am.playerIndex]>=3) {
+                            if (Inventory.instance.numOfPlayerResource[player_am.playerIndex]>=3
+                                || ((player_ps.currStatus==playerStatus.status.HELD || player_ps.currStatus==playerStatus.status.HOLDING) 
+                                && Inventory.instance.numOfPlayerResource[player_am.teamMember.GetComponent<ArrowKeyMovement>().playerIndex]>=3)) {
                                 Camera.main.GetComponent<TimeManager>().DoSlowMotion(collision.contacts[0].point);
                                 Camera.main.GetComponent<CameraShake>().ShakeCameraOnHurt(0.5f, 0.15f);
                                 //ScreenShakeManager.Bump(0.15f);
@@ -77,6 +79,8 @@ public class collisionManager : MonoBehaviour {
                                 Camera.main.GetComponent<CameraShake>().ShakeCamera(0.5f, 0.5f);
                                 //ScreenShakeManager.Bump(0.5f);
                             }
+                            if (player.layer == 11) return;
+                            player.layer = 11;
                             player_am.hurt(collision);
                             player_am.Vibration(0.5f);
                             am.Vibration(0.5f);
@@ -98,6 +102,7 @@ public class collisionManager : MonoBehaviour {
                     }
                     else
                     {
+                        if (player.layer == 11) return;
                         player.layer = 11;
                         am.stopDash = true;
                         player_am.Vibration(0.2f);

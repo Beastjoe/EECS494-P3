@@ -12,6 +12,9 @@ public class MainMenuController : MonoBehaviour
     private static int playerCount = 4;
     bool[] hasPressed = new bool[playerCount];
     public Text PressCount;
+    public GameObject BlackShader;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,7 @@ public class MainMenuController : MonoBehaviour
         {
             hasPressed[i] = false;
         }
+        StartCoroutine(Fading());
     }
 
     // Update is called once per frame
@@ -48,9 +52,32 @@ public class MainMenuController : MonoBehaviour
         if (xCount == playerCount)
         {
             Debug.Log("All four x pressed");
-            SceneManager.LoadScene("Selection");
+            StartCoroutine(Fadeout());
         }
     }
-    
-   
+
+    IEnumerator Fading() {
+        BlackShader.SetActive(true);
+        for (int i = 0; i < 100; ++i)
+        {
+            Color c = BlackShader.GetComponent<Image>().color;
+            c.a -= 0.01f;
+            BlackShader.GetComponent<Image>().color = c;
+            yield return new WaitForSeconds(0.001f);
+        }
+        BlackShader.SetActive(false);
+    }
+
+    IEnumerator Fadeout() {
+        BlackShader.SetActive(true);
+        for (int i = 0; i < 100; ++i)
+        {
+            Color c = BlackShader.GetComponent<Image>().color;
+            c.a += 0.01f;
+            BlackShader.GetComponent<Image>().color = c;
+            yield return new WaitForSeconds(0.003f);
+        }
+        SceneManager.LoadScene("Selection");
+    }
+
 }

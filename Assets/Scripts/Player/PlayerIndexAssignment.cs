@@ -8,7 +8,7 @@ public class PlayerIndexAssignment : MonoBehaviour
     public int[] indices;
     public bool[] robotSelected;
     public int robotSelectedCount = 0;
-
+    
     void Awake()
     {
         if (!instance)

@@ -61,7 +61,7 @@ public class FlyMoney : MonoBehaviour {
                     Instantiate(redFireWork, redFireWorkPos1, Quaternion.Euler(-90, 0, 0));
                     Instantiate(redFireWork, redFireWorkPos2, Quaternion.Euler(-90, 0, 0));
                     Instantiate(punch, new Vector3(-9.14f, 0.18f, 5.18f), Quaternion.Euler(-0.889f, -64.498f, 89.83401f));
-                    Camera.main.GetComponent<AudioSource>().PlayOneShot(scoreClip, 10.0f);
+                    Camera.main.GetComponent<AudioSource>().PlayOneShot(scoreClip, 1.0f);
                     redLightBoard.GetComponent<ShakeObject>().shake(1.0f);
                     redBuilding.GetComponent<ShakeObject>().shake(1.0f);
                 }
@@ -76,7 +76,7 @@ public class FlyMoney : MonoBehaviour {
                     Instantiate(blueFireWork, blueFireWorkPos1, Quaternion.Euler(-90, 0, 0));
                     Instantiate(blueFireWork, blueFireWorkPos2, Quaternion.Euler(-90, 0, 0));
                     Instantiate(punch, new Vector3(10.16988f, -0.08f, 5.15183f), Quaternion.Euler(0f, 68.54f, 90f));
-                    Camera.main.GetComponent<AudioSource>().PlayOneShot(scoreClip, 10.0f);
+                    Camera.main.GetComponent<AudioSource>().PlayOneShot(scoreClip, 1);
                     blueLightBoard.GetComponent<ShakeObject>().shake(1.0f);
                     blueBuilding.GetComponent<ShakeObject>().shake(1.0f);
                 }

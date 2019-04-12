@@ -22,5 +22,11 @@ EditorBuildSettings:
     guid: d006f7a6f31b54462b39395d2d8a46cd
   - enabled: 1
     path: Assets/Scenes/playLab.unity
-    guid: 46394d0c2ef65477992f5e7505bbf547
+    guid: b23af0825f671554fa2b4ce6b5449f8c
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/playLab 1.unity
+    guid: c219b2ffef030134596c77ba489424b2
   m_configObjects: {}

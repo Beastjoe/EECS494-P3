@@ -69,6 +69,7 @@ public class Timer : MonoBehaviour {
 
             if (gameEndAnimation)
             {
+                gameEndAnimation = false;
                 blackPanel.SetActive(true);
                 instruction.SetActive(true);
                 int redScore = Inventory.instance.numOfRedTeamResource;
@@ -160,7 +161,10 @@ public class Timer : MonoBehaviour {
         redTeamCamera2.transform.parent.Find("Canvas").gameObject.SetActive(false);
         blueTeamCamera1.transform.parent.Find("Canvas").gameObject.SetActive(false);
         blueTeamCamera2.transform.parent.Find("Canvas").gameObject.SetActive(false);
-
+        redTeamCamera1.transform.parent.GetComponent<ArrowKeyMovement>().gp.SetMotorSpeeds(0, 0);
+        redTeamCamera2.transform.parent.GetComponent<ArrowKeyMovement>().gp.SetMotorSpeeds(0, 0);
+        blueTeamCamera1.transform.parent.GetComponent<ArrowKeyMovement>().gp.SetMotorSpeeds(0, 0);
+        blueTeamCamera2.transform.parent.GetComponent<ArrowKeyMovement>().gp.SetMotorSpeeds(0, 0);
         if (redScore == blueScore)
         {
             gameEndAnimation = true;
