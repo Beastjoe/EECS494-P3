@@ -392,7 +392,7 @@ public class ArrowKeyMovement : MonoBehaviour {
 
         if (ps.currStatus == playerStatus.status.HELD)
         {
-            GetComponent<BoxCollider>().enabled = false;
+            gameObject.layer = 11;
             teamMember.GetComponent<playerStatus>().currStatus = playerStatus.status.HOLDING; 
             transform.Find("positionIndicator").gameObject.SetActive(false);
             transform.Find("directionIndicator").gameObject.SetActive(true);
@@ -428,7 +428,7 @@ public class ArrowKeyMovement : MonoBehaviour {
     }
 
     IEnumerator flying() {
-        GetComponent<BoxCollider>().enabled = true;
+        gameObject.layer = 12;
         flyingSpeed = maximumFlyingSpeed;
         Vector3 movingDir = (teamMember.transform.rotation * Vector3.forward).normalized;
         GameObject auroa = Instantiate(flyingFX, transform.position, Quaternion.identity);
@@ -502,7 +502,7 @@ public class ArrowKeyMovement : MonoBehaviour {
         {
             GameObject coin = Instantiate(rupee, transform.position, Quaternion.identity);
             coin.transform.GetChild(0).GetComponent<RupeeInitialization>().enabled = false;
-            coin.transform.GetComponentInChildren<Rigidbody>().velocity = new Vector3(Random.Range(-5.0f, 5.0f), 30, Random.Range(-5.0f, 5.0f)); ;
+            coin.transform.GetComponentInChildren<Rigidbody>().velocity = new Vector3(Random.Range(-5.0f, 5.0f), 15, Random.Range(-5.0f, 5.0f)); ;
         }
 
     }

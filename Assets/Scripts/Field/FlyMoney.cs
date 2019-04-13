@@ -15,6 +15,7 @@ public class FlyMoney : MonoBehaviour {
     GameObject blueLightBoard;
     GameObject blueBuilding;
     GameObject redBuilding;
+    Rigidbody rb;
 
     public GameObject blueFireWork;
     public GameObject redFireWork;
@@ -31,6 +32,7 @@ public class FlyMoney : MonoBehaviour {
         blueLightBoard = GameObject.Find("LightBoardBlue");
         blueBuilding = GameObject.Find("Skyscapers/Skyscraper_01");
         redBuilding = GameObject.Find("Skyscapers/Skyscraper_08");
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -38,12 +40,13 @@ public class FlyMoney : MonoBehaviour {
         if (redTeamScore)
         {
             Vector3 dir = (redScoreBoard.transform.position - transform.position).normalized;
-            transform.position += dir * flyingSpeed * Time.deltaTime;
+            rb.velocity = dir * flyingSpeed;
         }
         else
         {
             Vector3 dir = (blueScoreBoard.transform.position - transform.position).normalized;
-            transform.position += dir * flyingSpeed * Time.deltaTime;
+            //transform.position += dir * flyingSpeed * Time.deltaTime;
+            rb.velocity = dir * flyingSpeed;
         }
     }
 
@@ -51,6 +54,7 @@ public class FlyMoney : MonoBehaviour {
         if (other.CompareTag("ScoreBoard"))
         {
             int teamIndex = redTeamScore ? 0 : 1;
+            Debug.Log("Here: " + other.gameObject.transform.position);
             if (teamIndex == 0)
             {
                 Inventory.instance.numOfRedTeamResource += 1;
@@ -86,4 +90,5 @@ public class FlyMoney : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
 }

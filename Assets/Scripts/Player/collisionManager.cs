@@ -113,6 +113,7 @@ public class collisionManager : MonoBehaviour {
             }
             else if (player_ps.teamIdx == ps.teamIdx && player_ps.currStatus == playerStatus.status.DEFENSE && ps.currStatus == playerStatus.status.NORMAL)
             {
+                Debug.Log("Holding");
                 ps.currStatus = playerStatus.status.HOLDING;
                 player_am.defenseToHeld();
             }
